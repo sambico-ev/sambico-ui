@@ -1,10 +1,31 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injectable, NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { AppComponent } from './app.component';
 
-const routes: Routes = [];
+@Injectable({ providedIn: 'root' })
+export class TitleResolver {
+  constructor(private readonly translateService: TranslateService) {}
+  resolve(snapshot: ActivatedRouteSnapshot) {
+    console.log('snapshot', snapshot);
+    switch (snapshot.routeConfig?.path) {
+      case RouteNames.HOME:
+        return Promise.resolve(this.translateService.get('home.tabTitle'));
+    }
+    return 'Custom About Me';
+  }
+}
+
+export enum RouteNames {
+  HOME = '',
+  ABOUT = 'about',
+  CONTACT = 'contact',
+}
+
+const routes: Routes = [{ path: RouteNames.HOME, component: AppComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
