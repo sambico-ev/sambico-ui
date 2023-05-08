@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TitleService } from './shared/services/title.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
     private readonly translate: TranslateService,
-    private readonly titleService: TitleService
+    private readonly titleService: TitleService,
+    private route: ActivatedRoute
   ) {
-    // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('de');
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('de');
     this.titleService.init();
+  }
+
+  ngOnInit() {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment) {
+        document
+          .querySelector('#' + fragment)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   }
 }

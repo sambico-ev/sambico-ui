@@ -1,8 +1,17 @@
 <div class="toolbar">
-  <img class="logo" src="assets/images/logo.png" alt="sambico-logo" />
+  <img
+    class="logo"
+    src="assets/images/logo/Logo-sambico.png"
+    alt="sambico-logo"
+  />
+  <div class="sambico">SAMBICO e.V.</div>
   <div class="toolbar-menu">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a [routerLink]="['']" fragment="start">Start</a>
+    <a [routerLink]="['']" fragment="about">Über uns</a>
+    <a [routerLink]="['']" fragment="impressum">Impressum</a>
+  </div>
+  <div class="toolbar-actions">
+    <!-- <button class="btn btn-primary">Spenden</button> -->
+    <a class="btn btn-warning" href="mailto:kontakt@sambico.de"> Kontakt </a>
   </div>
 </div>

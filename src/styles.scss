@@ -1,4 +1,32 @@
 html,
 body {
   margin: 0;
+  scroll-behavior: smooth;
+}
+
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
+$theme-colors: (
+  'primary': #128b00,
+  'secondary': #603521,
+  'success': #128b00,
+  'info': #17a2b8,
+  'warning': #b46a0a,
+  'danger': #df1a07,
+  'light': #ebe1d8,
+  'dark': #343a40,
+);
+
+/* Importing Datepicker SCSS file. */
+@import 'node_modules/ngx-bootstrap/datepicker/bs-datepicker';
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/utilities';
+// Required
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
 }

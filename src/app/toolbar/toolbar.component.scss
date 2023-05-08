@@ -1,8 +1,9 @@
 .toolbar {
+  padding: 0 16px;
   position: sticky;
   height: 64px;
   top: 0;
-  background-color: black;
+  background-color: var(--bs-dark);
   -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
@@ -11,8 +12,27 @@
   align-items: center;
 }
 
+.logo {
+  height: 50px;
+  margin-right: 8px;
+}
+
+.sambico {
+  color: var(--bs-light);
+}
+
 .toolbar-menu {
   margin-left: 32px;
+  display: flex;
+  gap: 8px;
+
+  a {
+    color: var(--bs-light);
+  }
+}
+
+.toolbar-actions {
+  margin-left: auto;
   display: flex;
   gap: 16px;
 }

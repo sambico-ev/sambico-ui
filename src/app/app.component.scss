@@ -1,0 +1,49 @@
+@import '../styles';
+
+.content-wrapper {
+  background-color: var(--bs-light);
+}
+
+.start {
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  background-color: var(--bs-light);
+  font-style: italic;
+}
+
+.about {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 10%;
+  text-align: center;
+  background-color: var(--bs-secondary);
+  color: var(--bs-light);
+
+  div {
+    max-width: 1200px;
+  }
+
+  .heading {
+    font-size: 32px;
+  }
+
+  .sub-heading {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .text {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 8px;
+  }
+}
+
+.impressum {
+  padding: 16px;
+  text-align: center;
+}

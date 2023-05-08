@@ -20,12 +20,20 @@ export enum RouteNames {
   HOME = '',
   ABOUT = 'about',
   CONTACT = 'contact',
+  IMPRESSUM = 'impressum',
 }
 
 const routes: Routes = [{ path: RouteNames.HOME, component: AppComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      onSameUrlNavigation: 'reload',
+      anchorScrolling: 'enabled',
+      enableTracing: false,
+      scrollOffset: [0, 64], // offset height of toolbar
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
