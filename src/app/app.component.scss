@@ -17,8 +17,9 @@
   flex-direction: column;
   justify-content: center;
   padding: 64px 10%;
-  text-align: center;
   background-color: var(--bs-secondary);
+  position: relative;
+  text-align: center;
   color: var(--bs-light);
 
   div {
@@ -38,6 +39,19 @@
     text-align: left;
     font-size: 16px;
     margin-top: 8px;
+  }
+
+  ::after {
+    content: '';
+    background: url(/assets/images/fotos/dancers.jpg);
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.007;
+    z-index: 1;
   }
 }
 
