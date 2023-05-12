@@ -2,7 +2,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { RouteNames } from '../../app-routing.module';
 
 @Injectable({
   providedIn: 'root',
@@ -22,14 +21,7 @@ export class TitleService implements OnDestroy {
     this.router.events.subscribe((route) => {
       if (route instanceof NavigationEnd) {
         const url = route.urlAfterRedirects.replace(/^\/+/, '');
-        switch (url) {
-          case RouteNames.ABOUT:
-            this.title.setTitle(this.baseTitle + ' - ' + 'About');
-            break;
-          default:
-            this.title.setTitle(this.baseTitle);
-            break;
-        }
+        this.title.setTitle(this.baseTitle + ' - ' + url.toUpperCase);
       }
     });
   }
