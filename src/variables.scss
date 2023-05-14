@@ -6,6 +6,8 @@ $theme-colors: (
   'info': #17a2b8,
   'warning': #f49912,
   'danger': #f72314,
-  'light': #ebe1d8,
+  'light': #f3f1f0,
   'dark': #343a40,
 );
+
+$padding: calc(8px + 1.5625vw);

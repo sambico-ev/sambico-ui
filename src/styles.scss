@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   scroll-behavior: smooth;
+  font-size: calc(15px + 0.390625vw);
 }
 
 @import '../node_modules/bootstrap/scss/functions';
