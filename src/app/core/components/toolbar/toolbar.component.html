@@ -1,12 +1,12 @@
-<div class="toolbar-container">
+<div class="toolbar-container" [class.mobile]="isMobile | async">
   <div class="toolbar">
     <img
       class="logo"
+      [class.mobile]="isMobile | async"
       src="assets/logo/logo-full-horizontal.png"
       alt="sambico-logo"
     />
     <div class="toolbar-actions">
-      <a class="btn btn-primary" href="mailto:kontakt@sambico.de"> Kontakt </a>
       <app-burger-button (opened)="toggleMenu($event)"></app-burger-button>
     </div>
   </div>

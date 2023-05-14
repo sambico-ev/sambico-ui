@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BreakpointService } from '../../../shared/services/breakpoint.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ToolbarComponent {
   menuOpen = false;
+  isMobile = this.breakpointService.isMobile();
+
+  constructor(private breakpointService: BreakpointService) {}
 
   toggleMenu(open: boolean) {
     this.menuOpen = open;

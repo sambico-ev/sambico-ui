@@ -24,4 +24,12 @@ export class BreakpointService {
       })
     );
   }
+
+  isMobile(): Observable<boolean> {
+    return this.getBreakpoint().pipe(
+      map((breakpoint: any) => {
+        return breakpoint === Breakpoints.MOBILE;
+      })
+    );
+  }
 }
