@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SlideshowComponent } from './slideshow.component';
 
+// TEMP, MOVE TO SHARED COMPS WHEN READY
 @NgModule({
   declarations: [SlideshowComponent],
   imports: [CommonModule, CarouselModule],

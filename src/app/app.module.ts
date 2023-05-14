@@ -6,18 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SlideshowModule } from './slideshow/slideshow.module';
-import { ToolbarModule } from './toolbar/toolbar.module';
+import { SlideshowModule } from './core/components/slideshow/slideshow.module';
+import { BurgerButtonComponent } from './core/components/toolbar/burger-button/burger-button.component';
+import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ToolbarComponent, BurgerButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TranslateModule.forRoot(),
-    ToolbarModule,
     SlideshowModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot(),
     ButtonsModule.forRoot(),
   ],
   providers: [],

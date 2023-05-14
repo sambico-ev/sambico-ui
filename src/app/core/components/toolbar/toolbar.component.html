@@ -1,0 +1,13 @@
+<div class="toolbar-container">
+  <div class="toolbar">
+    <img
+      class="logo"
+      src="assets/logo/logo-full-horizontal.png"
+      alt="sambico-logo"
+    />
+    <div class="toolbar-actions">
+      <app-burger-button (opened)="toggleMenu($event)"></app-burger-button>
+    </div>
+  </div>
+  <div class="menu" [class.menu-open]="menuOpen">hi</div>
+</div>
