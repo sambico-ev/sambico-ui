@@ -1,25 +1,23 @@
 .toolbar {
   padding: 0 16px;
   position: sticky;
-  height: 64px;
+  height: 100px;
+  width: 100%;
   top: 0;
-  background-color: var(--bs-dark);
-  -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.75);
+  background-color: var(--bs-light);
+  -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   z-index: 99;
+  overflow: hidden;
 }
 
 .logo {
   height: 50px;
   margin-right: 8px;
-}
-
-.sambico {
-  color: var(--bs-light);
 }
 
 .toolbar-menu {

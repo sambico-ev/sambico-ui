@@ -18,9 +18,6 @@ export class TitleResolver {
 
 export enum RouteNames {
   HOME = '',
-  ABOUT = 'about',
-  CONTACT = 'contact',
-  IMPRESSUM = 'impressum',
 }
 
 const routes: Routes = [{ path: RouteNames.HOME, component: AppComponent }];
