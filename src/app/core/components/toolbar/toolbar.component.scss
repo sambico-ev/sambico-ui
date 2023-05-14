@@ -21,7 +21,7 @@ $toobar-background: var(--bs-light);
   align-items: center;
 }
 
-.menu {
+.menu-wrapper {
   overflow: hidden;
   background-color: $toobar-background;
   height: 0;
@@ -41,7 +41,7 @@ $toobar-background: var(--bs-light);
 }
 
 .logo {
-  height: 50px;
+  height: 80px;
   margin-right: 8px;
 }
 

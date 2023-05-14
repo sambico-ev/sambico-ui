@@ -8,10 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SlideshowModule } from './core/components/slideshow/slideshow.module';
 import { BurgerButtonComponent } from './core/components/toolbar/burger-button/burger-button.component';
+import { ToolbarMenuComponent } from './core/components/toolbar/toolbar-menu/toolbar-menu.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, BurgerButtonComponent],
+  declarations: [
+    AppComponent,
+    ToolbarComponent,
+    BurgerButtonComponent,
+    ToolbarMenuComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
