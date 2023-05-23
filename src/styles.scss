@@ -2,7 +2,6 @@ html,
 body {
   margin: 0;
   scroll-behavior: smooth;
-  font-size: calc(15px + 0.390625vw);
 }
 
 @font-face {
@@ -35,24 +34,91 @@ body {
   src: url('./assets/fonts/Poppins-MediumItalic.ttf');
 }
 
-* {
-  font-family: 'light';
-}
-
 @import '../node_modules/bootstrap/scss/functions';
 @import '../node_modules/bootstrap/scss/variables';
 @import '../node_modules/bootstrap/scss/mixins';
 
 @import './variables.scss';
 
-/* Importing Datepicker SCSS file. */
 @import 'node_modules/ngx-bootstrap/datepicker/bs-datepicker';
 
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import '../node_modules/bootstrap/scss/utilities';
-// Required
+
+* {
+  font-family: 'light';
+  font-size: calc(15px + 0.390625vw);
+}
 
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
+
+  &:hover {
+    color: var(--bs-secondary); /* blue colors for links too */
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+  padding: 0;
+  font-weight: unset;
+}
+
+h1 {
+  font-family: 'medium';
+  font-size: calc(36px + 0.390625vw);
+}
+
+h2 {
+  font-family: 'medium';
+  font-size: calc(32px + 0.390625vw);
+}
+
+h3 {
+  font-family: 'medium';
+  font-size: calc(28px + 0.390625vw);
+}
+
+h4 {
+  font-family: 'light';
+  font-size: calc(22px + 0.390625vw);
+}
+
+$paddingDirection: ('right', 'left', 'top', 'bottom');
+$paddingLength: (4, 8, 16, 32);
+
+@each $len in $paddingLength {
+  .padding-#{$len} {
+    padding: #{$len}px;
+  }
+}
+
+@each $dir in $paddingDirection {
+  @each $len in $paddingLength {
+    .padding-#{$dir}-#{$len} {
+      padding-#{$dir}: #{$len}px;
+    }
+  }
+}
+
+$marginDirection: ('right', 'left', 'top', 'bottom');
+$marginLength: (4, 8, 16, 32);
+
+@each $len in $marginLength {
+  .margin-#{$len} {
+    margin: #{$len}px;
+  }
+}
+
+@each $dir in $marginDirection {
+  @each $len in $marginLength {
+    .margin-#{$dir}-#{$len} {
+      margin-#{$dir}: #{$len}px;
+    }
+  }
 }
