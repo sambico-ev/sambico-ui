@@ -6,10 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SlideshowModule } from './core/components/slideshow/slideshow.module';
-import { BurgerButtonComponent } from './core/components/toolbar/burger-button/burger-button.component';
-import { ToolbarMenuComponent } from './core/components/toolbar/toolbar-menu/toolbar-menu.component';
-import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
+import { HomeModule } from './sites/home/home.module';
+import { SlideshowModule } from './sites/slideshow/slideshow.module';
+import { BurgerButtonComponent } from './sites/toolbar/burger-button/burger-button.component';
+import { ToolbarMenuComponent } from './sites/toolbar/toolbar-menu/toolbar-menu.component';
+import { ToolbarComponent } from './sites/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
     ToolbarMenuComponent,
   ],
   imports: [
+    HomeModule,
     BrowserModule,
     AppRoutingModule,
     SlideshowModule,

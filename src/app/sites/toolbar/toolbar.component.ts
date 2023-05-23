@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointService } from '../../../shared/services/breakpoint.service';
+import { BreakpointService } from '../../shared/services/breakpoint.service';
 
 @Component({
   selector: 'app-toolbar',

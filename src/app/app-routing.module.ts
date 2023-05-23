@@ -1,7 +1,8 @@
 import { Injectable, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AppComponent } from './app.component';
+import { BlogComponent } from './sites/blog/blog.component';
+import { HomeComponent } from './sites/home/home.component';
 
 @Injectable({ providedIn: 'root' })
 export class TitleResolver {
@@ -18,9 +19,13 @@ export class TitleResolver {
 
 export enum RouteNames {
   HOME = '',
+  BLOG = 'blog',
 }
 
-const routes: Routes = [{ path: RouteNames.HOME, component: AppComponent }];
+const routes: Routes = [
+  { path: RouteNames.HOME, component: HomeComponent, pathMatch: 'full' },
+  { path: RouteNames.BLOG, component: BlogComponent, pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [
