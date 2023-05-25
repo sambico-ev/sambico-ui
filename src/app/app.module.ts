@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { env } from '../environment/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './sites/home/home.module';
@@ -22,13 +24,14 @@ import { ToolbarComponent } from './sites/toolbar/toolbar.component';
   imports: [
     HomeModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     SlideshowModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
     ButtonsModule.forRoot(),
   ],
-  providers: [],
+  providers: [{ provide: 'env', useValue: env }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

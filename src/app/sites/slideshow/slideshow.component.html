@@ -1,8 +1,13 @@
 <carousel [pauseOnFocus]="true">
-  <slide>
+  <slide *ngFor="let slide of slides">
+    <!-- TODO Add different images depending on screen size -->
     <img
-      src="assets/images/drummer.jpeg"
-      alt="First slide"
+      [src]="
+        strapiService.getStrapiImageUrl(
+          slide.attributes.image.data.attributes.formats.medium
+        )
+      "
+      [alt]="slide.attributes.image.data.attributes.alternativeText"
       style="display: block; width: 100%"
     />
     <div class="carousel-caption d-none d-md-block">
