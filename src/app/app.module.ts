@@ -13,9 +13,7 @@ import { env } from '../environment/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './sites/home/home.module';
-import { BurgerButtonComponent } from './sites/toolbar/burger-button/burger-button.component';
-import { ToolbarMenuComponent } from './sites/toolbar/toolbar-menu/toolbar-menu.component';
-import { ToolbarComponent } from './sites/toolbar/toolbar.component';
+import { ToolbarModule } from './sites/toolbar/toolbar.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -24,18 +22,14 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
 registerLocaleData(localeDe, 'de', localeDeExtra);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToolbarComponent,
-    BurgerButtonComponent,
-    ToolbarMenuComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     HomeModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToolbarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
