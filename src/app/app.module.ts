@@ -13,6 +13,8 @@ import { SlideshowModule } from './sites/slideshow/slideshow.module';
 import { BurgerButtonComponent } from './sites/toolbar/burger-button/burger-button.component';
 import { ToolbarMenuComponent } from './sites/toolbar/toolbar-menu/toolbar-menu.component';
 import { ToolbarComponent } from './sites/toolbar/toolbar.component';
+import { ImprintModule } from './sites/imprint/imprint.module';
+import { MarkdownPipe } from './shared/pipes/markdown.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,6 @@ import { ToolbarComponent } from './sites/toolbar/toolbar.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SlideshowModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
     ButtonsModule.forRoot(),

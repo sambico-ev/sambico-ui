@@ -8,6 +8,8 @@ import {
   Slide,
   SliderResponse,
   StrapiTypes,
+  WeclomeText,
+  WelcomeTextResponse,
 } from '../models/strapi.models';
 
 @Injectable({
@@ -27,6 +29,18 @@ export class StrapiService {
       .pipe(
         map((res) => {
           return res.data;
+        })
+      );
+  }
+
+  getWelcomeText(): Observable<WeclomeText> {
+    return this.http
+      .get<WelcomeTextResponse>(
+        this.apiUrl + StrapiTypes.WELCOME_TEXT + '?populate=*'
+      )
+      .pipe(
+        map((res) => {
+          return res.data.attributes;
         })
       );
   }

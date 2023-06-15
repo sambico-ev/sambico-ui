@@ -2,6 +2,7 @@ export enum StrapiTypes {
   BLOG = 'blogs',
   SLIDER = 'sliders',
   USER = 'user',
+  WELCOME_TEXT = 'welcome-text',
 }
 
 export interface SliderResponse {
@@ -69,4 +70,14 @@ export interface Image {
       width: number;
     };
   };
+}
+
+export interface WelcomeTextResponse {
+  data: { attributes: WeclomeText };
+}
+
+export interface WeclomeText {
+  title: string;
+  subtitle: string;
+  content: string;
 }
