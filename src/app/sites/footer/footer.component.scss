@@ -1,0 +1,28 @@
+.footer-container {
+  width: 100%;
+  background-color: var(--bs-primary);
+  padding: 40px 0 40px 15%;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.address {
+  padding-right: 15%;
+  font-size: 0.9rem;
+  color: var(--bs-light);
+
+  img {
+    height: 60px;
+    margin-bottom: 24px;
+  }
+}
+
+.about-us {
+  padding-right: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}

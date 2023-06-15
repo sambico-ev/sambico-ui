@@ -5,6 +5,7 @@ import { SlideshowModule } from '../slideshow/slideshow.module';
 import { HomeComponent } from './home.component';
 import { WelcomeModule } from '../welcome/welcome.module';
 import { ImprintModule } from '../imprint/imprint.module';
+import { FooterModule } from '../footer/footer.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -13,6 +14,7 @@ import { ImprintModule } from '../imprint/imprint.module';
     SlideshowModule,
     BlogPreviewModule,
     WelcomeModule,
+    FooterModule,
     ImprintModule,
   ],
   // exports: [HomeComponent]

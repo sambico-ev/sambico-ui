@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { env } from '../environment/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './sites/home/home.module';
-import { SlideshowModule } from './sites/slideshow/slideshow.module';
 import { BurgerButtonComponent } from './sites/toolbar/burger-button/burger-button.component';
 import { ToolbarMenuComponent } from './sites/toolbar/toolbar-menu/toolbar-menu.component';
 import { ToolbarComponent } from './sites/toolbar/toolbar.component';
-import { ImprintModule } from './sites/imprint/imprint.module';
-import { MarkdownPipe } from './shared/pipes/markdown.pipe';
+
+export function createTranslateLoader(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+registerLocaleData(localeDe, 'de', localeDeExtra);
 
 @NgModule({
   declarations: [
@@ -29,7 +36,13 @@ import { MarkdownPipe } from './shared/pipes/markdown.pipe';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
     ButtonsModule.forRoot(),
   ],
   providers: [{ provide: 'env', useValue: env }],

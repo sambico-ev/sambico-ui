@@ -1,5 +1,9 @@
 {
+  "imprint": "Impressum",
+  "projects": "Projekte",
+  "blog": "Blog",
   "home": {
     "tabTitle": "SAMBICO"
-  }
+  },
+  "contact": "Kontakt"
 }

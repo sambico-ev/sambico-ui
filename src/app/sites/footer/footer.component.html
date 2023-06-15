@@ -1,1 +1,17 @@
-<p>footer works!</p>
+<div class="footer-container">
+  <div class="address">
+    <img src="/assets/logo/logo-text-alt.png" />
+    <div>SAMBICO e.V.</div>
+    <div>Murrhardter Str. 30</div>
+    <div>71522 Backnang</div>
+    <div>
+      E-Mail: <a href="mailto:kontakt@sambico.de">kontakt@sambico.de</a>
+    </div>
+  </div>
+  <div class="about-us">
+    <a [routerLink]="routes.IMPRINT">{{ "imprint" | translate }}</a>
+    <a [routerLink]="routes.PROJECTS">{{ "projects" | translate }}</a>
+    <a [routerLink]="routes.BLOG">{{ "blog" | translate }}</a>
+    <a href="mailto:kontakt@sambico.de">{{ "contact" | translate }}</a>
+  </div>
+</div>
