@@ -5,5 +5,8 @@
   "home": {
     "tabTitle": "SAMBICO"
   },
+  "footer": {
+    "rights-reserved": "Alle Rechte vorbehalten"
+  },
   "contact": "Kontakt"
 }

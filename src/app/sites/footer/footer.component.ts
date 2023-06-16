@@ -8,4 +8,5 @@ import { RouteNames } from 'src/app/app-routing.module';
 })
 export class FooterComponent {
   routes = RouteNames;
+  year = new Date().getFullYear();
 }

@@ -1,15 +1,23 @@
+@import "/src/variables.scss";
+
 .footer-container {
   width: 100%;
   background-color: var(--bs-primary);
-  padding: 40px 0 40px 15%;
+  padding: 40px 0 40px 10%;
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
   gap: 4rem;
+  position: absolute;
+  bottom: 0;
+  height: $footer-height;
+}
+
+.footer-column {
+  padding-right: 10%;
 }
 
 .address {
-  padding-right: 15%;
   font-size: 0.9rem;
   color: var(--bs-light);
 
@@ -20,9 +28,16 @@
 }
 
 .about-us {
-  padding-right: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   gap: 8px;
+}
+
+.copyright {
+  color: var(--bs-light);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
