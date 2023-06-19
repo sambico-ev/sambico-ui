@@ -1,0 +1,16 @@
+<div class="card-container">
+  <div class="project-preview-card" *ngFor="let project of projects">
+    <div class="content-wrapper">
+      <h1>{{ project.attributes.title }}</h1>
+      <h4>{{ project.attributes.subtitle }}</h4>
+      <div class="content" [innerHTML]="project.attributes.content"></div>
+      <button
+        class="btn icon-btn"
+        [routerLink]="routes.PROJECTS + '/' + project.id"
+      >
+        {{ "readMore" | translate }}
+        <img height="18px" src="assets/icons/chevron-right.svg" />
+      </button>
+    </div>
+  </div>
+</div>

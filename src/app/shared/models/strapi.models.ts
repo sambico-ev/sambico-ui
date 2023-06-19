@@ -3,10 +3,30 @@ export enum StrapiTypes {
   SLIDER = 'sliders',
   USER = 'user',
   WELCOME_TEXT = 'welcome-text',
+  PROJECT = 'projects',
 }
 
 export interface SliderResponse {
   data: Slide[];
+}
+
+export interface ProjectResponse {
+  data: Project[];
+}
+
+export interface Project {
+  id: number;
+  attributes: {
+    title: string;
+    subtitle: string;
+    content: string;
+    image: Image;
+    createdAt: Date;
+    locale: string;
+    localizations: Localization;
+    publishedAt: Date;
+    updatedAt: Date;
+  };
 }
 
 export interface Slide {
@@ -19,7 +39,7 @@ export interface Slide {
     locale: string;
     localizations: Localization;
     publishedAt: Date;
-    subTitle: string;
+    subtitle: string;
     title: string;
     updatedAt: Date;
   };

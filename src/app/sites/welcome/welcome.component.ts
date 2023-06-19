@@ -14,7 +14,6 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.strapiService.getWelcomeText().subscribe((res) => {
-      console.log(res);
       this.welcomeText = {
         content: res.content,
         title: res.title,

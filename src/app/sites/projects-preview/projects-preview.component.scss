@@ -1,0 +1,37 @@
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 32px;
+  justify-content: center;
+}
+
+.project-preview-card {
+  padding: 24px;
+  border-radius: 5px;
+  background-color: var(--bs-secondary);
+  transform: rotate(2deg);
+  max-width: 480px;
+  min-width: 280px;
+  width: 100%;
+}
+
+.content-wrapper {
+  transform: rotate(-2deg);
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+button {
+  margin-left: auto;
+  margin-top: 16px;
+}

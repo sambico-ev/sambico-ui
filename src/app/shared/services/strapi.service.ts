@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Environment } from '../models/env.model';
 import {
   Format,
+  Project,
+  ProjectResponse,
   Slide,
   SliderResponse,
   StrapiTypes,
@@ -26,6 +28,16 @@ export class StrapiService {
   getSlider(): Observable<Slide[]> {
     return this.http
       .get<SliderResponse>(this.apiUrl + StrapiTypes.SLIDER + '?populate=*')
+      .pipe(
+        map((res) => {
+          return res.data;
+        })
+      );
+  }
+
+  getProjects(): Observable<Project[]> {
+    return this.http
+      .get<ProjectResponse>(this.apiUrl + StrapiTypes.PROJECT + '?populate=*')
       .pipe(
         map((res) => {
           return res.data;

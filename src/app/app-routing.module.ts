@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { BlogComponent } from './sites/blog/blog.component';
 import { HomeComponent } from './sites/home/home.component';
 import { ImprintComponent } from './sites/imprint/imprint.component';
+import { ProjectComponent } from './sites/projects/project/project.component';
+import { ProjectsComponent } from './sites/projects/projects.component';
 
 @Injectable({ providedIn: 'root' })
 export class TitleResolver {
@@ -29,6 +31,18 @@ const routes: Routes = [
   { path: RouteNames.HOME, component: HomeComponent, pathMatch: 'full' },
   { path: RouteNames.BLOG, component: BlogComponent, pathMatch: 'full' },
   { path: RouteNames.IMPRINT, component: ImprintComponent, pathMatch: 'full' },
+  {
+    path: RouteNames.PROJECTS,
+    component: ProjectsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: RouteNames.PROJECTS + '/:id',
+    component: ProjectComponent,
+    pathMatch: 'full',
+  },
+
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({

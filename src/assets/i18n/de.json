@@ -1,12 +1,13 @@
 {
   "imprint": "Impressum",
   "projects": "Projekte",
-  "blog": "Blog",
+  "blog": "Neuigkeiten",
   "home": {
     "tabTitle": "SAMBICO"
   },
   "footer": {
     "rights-reserved": "Alle Rechte vorbehalten"
   },
-  "contact": "Kontakt"
+  "contact": "Kontakt",
+  "readMore": "Mehr erfahren"
 }
