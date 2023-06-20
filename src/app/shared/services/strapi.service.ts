@@ -19,7 +19,7 @@ import {
 })
 export class StrapiService {
   apiUrl = this.env.strapiUrl + '/api/';
-  headers = { Authorization: this.env.strapiApiToken };
+  headers = { Authorization: 'Bearer ' + this.env.strapiApiToken };
 
   constructor(
     @Inject('env') private env: Environment,
