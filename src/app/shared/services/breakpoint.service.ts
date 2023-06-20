@@ -14,7 +14,7 @@ export class BreakpointService {
     return this.breakpointObserver.observe(Object.values(Breakpoints)).pipe(
       map((state: BreakpointState) => {
         const matchingBreakpoint: Breakpoints = Breakpoints.DESKTOP;
-        const breakpoints = Object.keys(state.breakpoints);
+        const breakpoints = Object.keys(state.breakpoints) || [];
         for (let i = 0; i < breakpoints.length; i++) {
           if (state.breakpoints[breakpoints[i]]) {
             return breakpoints[i] as Breakpoints;
