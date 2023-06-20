@@ -19,6 +19,7 @@ import {
 })
 export class StrapiService {
   apiUrl = this.env.strapiUrl + '/api/';
+  headers = { Authorization: this.env.strapiApiToken };
 
   constructor(
     @Inject('env') private env: Environment,
@@ -27,7 +28,9 @@ export class StrapiService {
 
   getSlider(): Observable<Slide[]> {
     return this.http
-      .get<SliderResponse>(this.apiUrl + StrapiTypes.SLIDER + '?populate=*')
+      .get<SliderResponse>(this.apiUrl + StrapiTypes.SLIDER + '?populate=*', {
+        headers: this.headers,
+      })
       .pipe(
         map((res) => {
           return res.data;
@@ -40,7 +43,8 @@ export class StrapiService {
       .get<ProjectResponse>(
         this.apiUrl +
           StrapiTypes.PROJECT +
-          `${count ? '?pagination[pageSize]=' + count : ''}`
+          `${count ? '?pagination[pageSize]=' + count : ''}`,
+        { headers: this.headers }
       )
       .pipe(
         map((res) => {
@@ -52,7 +56,8 @@ export class StrapiService {
   getWelcomeText(): Observable<WeclomeText> {
     return this.http
       .get<WelcomeTextResponse>(
-        this.apiUrl + StrapiTypes.WELCOME_TEXT + '?populate=*'
+        this.apiUrl + StrapiTypes.WELCOME_TEXT + '?populate=*',
+        { headers: this.headers }
       )
       .pipe(
         map((res) => {
