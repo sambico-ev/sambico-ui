@@ -8,6 +8,9 @@
   "footer": {
     "rights-reserved": "Alle Rechte vorbehalten"
   },
+  "projectPreview": {
+    "showAll": "Alle Projekte zeigen"
+  },
   "contact": "Kontakt",
   "readMore": "Mehr erfahren"
 }

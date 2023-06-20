@@ -1,11 +1,14 @@
 <div class="card-container">
-  <div class="project-preview-card" *ngFor="let project of projects">
+  <div
+    class="project-preview-card"
+    *ngFor="let project of projects.slice(0, 2)"
+  >
     <div class="content-wrapper">
       <h1>{{ project.attributes.title }}</h1>
       <h4>{{ project.attributes.subtitle }}</h4>
       <div class="content" [innerHTML]="project.attributes.content"></div>
       <button
-        class="btn icon-btn"
+        class="btn icon-btn more-button"
         [routerLink]="routes.PROJECTS + '/' + project.id"
       >
         {{ "readMore" | translate }}
@@ -14,3 +17,7 @@
     </div>
   </div>
 </div>
+<button class="btn icon-btn all-button" [routerLink]="routes.PROJECTS">
+  {{ "showAll" | translate }}
+  <img height="18px" src="assets/icons/chevron-right.svg" />
+</button>

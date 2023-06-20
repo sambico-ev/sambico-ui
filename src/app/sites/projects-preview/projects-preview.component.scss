@@ -1,3 +1,13 @@
+:host {
+  max-width: 1200px;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 16px;
+}
+
 .card-container {
   display: flex;
   flex-direction: row;
@@ -5,6 +15,8 @@
   gap: 48px;
   padding: 32px;
   justify-content: center;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .project-preview-card {
@@ -31,7 +43,11 @@
   -webkit-box-orient: vertical;
 }
 
-button {
+.more-button {
   margin-left: auto;
   margin-top: 16px;
+}
+
+.all-button {
+  margin: 0 auto;
 }

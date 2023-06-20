@@ -15,7 +15,7 @@ export class ProjectsPreviewComponent implements OnInit {
   constructor(public strapiService: StrapiService) {}
 
   ngOnInit(): void {
-    this.strapiService.getProjects().subscribe((res) => {
+    this.strapiService.getProjects(2).subscribe((res) => {
       this.projects = res;
     });
   }

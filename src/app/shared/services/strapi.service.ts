@@ -35,9 +35,13 @@ export class StrapiService {
       );
   }
 
-  getProjects(): Observable<Project[]> {
+  getProjects(count?: number): Observable<Project[]> {
     return this.http
-      .get<ProjectResponse>(this.apiUrl + StrapiTypes.PROJECT + '?populate=*')
+      .get<ProjectResponse>(
+        this.apiUrl +
+          StrapiTypes.PROJECT +
+          `${count ? '?pagination[pageSize]=' + count : ''}`
+      )
       .pipe(
         map((res) => {
           return res.data;

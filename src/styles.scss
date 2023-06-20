@@ -115,6 +115,9 @@ h4 {
 }
 
 .btn {
+  text-transform: uppercase;
+  font-weight: bold;
+
   &.icon-btn {
     display: flex;
     align-items: center;
