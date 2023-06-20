@@ -9,7 +9,7 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { env } from '../environment/environment';
+import { env } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterModule } from './sites/footer/footer.module';
