@@ -1,4 +1,6 @@
 export const env = {
   production: true,
   strapiUrl: 'https://strapi-vnv3.onrender.com',
+  strapiApiToken:
+    'fa3c39767b9c881ba23c01708e91e898d5cc78c85cd6177f10022bbe520c97faafc015c8aae73d449b2d336422ea29165d4f36a58390933acd4022f8b91e96843ed34038ceeb2359bbd120040c7066687ce41347ab9e46ee13c05e339882a095711380d079aa082052d072471b0bc57d06481d48ed03f456e8c0d7d742f8e39a',
 };
