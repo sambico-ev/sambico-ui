@@ -1,0 +1,18 @@
+<carousel [pauseOnFocus]="true">
+  <slide *ngFor="let slide of slides">
+    <!-- TODO Add different images depending on screen size -->
+    <img
+      [src]="
+        strapiService.getStrapiImageUrl(
+          slide.attributes.image.data.attributes.formats.medium
+        )
+      "
+      [alt]="slide.attributes.image.data.attributes.alternativeText"
+      style="display: block; width: 100%"
+    />
+    <div class="carousel-caption d-none d-md-block">
+      <h1 class="margin-bottom-8">Welcome to SAMBICO e.V.</h1>
+      <h4>Society of Art and Music Boosting Intercultural Cooperation</h4>
+    </div>
+  </slide>
+</carousel>

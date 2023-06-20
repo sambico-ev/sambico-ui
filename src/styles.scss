@@ -1,60 +1,69 @@
-html,
+@font-face {
+  font-family: "thin";
+  src: url("./assets/fonts/Poppins-Thin.ttf");
+}
+
+@font-face {
+  font-family: "thin-italic";
+  src: url("./assets/fonts/Poppins-ThinItalic.ttf");
+}
+
+@font-face {
+  font-family: "light";
+  src: url("./assets/fonts/Poppins-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: "light-italic";
+  src: url("./assets/fonts/Poppins-ExtraLightItalic.ttf");
+}
+
+@font-face {
+  font-family: "medium";
+  src: url("./assets/fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "medium-italic";
+  src: url("./assets/fonts/Poppins-MediumItalic.ttf");
+}
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+@import "./variables.scss";
+
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/utilities";
+
+html {
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
+  position: relative;
+  background-color: var(--bs-primary);
+}
+
+body,
+html {
   margin: 0;
   scroll-behavior: smooth;
-}
-
-@font-face {
-  font-family: 'thin';
-  src: url('./assets/fonts/Poppins-Thin.ttf');
-}
-
-@font-face {
-  font-family: 'thin-italic';
-  src: url('./assets/fonts/Poppins-ThinItalic.ttf');
-}
-
-@font-face {
-  font-family: 'light';
-  src: url('./assets/fonts/Poppins-ExtraLight.ttf');
-}
-
-@font-face {
-  font-family: 'light-italic';
-  src: url('./assets/fonts/Poppins-ExtraLightItalic.ttf');
-}
-
-@font-face {
-  font-family: 'medium';
-  src: url('./assets/fonts/Poppins-Medium.ttf');
-}
-
-@font-face {
-  font-family: 'medium-italic';
-  src: url('./assets/fonts/Poppins-MediumItalic.ttf');
-}
-
-@import '../node_modules/bootstrap/scss/functions';
-@import '../node_modules/bootstrap/scss/variables';
-@import '../node_modules/bootstrap/scss/mixins';
-
-@import './variables.scss';
-
-@import 'node_modules/ngx-bootstrap/datepicker/bs-datepicker';
-
-@import '../node_modules/bootstrap/scss/bootstrap';
-@import '../node_modules/bootstrap/scss/utilities';
-
-* {
-  font-family: 'light';
+  font-family: "light";
   font-size: calc(15px + 0.390625vw);
 }
 
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
+  color: var(--bs-secondary); /* blue colors for links too */
 
   &:hover {
+    font-weight: bold;
     color: var(--bs-secondary); /* blue colors for links too */
   }
 }
@@ -70,26 +79,53 @@ p {
 }
 
 h1 {
-  font-family: 'medium';
-  font-size: calc(36px + 0.390625vw);
+  font-family: "medium";
+  font-size: calc(28px + 0.390625vw);
+
+  @media (min-width: 768px) {
+    font-size: calc(36px + 0.390625vw);
+  }
 }
 
 h2 {
-  font-family: 'medium';
-  font-size: calc(32px + 0.390625vw);
+  font-family: "medium";
+  font-size: calc(26px + 0.390625vw);
+
+  @media (min-width: 768px) {
+    font-size: calc(32px + 0.390625vw);
+  }
 }
 
 h3 {
-  font-family: 'medium';
-  font-size: calc(28px + 0.390625vw);
+  font-family: "medium";
+  font-size: calc(22px + 0.390625vw);
+
+  @media (min-width: 768px) {
+    font-size: calc(28px + 0.390625vw);
+  }
 }
 
 h4 {
-  font-family: 'light';
-  font-size: calc(22px + 0.390625vw);
+  font-family: "light";
+  font-size: calc(18px + 0.390625vw);
+
+  @media (min-width: 768px) {
+    font-size: calc(22px + 0.390625vw);
+  }
 }
 
-$paddingDirection: ('right', 'left', 'top', 'bottom');
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+$paddingDirection: ("right", "left", "top", "bottom");
 $paddingLength: (4, 8, 16, 32);
 
 @each $len in $paddingLength {
@@ -106,7 +142,7 @@ $paddingLength: (4, 8, 16, 32);
   }
 }
 
-$marginDirection: ('right', 'left', 'top', 'bottom');
+$marginDirection: ("right", "left", "top", "bottom");
 $marginLength: (4, 8, 16, 32);
 
 @each $len in $marginLength {

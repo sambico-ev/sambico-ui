@@ -1,0 +1,5 @@
+<div class="welcome-container" *ngIf="welcomeText">
+  <div class="title">{{ welcomeText.title }}</div>
+  <div class="sub-title">{{ welcomeText.subtitle }}</div>
+  <div class="content" [innerHTML]="welcomeText.content | markdown"></div>
+</div>

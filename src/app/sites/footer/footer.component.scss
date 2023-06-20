@@ -1,0 +1,37 @@
+@import "/src/variables.scss";
+
+.footer-container {
+  width: 100%;
+  padding: 40px 0 0 10%;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  gap: 4rem;
+  position: absolute;
+  bottom: 0;
+  height: $footer-height;
+}
+
+.footer-column {
+  padding-bottom: 32px;
+  justify-content: end;
+  padding-right: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  font-size: 0.9rem;
+  color: var(--bs-light);
+
+  img {
+    height: 60px;
+    margin-bottom: 8px;
+  }
+}
+
+.copyright {
+  color: var(--bs-light);
+  font-size: 0.9rem;
+}

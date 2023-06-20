@@ -1,32 +1,47 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+import { registerLocaleData } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { env } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SlideshowModule } from './core/components/slideshow/slideshow.module';
-import { BurgerButtonComponent } from './core/components/toolbar/burger-button/burger-button.component';
-import { ToolbarMenuComponent } from './core/components/toolbar/toolbar-menu/toolbar-menu.component';
-import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
+import { FooterModule } from './sites/footer/footer.module';
+import { HomeModule } from './sites/home/home.module';
+import { ToolbarModule } from './sites/toolbar/toolbar.module';
+
+export function createTranslateLoader(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+registerLocaleData(localeDe, 'de', localeDeExtra);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToolbarComponent,
-    BurgerButtonComponent,
-    ToolbarMenuComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
+    HomeModule,
     BrowserModule,
+    HttpClientModule,
+    FooterModule,
     AppRoutingModule,
-    SlideshowModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot(),
+    ToolbarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
     ButtonsModule.forRoot(),
   ],
-  providers: [],
+  providers: [{ provide: 'env', useValue: env }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
