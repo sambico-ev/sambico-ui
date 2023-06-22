@@ -1,0 +1,54 @@
+:host {
+  max-width: 1200px;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 16px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 32px;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.project-preview-card {
+  padding: 24px;
+  border-radius: 5px;
+  background-color: var(--bs-secondary);
+  transform: rotate(2deg);
+  width: 100%;
+}
+
+.info-card {
+  padding: 24px;
+  border-radius: 5px;
+  color: var(--bs-light);
+}
+
+.content-wrapper {
+  transform: rotate(-2deg);
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  overflow: hidden;
+  padding-bottom: 24px;
+}
+
+.more-button {
+  margin-left: auto;
+  margin-top: 16px;
+}
+
+.all-button {
+  margin: 0 auto;
+}

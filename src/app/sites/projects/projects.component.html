@@ -1,1 +1,26 @@
-<p>projects works!</p>
+<div class="card-container">
+    <h4 class="info-card">
+        Mit den Erlösen aus unseren Veranstaltungen und Events unterstützen wir Hilfsprojekte 
+        in Sambia. Zurzeit kooperieren wir mit verschiedenen Organisationen und Vereinen, die 
+        Projekte in unterschiedlichen Bereichen in Sambia durchführen.
+    </h4>
+
+    <div
+      class="project-preview-card"
+      *ngFor="let project of projects"
+    >
+      <div class="content-wrapper">
+        <h2 class="margin-bottom-8">{{ project.attributes.title }}</h2>
+        <h4 class="margin-bottom-8">{{ project.attributes.subtitle }}</h4>
+        <div class="content" [innerHTML]="project.attributes.content"></div>
+        <!-- <button
+          class="btn icon-btn more-button"
+          [routerLink]="routes.PROJECTS + '/' + project.id"
+        >
+          {{ "readMore" | translate }}
+          <img height="18px" src="assets/icons/chevron-right.svg" />
+        </button> -->
+      </div>
+    </div>
+  </div>
+  
