@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeComponent } from './welcome.component';
-import { MarkdownPipe } from 'src/app/shared/pipes/markdown.pipe';
 
 @NgModule({
-  declarations: [WelcomeComponent, MarkdownPipe],
-  imports: [CommonModule],
+  declarations: [WelcomeComponent],
+  imports: [CommonModule, SharedModule],
   exports: [WelcomeComponent],
 })
 export class WelcomeModule {}
