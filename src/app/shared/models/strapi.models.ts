@@ -50,10 +50,12 @@ interface Localization {
 }
 
 export interface Formats {
-  large: Format;
-  medium: Format;
-  small: Format;
-  thumbnail: Format;
+  xlarge: Format; // 1920
+  large: Format; // 1440
+  medium: Format; // 75
+  small: Format; // 563
+  xsmall: Format; // 96
+  thumbnail: Format; // 156
 }
 
 export interface Format {

@@ -68,8 +68,11 @@ export class StrapiService {
 
   getStrapiImageUrl(
     formats: Formats,
-    size: 'large' | 'medium' | 'small' | 'thumbnail'
+    size: 'large' | 'medium' | 'small' | 'thumbnail' | 'xlarge' | 'xsmall'
   ): string {
+    if (size === 'xlarge' && !formats[size]) {
+      size = 'large';
+    }
     return this.env.strapiUrl + formats[size].url;
   }
 }

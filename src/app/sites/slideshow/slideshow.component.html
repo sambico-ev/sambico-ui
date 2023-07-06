@@ -5,7 +5,7 @@
     <img
       [src]="
         strapiService.getStrapiImageUrl(
-          slide.attributes.image.data.attributes.formats, (isMobile | async) ? 'medium' : 'large'
+          slide.attributes.image.data.attributes.formats, (isMobile | async) ? 'large' : 'xlarge'
         )
       "
       [alt]="slide.attributes.image.data.attributes.alternativeText"
