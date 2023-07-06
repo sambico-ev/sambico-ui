@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Environment } from '../models/env.model';
 import {
-  Format,
+  Formats,
   Project,
   ProjectResponse,
   Slide,
@@ -66,7 +66,10 @@ export class StrapiService {
       );
   }
 
-  getStrapiImageUrl(image: Format): string {
-    return this.env.strapiUrl + image.url;
+  getStrapiImageUrl(
+    formats: Formats,
+    size: 'large' | 'medium' | 'small' | 'thumbnail'
+  ): string {
+    return this.env.strapiUrl + formats[size].url;
   }
 }

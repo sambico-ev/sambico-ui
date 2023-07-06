@@ -49,7 +49,7 @@ interface Localization {
   date: any[]; //TODO: Type
 }
 
-interface Formats {
+export interface Formats {
   large: Format;
   medium: Format;
   small: Format;
