@@ -1,1 +1,31 @@
-<p>blog-preview works!</p>
+<div class="blog-preview-container">
+  <h1 class="heading">Was gibt's neues?</h1>
+  <div class="blog-preview" *ngFor="let blog of blogs">
+    <div class="image-container">
+      <img
+        (click)="openImage(blog.attributes.image.data.attributes.formats)"
+        class="image"
+        [src]="
+          strapiService.getStrapiImageUrl(
+            blog.attributes.image.data.attributes.formats,
+            (isMobile | async) ? 'large' : 'xlarge'
+          )
+        "
+        alt="blog image"
+      />
+    </div>
+    <div class="content">
+      <h3 class="title">{{ blog.attributes.title }}</h3>
+      <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
+        {{ blog.attributes.subTitle }}
+      </h4>
+      <button
+        class="btn icon-btn read-button"
+        [routerLink]="'/' + routes.PROJECTS"
+      >
+        {{ "blogPreview.readMore" | translate }}
+        <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+      </button>
+    </div>
+  </div>
+</div>

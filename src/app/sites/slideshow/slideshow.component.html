@@ -1,20 +1,24 @@
-<carousel [pauseOnFocus]="true">
-  <slide *ngFor="let slide of slides">
-    <!-- TODO Add different images depending on screen size -->
-    <div *ngIf="slide.attributes.image.data">
-    <img
-      [src]="
-        strapiService.getStrapiImageUrl(
-          slide.attributes.image.data.attributes.formats, (isMobile | async) ? 'large' : 'xlarge'
-        )
-      "
-      [alt]="slide.attributes.image.data.attributes.alternativeText"
-      style="display: block; width: 100%"
-    />
-    <div class="carousel-caption d-none d-md-block">
-      <h1 class="margin-bottom-8">{{slide.attributes.title}}</h1>
-      <h4>{{slide.attributes.subtitle}}</h4>
-    </div>
-  </div>
-  </slide>
-</carousel>
+<div class="slideshow-container" [class.mobile]="isMobile | async">
+  <carousel [pauseOnFocus]="true">
+    <slide *ngFor="let slide of slides">
+      <!-- TODO Add different images depending on screen size -->
+      <div *ngIf="slide.attributes.image.data">
+        <img
+          [class.mobile]="isMobile | async"
+          [src]="
+            strapiService.getStrapiImageUrl(
+              slide.attributes.image.data.attributes.formats,
+              (isMobile | async) ? 'large' : 'xlarge'
+            )
+          "
+          [alt]="slide.attributes.image.data.attributes.alternativeText"
+          style="display: block; width: 100%"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="margin-bottom-8">{{ slide.attributes.title }}</h1>
+          <h4>{{ slide.attributes.subtitle }}</h4>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+</div>

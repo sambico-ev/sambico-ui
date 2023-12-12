@@ -11,6 +11,10 @@
   "projectPreview": {
     "showAll": "Alle Projekte zeigen"
   },
+  "blogPreview": {
+    "showAll": "Alle Neuigkeiten zeigen",
+    "readMore": "Jetzt Lesen"
+  },
   "contact": "Kontakt",
   "readMore": "Mehr erfahren"
 }

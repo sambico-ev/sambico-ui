@@ -45,6 +45,22 @@ export interface Slide {
   };
 }
 
+export interface Blog {
+  id: number;
+  attributes: {
+    title: string;
+    subTitle?: string;
+    image: Image;
+    content: string;
+    contentPreview?: string;
+    previewButtonText: string;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date;
+    locale: string;
+  };
+}
+
 interface Localization {
   date: any[]; //TODO: Type
 }
@@ -96,6 +112,10 @@ export interface Image {
 
 export interface WelcomeTextResponse {
   data: { attributes: WeclomeText };
+}
+
+export interface BlogResponse {
+  data: Blog[];
 }
 
 export interface WeclomeText {

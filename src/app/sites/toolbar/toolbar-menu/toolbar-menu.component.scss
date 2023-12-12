@@ -6,3 +6,11 @@
   align-items: center;
   flex-direction: column;
 }
+
+.toolbar-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 16px;
+}

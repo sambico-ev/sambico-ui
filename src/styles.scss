@@ -58,7 +58,6 @@ html {
 }
 
 a {
-  color: inherit;
   text-decoration: inherit;
   color: var(--bs-secondary);
 
@@ -99,39 +98,44 @@ h1 {
 
 h2 {
   font-family: "medium";
-  font-size: calc(26px + 0.390625vw);
+  font-size: calc(24px + 0.390625vw);
 
   @media (min-width: 768px) {
-    font-size: calc(32px + 0.390625vw);
+    font-size: calc(30px + 0.390625vw);
   }
 }
 
 h3 {
   font-family: "medium";
-  font-size: calc(22px + 0.390625vw);
+  font-size: calc(20px + 0.390625vw);
 
   @media (min-width: 768px) {
-    font-size: calc(28px + 0.390625vw);
+    font-size: calc(24px + 0.390625vw);
   }
 }
 
 h4 {
   font-family: "light";
-  font-size: calc(18px + 0.390625vw);
+  font-size: calc(16px + 0.390625vw);
 
   @media (min-width: 768px) {
-    font-size: calc(22px + 0.390625vw);
+    font-size: calc(18px + 0.390625vw);
   }
 }
 
 .btn {
   text-transform: uppercase;
   font-weight: bold;
+  transition: all 0.1s ease-in-out;
 
   &.icon-btn {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 8px;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 }
 
