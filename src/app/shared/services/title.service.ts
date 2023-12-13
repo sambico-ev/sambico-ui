@@ -21,7 +21,9 @@ export class TitleService implements OnDestroy {
     this.router.events.subscribe((route) => {
       if (route instanceof NavigationEnd) {
         const url = route.urlAfterRedirects.replace(/^\/+/, '');
-        this.title.setTitle(this.baseTitle + ' - ' + url.toUpperCase);
+        this.title.setTitle(
+          this.baseTitle + (url ? ' - ' + url.toUpperCase() : '')
+        );
       }
     });
   }
