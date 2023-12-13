@@ -1,18 +1,45 @@
 <div class="toolbar-actions">
   <h4>{{ "toolbar.actions.navigation" | translate }}</h4>
-  <button [routerLink]="['/blog']" class="btn">
+  <a [routerLink]="['/' + routes.BLOG]" class="btn icon-btn">
     {{ "toolbar.actions.blog" | translate }}
-  </button>
-  <button [routerLink]="['/projects']" class="btn">
+    <i-bs name="chevron-right" height="20" width="20"></i-bs>
+  </a>
+  <a [routerLink]="['/' + routes.PROJECTS]" class="btn icon-btn">
     {{ "toolbar.actions.projects" | translate }}
-  </button>
+    <i-bs name="chevron-right" height="20" width="20"></i-bs>
+  </a>
+  <a [routerLink]="['/' + routes.PROJECTS]" class="btn icon-btn">
+    {{ "toolbar.actions.imprint" | translate }}
+    <i-bs name="chevron-right" height="20" width="20"></i-bs>
+  </a>
 </div>
 <div class="toolbar-actions">
   <h4>{{ "toolbar.actions.participate" | translate }}</h4>
-  <a class="btn" href="mailto:kontakt@sambico.de">
+  <a class="btn icon-btn" href="mailto:kontakt@sambico.de">
+    <i-bs name="at" height="20" width="20"></i-bs>
     {{ "toolbar.actions.contact" | translate }}
   </a>
-  <button class="btn" (click)="downloadMembershipApplication()">
+  <button class="btn icon-btn" (click)="downloadMembershipApplication()">
+    <i-bs name="download" height="20" width="20"></i-bs>
     {{ "toolbar.actions.download_membership_application" | translate }}
   </button>
+</div>
+<div class="toolbar-actions">
+  <h4>{{ "toolbar.actions.social" | translate }}</h4>
+  <a
+    class="btn icon-btn"
+    href="https://www.facebook.com/SambicoeV/"
+    target="_blank"
+  >
+    <i-bs name="facebook" height="20" width="20"></i-bs>
+    {{ "toolbar.actions.facebook" | translate }}
+  </a>
+  <a
+    class="btn icon-btn"
+    href="https://www.instagram.com/sambico/"
+    target="_blank"
+  >
+    <i-bs name="instagram" height="20" width="20"></i-bs>
+    {{ "toolbar.actions.instagram" | translate }}
+  </a>
 </div>

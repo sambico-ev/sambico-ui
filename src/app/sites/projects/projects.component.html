@@ -1,10 +1,7 @@
-<h1 class="page-heading">{{ "projects" | translate }}</h1>
+<h1 class="page-heading">{{ "projects.title" | translate }}</h1>
 <div class="card-container">
   <h4 class="info-card">
-    Mit den Erlösen aus unseren Veranstaltungen und Events unterstützen wir
-    Entwicklungsprojekte in Sambia. Zurzeit kooperieren wir mit verschiedenen
-    Organisationen und Vereinen, die Projekte in unterschiedlichen Bereichen in
-    Sambia durchführen.
+    {{ "projects.info" | translate }}
   </h4>
 
   <div class="project-preview-card" *ngFor="let project of projects">
@@ -15,13 +12,6 @@
         class="content"
         [innerHTML]="project.attributes.content | markdown"
       ></div>
-      <!-- <button
-          class="btn icon-btn more-button"
-          [routerLink]="routes.PROJECTS + '/' + project.id"
-        >
-          {{ "readMore" | translate }}
-          <img height="18px" src="assets/icons/chevron-right.svg" />
-        </button> -->
     </div>
   </div>
 </div>

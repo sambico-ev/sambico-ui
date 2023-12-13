@@ -47,9 +47,10 @@ $toobar-background: var(--bs-light);
 .logo {
   height: 80px;
   margin-right: 8px;
+  transition: all 0.1s ease-in-out;
 
   &:hover {
-    height: 84px;
+    height: 82px;
   }
 
   &.mobile {

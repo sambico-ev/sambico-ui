@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, ProjectComponent],
+  declarations: [ProjectsComponent],
   imports: [CommonModule, RouterModule, TranslateModule, SharedModule],
-  exports: [ProjectsComponent, ProjectComponent],
+  exports: [ProjectsComponent],
 })
 export class ProjectsModule {}

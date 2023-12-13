@@ -1,6 +1,6 @@
 <div class="toolbar-container" [class.mobile]="isMobile | async">
   <div class="toolbar">
-    <a [routerLink]="routes.HOME">
+    <a [routerLink]="routes.HOME" (click)="toggleMenu(false)">
       <img
         class="logo"
         alt="sambico-logo"
@@ -8,7 +8,10 @@
         src="assets/logo/logo-full-horizontal.png"
     /></a>
     <div class="toolbar-actions">
-      <app-burger-button (opened)="toggleMenu($event)"></app-burger-button>
+      <app-burger-button
+        (opened)="toggleMenu($event)"
+        [active]="menuOpen"
+      ></app-burger-button>
     </div>
   </div>
   <div class="menu-wrapper" [class.menu-open]="menuOpen">

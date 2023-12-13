@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouteNames } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-toolbar-menu',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./toolbar-menu.component.scss'],
 })
 export class ToolbarMenuComponent {
+  routes = RouteNames;
+
   downloadMembershipApplication(): void {
     const link = document.createElement('a');
     link.setAttribute('type', 'hidden');

@@ -43,3 +43,13 @@
   color: var(--bs-light);
   font-size: 0.9rem;
 }
+
+a {
+  text-decoration: inherit;
+  color: var(--bs-secondary);
+
+  &:hover {
+    font-weight: bold;
+    color: var(--bs-secondary);
+  }
+}

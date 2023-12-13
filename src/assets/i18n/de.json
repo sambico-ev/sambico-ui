@@ -1,7 +1,14 @@
 {
-  "imprint": "Impressum",
-  "projects": "Projekte",
-  "blog": "Neuigkeiten",
+  "imprint": {
+    "title": "Impressum"
+  },
+  "projects": {
+    "title": "Projekte",
+    "info": "Mit den Erlösen aus unseren Veranstaltungen und Events unterstützen wir Entwicklungsprojekte in Sambia. Zurzeit kooperieren wir mit verschiedenen Organisationen und Vereinen, die Projekte in Bereichen in Sambia durchführen."
+  },
+  "blog": {
+    "title": "Blog"
+  },
   "home": {
     "tabTitle": "SAMBICO"
   },
@@ -25,7 +32,11 @@
       "participate": "Mitmachen",
       "contact": "Kontakt",
       "navigation": "Navigation",
-      "download_membership_application": "Mitgliedsantrag herunterladen"
+      "download_membership_application": "Mitgliedsantrag",
+      "imprint": "Impressum",
+      "social": "Weitere Kanäle",
+      "facebook": "Facebook",
+      "instagram": "Instagram"
     }
   }
 }
