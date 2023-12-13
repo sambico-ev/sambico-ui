@@ -14,7 +14,11 @@
       ></app-burger-button>
     </div>
   </div>
-  <div class="menu-wrapper" [class.menu-open]="menuOpen">
+  <div
+    class="menu-wrapper"
+    [class.menu-open]="menuOpen"
+    [class.mobile]="isMobile | async"
+  >
     <app-toolbar-menu></app-toolbar-menu>
   </div>
 </div>
