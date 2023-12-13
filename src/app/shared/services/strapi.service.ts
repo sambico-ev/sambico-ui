@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Environment } from '../models/env.model';
 import {
+  Blog,
+  BlogResponse,
   Formats,
   Project,
   ProjectResponse,
@@ -66,13 +68,33 @@ export class StrapiService {
       );
   }
 
+  getBlogPosts(count?: number): Observable<Blog[]> {
+    return this.http
+      .get<BlogResponse>(
+        this.apiUrl +
+          StrapiTypes.BLOG +
+          '?populate=*' +
+          `${count ? '&pagination[pageSize]=' + count : ''}`,
+        { headers: this.headers }
+      )
+      .pipe(
+        map((res) => {
+          return res.data;
+        })
+      );
+  }
+
   getStrapiImageUrl(
     formats: Formats,
     size: 'large' | 'medium' | 'small' | 'thumbnail' | 'xlarge' | 'xsmall'
   ): string {
     if (size === 'xlarge' && !formats[size]) {
-      size = 'large';
+      if (formats.large) {
+        size = 'large';
+      } else if (formats.medium) {
+        size = 'small';
+      }
     }
-    return this.env.strapiUrl + formats[size].url;
+    return this.env.strapiUrl + formats[size]?.url;
   }
 }

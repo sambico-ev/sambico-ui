@@ -19,7 +19,7 @@ export class SlideshowComponent implements OnInit {
 
   ngOnInit(): void {
     this.strapiService.getSlider().subscribe((res) => {
-      this.slides = res;
+      this.slides = res.reverse();
     });
   }
 }

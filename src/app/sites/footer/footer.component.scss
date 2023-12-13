@@ -2,21 +2,23 @@
 
 .footer-container {
   width: 100%;
-  padding: 40px 0 0 10%;
+  padding: 40px 10% 0 10%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   flex-wrap: wrap;
-  flex-direction: row-reverse;
-  gap: 4rem;
+  flex-direction: row;
   position: absolute;
   bottom: 0;
   height: $footer-height;
+
+  &.mobile {
+    text-align: center;
+  }
 }
 
 .footer-column {
   padding-bottom: 32px;
   justify-content: end;
-  padding-right: 10%;
   display: flex;
   flex-direction: column;
 }
@@ -29,6 +31,12 @@
     height: 60px;
     margin-bottom: 8px;
   }
+}
+
+.about-us {
+  padding-left: 8rem;
+  padding-right: 8rem;
+  margin: 0 auto;
 }
 
 .copyright {
