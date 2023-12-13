@@ -1,1 +1,9 @@
-<p>blog works!</p>
+<h1 class="page-heading" [class.mobile]="isMobile | async">
+  {{ "blogPreview.title" | translate }}
+</h1>
+<div class="blog-container">
+  <app-blog-entry
+    *ngFor="let blogEntry of blogEntries"
+    [blog]="blogEntry"
+  ></app-blog-entry>
+</div>

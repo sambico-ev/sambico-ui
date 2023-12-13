@@ -30,6 +30,11 @@ export enum RouteNames {
 const routes: Routes = [
   { path: RouteNames.HOME, component: HomeComponent, pathMatch: 'full' },
   { path: RouteNames.BLOG, component: BlogComponent, pathMatch: 'full' },
+  {
+    path: RouteNames.BLOG + '/:id',
+    component: BlogComponent,
+    pathMatch: 'full',
+  },
   { path: RouteNames.IMPRINT, component: ImprintComponent, pathMatch: 'full' },
   {
     path: RouteNames.PROJECTS,
@@ -41,7 +46,6 @@ const routes: Routes = [
     component: ProjectComponent,
     pathMatch: 'full',
   },
-
   { path: '**', component: HomeComponent },
 ];
 

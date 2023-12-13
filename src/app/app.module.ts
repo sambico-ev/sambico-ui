@@ -12,6 +12,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { env } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BlogModule } from './sites/blog/blog.module';
 import { FooterModule } from './sites/footer/footer.module';
 import { HomeModule } from './sites/home/home.module';
 import { ToolbarModule } from './sites/toolbar/toolbar.module';
@@ -29,6 +30,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     BrowserModule,
     HttpClientModule,
     FooterModule,
+    BlogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarModule,

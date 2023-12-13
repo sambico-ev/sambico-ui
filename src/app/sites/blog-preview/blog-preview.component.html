@@ -1,31 +1,40 @@
 <div class="blog-preview-container">
-  <h1 class="heading">Was gibt's neues?</h1>
-  <div class="blog-preview" *ngFor="let blog of blogs">
-    <div class="image-container">
+  <div class="background"></div>
+  <h1 class="heading" [class.mobile]="isMobile | async">
+    {{ "blogPreview.title" | translate }}
+  </h1>
+  <div class="preview-container">
+    <div
+      class="blog-preview"
+      *ngFor="let blog of blogEntries; index as i"
+      [class.visible]="visible && i > 0"
+      [class.mobile]="isMobile | async"
+      [routerLink]="'/' + routes.BLOG"
+    >
       <img
-        (click)="openImage(blog.attributes.image.data.attributes.formats)"
         class="image"
         [src]="
           strapiService.getStrapiImageUrl(
             blog.attributes.image.data.attributes.formats,
-            (isMobile | async) ? 'large' : 'xlarge'
+            (isMobile | async) ? 'small' : 'xlarge'
           )
         "
         alt="blog image"
       />
-    </div>
-    <div class="content">
-      <h3 class="title">{{ blog.attributes.title }}</h3>
-      <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
-        {{ blog.attributes.subTitle }}
-      </h4>
-      <button
-        class="btn icon-btn read-button"
-        [routerLink]="'/' + routes.PROJECTS"
-      >
-        {{ "blogPreview.readMore" | translate }}
-        <i-bs name="chevron-right" width="20" height="20"> </i-bs>
-      </button>
+      <div class="content">
+        <h3 class="title">{{ blog.attributes.title }}</h3>
+        <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
+          {{ blog.attributes.subTitle }}
+        </h4>
+        <button class="btn icon-btn read-button">
+          {{ "blogPreview.readMore" | translate }}
+          <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+        </button>
+      </div>
     </div>
   </div>
+  <button class="btn icon-btn read-all-button" [routerLink]="'/' + routes.BLOG">
+    {{ "blogPreview.showAll" | translate }}
+    <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+  </button>
 </div>
