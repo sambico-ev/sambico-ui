@@ -4,7 +4,7 @@
   },
   "projects": {
     "title": "Projekte",
-    "info": "Mit den Erlösen aus unseren Veranstaltungen und Events unterstützen wir Entwicklungsprojekte in Sambia. Zurzeit kooperieren wir mit verschiedenen Organisationen und Vereinen, die Projekte in Bereichen in Sambia durchführen."
+    "info": "Mit den Erlösen aus unseren Veranstaltungen und Events unterstützen wir Entwicklungsprojekte in Sambia. Zurzeit kooperieren wir mit verschiedenen Organisationen und Vereinen, die Projekte in Bereichen in Sambia durchführen. Bisher haben wir 5000€ an diese Projekte gespendet."
   },
   "blog": {
     "title": "Blog"
@@ -16,10 +16,10 @@
     "rights-reserved": "Alle Rechte vorbehalten"
   },
   "projectPreview": {
-    "showAll": "Alle Projekte zeigen"
+    "showAll": "Alle Projekte"
   },
   "blogPreview": {
-    "showAll": "Alle Neuigkeiten zeigen",
+    "showAll": "Alle Neuigkeiten",
     "readMore": "Jetzt Lesen",
     "title": "Was gibt's Neues?"
   },

@@ -28,6 +28,10 @@
 .preview-container {
   position: relative;
   height: 627px;
+
+  &.mobile {
+    height: 100%;
+  }
 }
 
 .blog-preview {

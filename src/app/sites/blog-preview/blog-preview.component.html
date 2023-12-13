@@ -3,7 +3,7 @@
   <h1 class="heading" [class.mobile]="isMobile | async">
     {{ "blogPreview.title" | translate }}
   </h1>
-  <div class="preview-container">
+  <div class="preview-container" [class.mobile]="isMobile | async">
     <div
       class="blog-preview"
       *ngFor="let blog of blogEntries; index as i"
