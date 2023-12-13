@@ -1,4 +1,18 @@
 <div class="toolbar-actions">
-  <button [routerLink]="['/blog']" class="btn btn-primary">Blog</button>
-  <a class="btn btn-primary" href="mailto:kontakt@sambico.de"> Kontakt </a>
+  <h4>{{ "toolbar.actions.navigation" | translate }}</h4>
+  <button [routerLink]="['/blog']" class="btn">
+    {{ "toolbar.actions.blog" | translate }}
+  </button>
+  <button [routerLink]="['/projects']" class="btn">
+    {{ "toolbar.actions.projects" | translate }}
+  </button>
+</div>
+<div class="toolbar-actions">
+  <h4>{{ "toolbar.actions.participate" | translate }}</h4>
+  <a class="btn" href="mailto:kontakt@sambico.de">
+    {{ "toolbar.actions.contact" | translate }}
+  </a>
+  <button class="btn" (click)="downloadMembershipApplication()">
+    {{ "toolbar.actions.download_membership_application" | translate }}
+  </button>
 </div>

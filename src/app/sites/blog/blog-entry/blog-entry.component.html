@@ -1,17 +1,19 @@
 <div class="blog-preview" [class.mobile]="isMobile | async">
-  <img
-    (click)="openImage(blog.attributes.image.data.attributes.formats)"
-    class="image"
-    [src]="
-      strapiService.getStrapiImageUrl(
-        blog.attributes.image.data.attributes.formats,
-        (isMobile | async) ? 'small' : 'xlarge'
-      )
-    "
-    alt="blog image"
-  />
+  <div class="image-container">
+    <img
+      (click)="openImage(blog.attributes.image.data.attributes.formats)"
+      class="image"
+      [src]="
+        strapiService.getStrapiImageUrl(
+          blog.attributes.image.data.attributes.formats,
+          (isMobile | async) ? 'small' : 'xlarge'
+        )
+      "
+      alt="blog image"
+    />
+  </div>
   <div class="content">
-    <span>{{ blog.attributes.createdAt | date : "dd.MM.YYYY, hh:mm" }}</span>
+    <!-- <span>{{ blog.attributes.createdAt | date : "dd.MM.YYYY, hh:mm" }}</span> -->
     <h2 class="title">{{ blog.attributes.title }}</h2>
     <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
       {{ blog.attributes.subTitle }}

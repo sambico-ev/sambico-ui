@@ -62,7 +62,9 @@ export class BlogPreviewComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     const componentPosition =
-      this.el.nativeElement.offsetTop - this.el.nativeElement.offsetHeight;
+      this.el.nativeElement.offsetTop -
+      this.el.nativeElement.offsetHeight +
+      400;
     const scrollPosition = window.scrollY;
     if (scrollPosition >= componentPosition) {
       this.visible = true;

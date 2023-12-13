@@ -17,5 +17,15 @@
     "title": "Was gibt's Neues?"
   },
   "contact": "Kontakt",
-  "readMore": "Mehr erfahren"
+  "readMore": "Mehr erfahren",
+  "toolbar": {
+    "actions": {
+      "blog": "Blog",
+      "projects": "Projekte",
+      "participate": "Mitmachen",
+      "contact": "Kontakt",
+      "navigation": "Navigation",
+      "download_membership_application": "Mitgliedsantrag herunterladen"
+    }
+  }
 }

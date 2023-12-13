@@ -16,12 +16,15 @@
         [src]="
           strapiService.getStrapiImageUrl(
             blog.attributes.image.data.attributes.formats,
-            (isMobile | async) ? 'small' : 'xlarge'
+            'small'
           )
         "
         alt="blog image"
       />
       <div class="content">
+        <!-- <span>{{
+          blog.attributes.createdAt | date : "dd.MM.YYYY, mm:hh"
+        }}</span> -->
         <h3 class="title">{{ blog.attributes.title }}</h3>
         <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
           {{ blog.attributes.subTitle }}
