@@ -7,10 +7,9 @@
     >
       <div class="content-wrapper">
         <h2 class="margin-bottom-8">{{ project.attributes.title }}</h2>
-        <div
-          class="content"
-          [innerHTML]="project.attributes.content | markdown"
-        ></div>
+        <div class="content">
+          <p [innerHTML]="project.attributes.content | markdown"></p>
+        </div>
         <!-- <button
         class="btn icon-btn more-button"
         [routerLink]="routes.PROJECTS + '/' + project.id"
