@@ -138,6 +138,9 @@ h4 {
 
 p {
   white-space: pre-line;
+  word-wrap: normal;
+  resize: none;
+  box-sizing: border-box;
 
   a {
     text-decoration: inherit;
