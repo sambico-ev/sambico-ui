@@ -52,11 +52,11 @@ export interface Blog {
     subTitle?: string;
     image: Image;
     content: string;
-    contentPreview?: string;
     previewButtonText: string;
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;
+    date: Date;
     locale: string;
   };
 }

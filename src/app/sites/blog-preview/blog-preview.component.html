@@ -22,9 +22,7 @@
         alt="blog image"
       />
       <div class="content">
-        <!-- <span>{{
-          blog.attributes.createdAt | date : "dd.MM.YYYY, mm:hh"
-        }}</span> -->
+        <span>{{ blog.attributes.date | date : "dd.MM.YYYY" }}</span>
         <h3 class="title">{{ blog.attributes.title }}</h3>
         <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
           {{ blog.attributes.subTitle }}
