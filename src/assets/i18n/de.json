@@ -16,7 +16,8 @@
     "rights-reserved": "Alle Rechte vorbehalten"
   },
   "projectPreview": {
-    "showAll": "Alle Projekte"
+    "showAll": "Alle Projekte",
+    "title": "Projektvorstellung"
   },
   "blogPreview": {
     "showAll": "Alle Neuigkeiten",
