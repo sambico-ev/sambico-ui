@@ -1,0 +1,28 @@
+<div class="events-container">
+  <h1 class="heading" [class.mobile]="isMobile | async">
+    {{ "blogPreview.events.title" | translate }}
+  </h1>
+  <div class="events">
+    <div class="event" *ngFor="let event of events; index as i">
+      <div class="date">
+        <div class="day">{{ event.date | date : "dd" }}</div>
+        <div class="month">{{ event.date | date : "MMM" }}</div>
+      </div>
+      <div class="text">
+        <h3 id="event-title">{{ event.title }}{{ i }}</h3>
+        <a
+          *ngIf="event.location"
+          class="location"
+          [href]="
+            'https://www.google.com/maps/search/?api=1&query=' + event.location
+          "
+          target="_blank"
+        >
+          <i-bs name="geo-alt-fill" style="margin-right: 8px"></i-bs
+          >{{ event.location }}
+        </a>
+        <div class="description" [innerHTML]="event.description"></div>
+      </div>
+    </div>
+  </div>
+</div>

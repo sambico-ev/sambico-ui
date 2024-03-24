@@ -1,0 +1,100 @@
+.events-container {
+  margin-top: 56px;
+  overflow: hidden;
+  //   padding: 0 5%;
+
+  .heading {
+    margin-bottom: 1rem;
+  }
+
+  .events {
+    transform-origin: right top;
+    transform: rotate(-90deg) translateY(-400px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 32px;
+    transition: transform 0.5s ease;
+    height: 100vw;
+    width: 400px;
+    // -ms-overflow-style: none;
+    // scrollbar-width: none;
+
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
+    // &._1 {
+    //   transform: translateX(-100%);
+    // }
+
+    // &._2 {
+    //   transform: translateX(-200%);
+    // }
+
+    .event {
+      transform: rotate(90deg);
+      display: flex;
+      //   flex: 0 0 100%;
+      justify-content: center;
+      gap: 16px;
+      overflow: hidden;
+
+      .date {
+        border-radius: 100px;
+        padding: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.1;
+        max-height: 400px;
+        text-transform: uppercase;
+        font-family: poppins-medium;
+        color: var(--bs-dark);
+        background-color: var(--bs-secondary);
+        min-height: 75px;
+        min-width: 75px;
+        max-height: 75px;
+        max-width: 75px;
+
+        .day {
+          font-size: 1.5rem;
+        }
+      }
+
+      .text {
+        padding: 8px 16px;
+        background-color: var(--bs-light);
+        opacity: 1;
+        color: var(--bs-dark);
+        text-align: left;
+        border-radius: 5px;
+        max-width: 650px;
+        width: 100%;
+        max-height: 400px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+        .title {
+          margin-bottom: 8px;
+        }
+
+        .location {
+          font-size: 0.9rem;
+          text-decoration: none;
+          color: var(--bs-dark);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .description {
+          margin-top: 8px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}

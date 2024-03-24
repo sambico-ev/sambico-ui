@@ -22,7 +22,10 @@
   "blogPreview": {
     "showAll": "Alle Neuigkeiten",
     "readMore": "Jetzt Lesen",
-    "title": "Was gibt's Neues?"
+    "title": "Was gibt's Neues?",
+    "events": {
+      "title": "Bevorstehende Events"
+    }
   },
   "contact": "Kontakt",
   "readMore": "Mehr erfahren",
