@@ -38,4 +38,8 @@
     {{ "blogPreview.showAll" | translate }}
     <i-bs name="chevron-right" width="20" height="20"> </i-bs>
   </button>
+  <app-events
+    *ngIf="events && events.length > 0"
+    [events]="events"
+  ></app-events>
 </div>

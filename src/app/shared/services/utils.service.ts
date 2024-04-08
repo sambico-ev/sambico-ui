@@ -13,4 +13,12 @@ export class UtilsService {
     }
     return [...array];
   }
+
+  public parseDate(date: string): Date | undefined {
+    const parts = date.match(/(\d+)/g);
+    if (!parts) {
+      return undefined;
+    }
+    return new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
+  }
 }

@@ -1,0 +1,123 @@
+@import "/src/variables.scss";
+
+.events-container {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+  padding: 0 32px;
+
+  &.mobile {
+    padding: 0;
+  }
+}
+
+.events {
+  margin-top: 16px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 32px;
+  padding-bottom: 16px;
+}
+
+.event {
+  flex-shrink: 0;
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-height: calc(100vh - $header-height);
+  overflow: hidden;
+  min-width: 300px;
+
+  &.mobile {
+    max-height: calc(100vh - $header-height-mobile);
+  }
+}
+
+.date {
+  border-radius: 100px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-family: poppins-medium;
+  color: var(--bs-dark);
+  background-color: var(--bs-secondary);
+  min-height: 75px;
+  min-width: 75px;
+  max-height: 75px;
+  max-width: 75px;
+
+  //   &.mobile {
+  //     min-height: 50px;
+  //     min-width: 50px;
+  //     max-height: 50px;
+  //     max-width: 50px;
+  //     padding: 1px;
+
+  //     .day {
+  //       font-size: 1.1rem;
+  //     }
+  //   }
+
+  .day {
+    font-size: 1.5rem;
+  }
+}
+
+.text {
+  padding: 8px 16px;
+  background-color: var(--bs-light);
+  opacity: 1;
+  color: var(--bs-dark);
+  text-align: left;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+  .title {
+    margin-bottom: 8px;
+  }
+
+  .location {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--bs-dark);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .description {
+    margin-top: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+slide {
+  padding: 0 48px 60px;
+  margin-top: 16px;
+
+  @media (max-width: 701px) {
+    padding: 0 0 60px;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: unset;
+
+      .carousel-control-next-icon,
+      .carousel-control-prev-icon {
+        @media (max-width: 701px) {
+          filter: invert(1);
+        }
+      }
+    }
+  }
+}
