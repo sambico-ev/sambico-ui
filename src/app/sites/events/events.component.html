@@ -9,7 +9,7 @@
     [pauseOnFocus]="true"
   >
     <slide *ngFor="let event of events; index as i" class="slide">
-      <div class="event">
+      <div class="event" [class.mobile]="isMobile | async">
         <div class="date" *ngIf="!(isMobile | async)">
           <div class="day">{{ event.date | date : "dd" }}</div>
           <div class="month">{{ event.date | date : "MMM" }}</div>

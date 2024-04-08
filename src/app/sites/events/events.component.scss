@@ -30,7 +30,7 @@
   min-width: 300px;
 
   &.mobile {
-    max-height: calc(100vh - $header-height-mobile);
+    max-height: unset;
   }
 }
 
