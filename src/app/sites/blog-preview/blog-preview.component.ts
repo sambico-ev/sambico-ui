@@ -71,13 +71,6 @@ export class BlogPreviewComponent implements OnInit {
             location,
           };
         });
-
-        // DEV ONLY REMOVE LATER (copy events 5 times)
-        this.events = [
-          ...this.events,
-          { ...this.events[0], location: '' },
-          ...this.events,
-        ];
       });
 
     this.isMobile

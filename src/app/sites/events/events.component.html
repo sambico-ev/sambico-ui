@@ -1,28 +1,37 @@
-<div class="events-container">
+<div class="events-container" [class.mobile]="isMobile | async">
   <h1 class="heading" [class.mobile]="isMobile | async">
     {{ "blogPreview.events.title" | translate }}
   </h1>
-  <div class="events">
-    <div class="event" *ngFor="let event of events; index as i">
-      <div class="date">
-        <div class="day">{{ event.date | date : "dd" }}</div>
-        <div class="month">{{ event.date | date : "MMM" }}</div>
+  <carousel
+    [noPause]="false"
+    [isAnimated]="true"
+    [interval]="10000"
+    [pauseOnFocus]="true"
+  >
+    <slide *ngFor="let event of events; index as i" class="slide">
+      <div class="event">
+        <div class="date" *ngIf="!(isMobile | async)">
+          <div class="day">{{ event.date | date : "dd" }}</div>
+          <div class="month">{{ event.date | date : "MMM" }}</div>
+        </div>
+        <div class="text" [class.mobile]="isMobile | async">
+          <h3 id="event-title">{{ event.title }}</h3>
+          <a
+            *ngIf="event.location"
+            class="location"
+            [href]="
+              'https://www.google.com/maps/search/?api=1&query=' +
+              event.location
+            "
+            target="_blank"
+          >
+            <i-bs name="geo-alt-fill" style="margin-right: 8px"></i-bs
+            >{{ event.location }}
+          </a>
+          <div class="description" [innerHTML]="event.description"></div>
+        </div>
+        <!-- </div> -->
       </div>
-      <div class="text">
-        <h3 id="event-title">{{ event.title }}{{ i }}</h3>
-        <a
-          *ngIf="event.location"
-          class="location"
-          [href]="
-            'https://www.google.com/maps/search/?api=1&query=' + event.location
-          "
-          target="_blank"
-        >
-          <i-bs name="geo-alt-fill" style="margin-right: 8px"></i-bs
-          >{{ event.location }}
-        </a>
-        <div class="description" [innerHTML]="event.description"></div>
-      </div>
-    </div>
-  </div>
+    </slide>
+  </carousel>
 </div>
