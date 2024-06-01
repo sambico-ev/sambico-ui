@@ -58,6 +58,7 @@ export class BlogPreviewComponent implements OnInit {
         { responseType: 'text' }
       )
       .subscribe((res) => {
+        if (!res) return;
         const csv = res.split('\n');
         this.events = csv.map((line) => {
           const regex = /,(?=(?:[^"]|"[^"]*")*$)/;
