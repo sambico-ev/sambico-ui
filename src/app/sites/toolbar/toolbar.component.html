@@ -8,6 +8,21 @@
         src="assets/logo/logo-full-horizontal.png"
     /></a>
     <div class="toolbar-actions">
+      <ng-container *ngIf="!(isMobile | async)">
+        <a
+          class="btn icon-btn"
+          href="https://www.facebook.com/SambicoeV/"
+          target="_blank"
+        >
+          <i-bs name="facebook" height="36" width="36"></i-bs>
+        </a>
+        <a
+          class="btn icon-btn"
+          href="https://www.instagram.com/sambico/"
+          target="_blank"
+        >
+          <i-bs name="instagram" height="36" width="36"></i-bs> </a
+      ></ng-container>
       <app-burger-button
         (opened)="toggleMenu($event)"
         [active]="menuOpen"

@@ -53,3 +53,9 @@ a {
     color: var(--bs-secondary);
   }
 }
+
+.social {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
