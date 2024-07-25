@@ -19,7 +19,12 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.strapiService.getBlogPosts().subscribe((res) => {
-      this.blogEntries = res;
+      this.blogEntries = res.sort((a, b) => {
+        return (
+          new Date(b.attributes.publishedAt).getTime() -
+          new Date(a.attributes.publishedAt).getTime()
+        );
+      });
     });
   }
 }
