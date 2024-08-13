@@ -55,7 +55,9 @@ export class BlogPreviewComponent implements OnInit {
     this.http
       .get(
         'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSGiKs_8gTfF-eACbbKuDyTjf7sjC1RatZHx2XulycZzgZIUooGxBTbk6jKyzHZteY5wWADVvq-LVq/pub?gid=0&single=true&output=csv',
-        { responseType: 'text' }
+        {
+          responseType: 'text',
+        }
       )
       .subscribe((res) => {
         if (!res) return;
@@ -78,8 +80,8 @@ export class BlogPreviewComponent implements OnInit {
       .pipe(
         switchMap((isMobile) => {
           return isMobile
-            ? this.strapiService.getBlogPosts(1)
-            : this.strapiService.getBlogPosts(3);
+            ? this.strapiService.getBlogPosts(1, 'desc')
+            : this.strapiService.getBlogPosts(3, 'desc');
         })
       )
       .subscribe((res) => {
