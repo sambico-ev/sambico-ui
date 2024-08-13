@@ -10,25 +10,34 @@
     <div class="toolbar-actions">
       <ng-container *ngIf="!(isMobile | async)">
         <a
-          class="btn icon-btn"
+          class="btn icon-btn hot"
           href="https://eventfrog.de/sambico-festival"
           target="_blank"
-          >SAMBICO Festival 2024
+        >
+          SAMBICO Festival 2024
+        </a>
+
+        <a
+          class="btn icon-btn"
+          href="https://www.instagram.com/sambico/"
+          target="_blank"
+        >
+          <i-bs name="instagram" height="28" width="28"></i-bs> </a
+        ><a
+          class="btn icon-btn"
+          href="https://www.tiktok.com/@sambicoe.v"
+          target="_blank"
+        >
+          <i-bs name="tiktok" height="28" width="28"></i-bs>
         </a>
         <a
           class="btn icon-btn"
           href="https://www.facebook.com/SambicoeV/"
           target="_blank"
         >
-          <i-bs name="facebook" height="36" width="36"></i-bs>
+          <i-bs name="facebook" height="28" width="28"></i-bs>
         </a>
-        <a
-          class="btn icon-btn"
-          href="https://www.instagram.com/sambico/"
-          target="_blank"
-        >
-          <i-bs name="instagram" height="36" width="36"></i-bs> </a
-      ></ng-container>
+      </ng-container>
       <app-burger-button
         (opened)="toggleMenu($event)"
         [active]="menuOpen"

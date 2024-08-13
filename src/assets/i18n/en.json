@@ -3,5 +3,10 @@
     "events": {
       "title": "Upcomming Events"
     }
+  },
+  "toolbar": {
+    "actions": {
+      "tiktok": "TikTok"
+    }
   }
 }

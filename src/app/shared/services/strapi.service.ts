@@ -68,14 +68,17 @@ export class StrapiService {
       );
   }
 
-  getBlogPosts(count?: number, oderDir?: 'asc' | 'desc'): Observable<Blog[]> {
+  getBlogPosts(count?: number, orderDir?: 'asc' | 'desc'): Observable<Blog[]> {
     return this.http
       .get<BlogResponse>(
         this.apiUrl +
           StrapiTypes.BLOG +
           '?populate=*' +
           `${count ? '&pagination[pageSize]=' + count : ''}`,
-        { headers: this.headers, params: { sort: 'id:' + oderDir || 'asc' } }
+        {
+          headers: this.headers,
+          params: { sort: 'id:' + (orderDir ? orderDir : 'asc') },
+        }
       )
       .pipe(
         map((res) => {

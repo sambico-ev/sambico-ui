@@ -10,27 +10,42 @@
   </div>
 
   <div class="about-us footer-column">
-    <a [routerLink]="routes.IMPRINT">{{ "imprint.title" | translate }}</a>
-    <a [routerLink]="routes.PROJECTS">{{ "projects.title" | translate }}</a>
-    <a [routerLink]="routes.BLOG">{{ "blog.title" | translate }}</a>
-    <a href="mailto:kontakt@sambico.de">{{ "contact" | translate }}</a>
+    <a [routerLink]="routes.IMPRINT" target="_blank">{{
+      "imprint.title" | translate
+    }}</a>
+    <a [routerLink]="routes.PROJECTS" target="_blank">{{
+      "projects.title" | translate
+    }}</a>
+    <a [routerLink]="routes.BLOG" target="_blank">{{
+      "blog.title" | translate
+    }}</a>
+    <a href="mailto:kontakt@sambico.de" target="_blank">{{
+      "contact" | translate
+    }}</a>
   </div>
 
   <div class="copyright footer-column">
     <div class="social">
       <a
         class="btn icon-btn"
-        href="https://www.facebook.com/SambicoeV/"
-        target="_blank"
-      >
-        <i-bs name="facebook" height="36" width="36"></i-bs>
-      </a>
-      <a
-        class="btn icon-btn"
         href="https://www.instagram.com/sambico/"
         target="_blank"
       >
         <i-bs name="instagram" height="36" width="36"></i-bs>
+      </a>
+      <a
+        class="btn icon-btn"
+        href="https://www.tiktok.com/@sambicoe.v"
+        target="_blank"
+      >
+        <i-bs name="tiktok" height="36" width="36"></i-bs>
+      </a>
+      <a
+        class="btn icon-btn"
+        href="https://www.facebook.com/SambicoeV/"
+        target="_blank"
+      >
+        <i-bs name="facebook" height="36" width="36"></i-bs>
       </a>
     </div>
     <div>© {{ year }} SAMBICO e.V.</div>
