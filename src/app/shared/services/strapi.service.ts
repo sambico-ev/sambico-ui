@@ -95,9 +95,12 @@ export class StrapiService {
       if (formats.large) {
         size = 'large';
       } else if (formats.medium) {
+        size = 'medium';
+      } else if (formats.small) {
         size = 'small';
       }
     }
+
     return this.env.strapiUrl + formats[size]?.url;
   }
 }
