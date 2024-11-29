@@ -91,7 +91,7 @@ export class StrapiService {
     formats: Formats,
     size: 'large' | 'medium' | 'small' | 'thumbnail' | 'xlarge' | 'xsmall'
   ): string {
-    if (size === 'xlarge' && !formats[size]) {
+    if (!formats[size]) {
       if (formats.large) {
         size = 'large';
       } else if (formats.medium) {
