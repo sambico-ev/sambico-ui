@@ -17,6 +17,11 @@
   justify-content: center;
   margin: 2rem auto;
   width: 100%;
+  overflow: hidden;
+  min-height: 250px;
+  align-items: center;
+  padding: 0.5rem 0;
+  height: 305px;
 }
 
 .project-preview-card {

@@ -3,20 +3,14 @@
   <div class="card-container">
     <div
       class="project-preview-card"
-      *ngFor="let project of projects.slice(0, 2)"
+      *ngIf="currentProject"
+      @slideCard
     >
       <div class="content-wrapper">
-        <h2 class="margin-bottom-8">{{ project.attributes.title }}</h2>
+        <h2 class="margin-bottom-8">{{ currentProject.attributes.title }}</h2>
         <div class="content">
-          <p [innerHTML]="project.attributes.content | markdown"></p>
+          <p [innerHTML]="currentProject.attributes.content | markdown"></p>
         </div>
-        <!-- <button
-        class="btn icon-btn more-button"
-        [routerLink]="routes.PROJECTS + '/' + project.id"
-      >
-        {{ "readMore" | translate }}
-        <img height="18px" src="assets/icons/chevron-right.svg" />
-      </button> -->
       </div>
     </div>
   </div>
