@@ -16,7 +16,7 @@ export class ProjectsComponent {
 
   ngOnInit(): void {
     this.strapiService.getProjects().subscribe((res) => {
-      this.projects = res;
+      this.projects = res.reverse();
     });
   }
 }
