@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 
 const SLIDE_DURATION = 60;
 const SLIDE_GAP = 20;
-const SLOT_DELAYS = [175, 170, 210, 280, 380, 500];
+const SLOT_DELAYS = [185, 175, 170, 210, 280, 340, 400];
 
 @Component({
   selector: 'app-projects-preview',
