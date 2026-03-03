@@ -4,7 +4,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Project } from 'src/app/shared/models/strapi.models';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 
 const SLIDE_DURATION = 60;
 const SLIDE_GAP = 20;
-const SLOT_DELAYS = [185, 175, 170, 210, 280, 340, 400];
+const SLOT_DELAYS = [185, 175, 170, 210, 280, 340, 400, 500];
 
 @Component({
   selector: 'app-projects-preview',
@@ -60,26 +60,27 @@ export class ProjectsPreviewComponent implements OnInit, AfterViewInit, OnDestro
         this.slotIndex = (this.slotIndex + 1) % this.allProjects.length;
       }
       if (this.isVisible) {
-        this.startSlotMachine();
+        // this.startSlotMachine(); // disabled temporarily
       } else {
-        this.checkScroll();
+        // this.checkScroll(); // disabled temporarily
       }
     });
   }
 
   ngAfterViewInit(): void {
-    this.checkScroll();
+    // this.checkScroll(); // disabled temporarily
   }
 
   ngOnDestroy(): void {
     this.clearTimeouts();
   }
 
-  @HostListener('window:scroll')
+  // Temporarily disable automatic slot-machine on scroll
+  // @HostListener('window:scroll')
   checkScroll(): void {
     const rect = this.el.nativeElement.getBoundingClientRect();
     const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-    const inView = visibleHeight >= rect.height * 0.3;
+    const inView = visibleHeight >= rect.height * 0.8;
 
     if (inView) {
       if (!this.isVisible) {

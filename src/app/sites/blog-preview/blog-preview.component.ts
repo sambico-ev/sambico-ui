@@ -94,8 +94,9 @@ export class BlogPreviewComponent implements OnInit {
       });
   }
 
+
   @HostListener('window:scroll', ['$event'])
-  checkScroll() {
+  checkScroll(_: Event): void {
     const componentPosition =
       this.el.nativeElement.offsetTop -
       this.el.nativeElement.offsetHeight +
