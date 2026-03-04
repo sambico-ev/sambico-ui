@@ -1,20 +1,29 @@
-@import "/src/variables.scss";
+@import '/src/variables.scss';
 
 $toobar-background: var(--bs-light);
 
 .toolbar-container {
   background-color: $toobar-background;
-  position: sticky;
+  position: fixed;
   height: $header-height;
   width: 100%;
   top: 0;
   z-index: 99;
+  transition: height 0.3s ease;
   -webkit-box-shadow: 0px 15px 10px -15px #11111168;
   -moz-box-shadow: 0px 15px 10px -15px #11111168;
   box-shadow: 0px 15px 10px -15px #11111168;
 
   &.mobile {
     height: $header-height-mobile;
+  }
+
+  &.scrolled {
+    height: $header-height-scrolled;
+
+    &.mobile {
+      height: $header-height-scrolled-mobile;
+    }
   }
 }
 
@@ -53,7 +62,7 @@ $toobar-background: var(--bs-light);
 .logo {
   height: 80px;
   margin-right: 8px;
-  transition: all 0.1s ease-in-out;
+  transition: height 0.3s ease;
 
   &:hover {
     height: 82px;
@@ -61,6 +70,26 @@ $toobar-background: var(--bs-light);
 
   &.mobile {
     height: 50px;
+
+    &:hover {
+      height: 52px;
+    }
+  }
+
+  &.scrolled {
+    height: 50px;
+
+    &:hover {
+      height: 52px;
+    }
+
+    &.mobile {
+      height: 38px;
+
+      &:hover {
+        height: 40px;
+      }
+    }
   }
 }
 

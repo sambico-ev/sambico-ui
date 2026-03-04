@@ -1,4 +1,4 @@
-@import "/src/variables.scss";
+@import '/src/variables.scss';
 
 .events-container {
   position: relative;
@@ -25,7 +25,7 @@
   display: flex;
   gap: 16px;
   width: 100%;
-  max-height: calc(100vh - $header-height);
+  max-height: calc(100vh - var(--toolbar-height, 120px));
   overflow: hidden;
   min-width: 300px;
 

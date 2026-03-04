@@ -1,56 +1,61 @@
 @font-face {
-  font-family: "poppins-thin";
-  src: url("./assets/fonts/Poppins-Thin.ttf");
+  font-family: 'poppins-thin';
+  src: url('./assets/fonts/Poppins-Thin.ttf');
 }
 
 @font-face {
-  font-family: "poppins-thin-italic";
-  src: url("./assets/fonts/Poppins-ThinItalic.ttf");
+  font-family: 'poppins-thin-italic';
+  src: url('./assets/fonts/Poppins-ThinItalic.ttf');
 }
 
 @font-face {
-  font-family: "poppins-light";
-  src: url("./assets/fonts/Poppins-ExtraLight.ttf");
+  font-family: 'poppins-light';
+  src: url('./assets/fonts/Poppins-ExtraLight.ttf');
 }
 
 @font-face {
-  font-family: "poppins-light-italic";
-  src: url("./assets/fonts/Poppins-ExtraLightItalic.ttf");
+  font-family: 'poppins-light-italic';
+  src: url('./assets/fonts/Poppins-ExtraLightItalic.ttf');
 }
 
 @font-face {
-  font-family: "poppins-medium";
-  src: url("./assets/fonts/Poppins-Medium.ttf");
+  font-family: 'poppins-medium';
+  src: url('./assets/fonts/Poppins-Medium.ttf');
 }
 
 @font-face {
-  font-family: "poppins-medium-italic";
-  src: url("./assets/fonts/Poppins-MediumItalic.ttf");
+  font-family: 'poppins-medium-italic';
+  src: url('./assets/fonts/Poppins-MediumItalic.ttf');
 }
 
 @font-face {
-  font-family: "vollkorn";
-  src: url("./assets/fonts/Vollkorn-Regular.ttf");
+  font-family: 'vollkorn';
+  src: url('./assets/fonts/Vollkorn-Regular.ttf');
 }
 
 @font-face {
-  font-family: "vollkorn-bold";
-  src: url("./assets/fonts/Vollkorn-ExtraBold.ttf");
+  font-family: 'vollkorn-bold';
+  src: url('./assets/fonts/Vollkorn-ExtraBold.ttf');
 }
 
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
 
-@import "./variables.scss";
+@import './variables.scss';
 
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import 'node_modules/ngx-bootstrap/datepicker/bs-datepicker';
 
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/bootstrap/scss/utilities";
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/utilities';
+
+:root {
+  --toolbar-height: 120px;
+}
 
 html {
   height: 100%;
+  overflow-anchor: none;
 }
 
 body {
@@ -63,7 +68,7 @@ body,
 html {
   margin: 0;
   scroll-behavior: smooth;
-  font-family: "poppins-light";
+  font-family: 'poppins-light';
   font-size: calc(15px + 0.390625vw);
 }
 
@@ -88,7 +93,7 @@ p {
 }
 
 h1 {
-  font-family: "vollkorn-bold";
+  font-family: 'vollkorn-bold';
   font-size: calc(28px + 0.390625vw);
 
   @media (min-width: 768px) {
@@ -110,7 +115,7 @@ h1 {
 }
 
 h2 {
-  font-family: "poppins-medium";
+  font-family: 'poppins-medium';
   font-size: calc(24px + 0.390625vw);
 
   @media (min-width: 768px) {
@@ -119,7 +124,7 @@ h2 {
 }
 
 h3 {
-  font-family: "poppins-medium";
+  font-family: 'poppins-medium';
   font-size: calc(20px + 0.390625vw);
 
   @media (min-width: 768px) {
@@ -128,7 +133,7 @@ h3 {
 }
 
 h4 {
-  font-family: "poppins-light";
+  font-family: 'poppins-light';
   font-size: calc(16px + 0.390625vw);
 
   @media (min-width: 768px) {
@@ -155,7 +160,7 @@ p {
 
 .btn {
   text-transform: uppercase;
-  font-family: "poppins-medium";
+  font-family: 'poppins-medium';
   transition: all 0.1s linear;
 
   &.icon-btn {
@@ -174,7 +179,7 @@ p {
   }
 }
 
-$paddingDirection: ("right", "left", "top", "bottom");
+$paddingDirection: ('right', 'left', 'top', 'bottom');
 $paddingLength: (4, 8, 16, 32);
 
 @each $len in $paddingLength {
@@ -191,7 +196,7 @@ $paddingLength: (4, 8, 16, 32);
   }
 }
 
-$marginDirection: ("right", "left", "top", "bottom");
+$marginDirection: ('right', 'left', 'top', 'bottom');
 $marginLength: (4, 8, 16, 32);
 
 @each $len in $marginLength {

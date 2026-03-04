@@ -1,6 +1,8 @@
-@import "/src/variables.scss";
+@import '/src/variables.scss';
 
 .router-wrapper {
+  padding-top: var(--toolbar-height, #{$header-height});
   padding-bottom: $footer-height;
   min-height: 100%;
+  transition: padding-top 0.3s ease;
 }

@@ -1,10 +1,15 @@
-<div class="toolbar-container" [class.mobile]="isMobile | async">
+<div
+  class="toolbar-container"
+  [class.mobile]="isMobile | async"
+  [class.scrolled]="scrolled"
+>
   <div class="toolbar">
     <a [routerLink]="routes.HOME" (click)="toggleMenu(false)">
       <img
         class="logo"
         alt="sambico-logo"
         [class.mobile]="isMobile | async"
+        [class.scrolled]="scrolled"
         src="assets/logo/logo-full-horizontal.png"
     /></a>
     <div class="toolbar-actions">
