@@ -1,7 +1,7 @@
 <div class="blog-preview-container">
   <div class="background"></div>
   <h1 class="heading" [class.mobile]="isMobile | async">
-    {{ "blogPreview.title" | translate }}
+    {{ 'blogPreview.title' | translate }}
   </h1>
   <div class="preview-container" [class.mobile]="isMobile | async">
     <div
@@ -11,31 +11,43 @@
       [class.mobile]="isMobile | async"
       [routerLink]="'/' + routes.BLOG"
     >
-      <img
-        class="image"
-        [src]="
-          strapiService.getStrapiImageUrl(
-            blog.attributes.image.data.attributes.formats,
-            'small'
-          )
-        "
-        alt="blog image"
-      />
-      <div class="content">
-        <span>{{ blog.attributes.date | date : "dd.MM.YYYY" }}</span>
-        <h3 class="title">{{ blog.attributes.title }}</h3>
-        <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
-          {{ blog.attributes.subTitle }}
-        </h4>
-        <button class="btn icon-btn read-button">
-          {{ "blogPreview.readMore" | translate }}
-          <i-bs name="chevron-right" width="20" height="20"> </i-bs>
-        </button>
-      </div>
+      <ng-container *ngIf="blog?.attributes; else noAttributes">
+        <ng-container>
+          <img
+            class="image"
+            [src]="blog | imageUrl: 'small'"
+            alt="blog image"
+          />
+        </ng-container>
+
+        <ng-template #placeholder>
+          <img
+            class="image"
+            src="assets/images/placeholder.png"
+            alt="placeholder"
+          />
+        </ng-template>
+
+        <div class="content">
+          <span>{{ blog.attributes.date | date: 'dd.MM.YYYY' }}</span>
+          <h3 class="title">{{ blog.attributes.title }}</h3>
+          <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
+            {{ blog.attributes.subTitle }}
+          </h4>
+          <button class="btn icon-btn read-button">
+            {{ 'blogPreview.readMore' | translate }}
+            <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #noAttributes>
+        <!-- Skip rendering entries without attributes -->
+      </ng-template>
     </div>
   </div>
   <button class="btn icon-btn read-all-button" [routerLink]="'/' + routes.BLOG">
-    {{ "blogPreview.showAll" | translate }}
+    {{ 'blogPreview.showAll' | translate }}
     <i-bs name="chevron-right" width="20" height="20"> </i-bs>
   </button>
   <app-events

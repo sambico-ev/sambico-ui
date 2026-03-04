@@ -3,7 +3,7 @@ import {
   state,
   style,
   transition,
-  trigger,
+  trigger
 } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
@@ -16,11 +16,11 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 const style1 = style({
-  opacity: 1,
+  opacity: 1
 });
 
 const style2 = style({
-  opacity: 0,
+  opacity: 0
 });
 
 @Component({
@@ -32,9 +32,9 @@ const style2 = style({
       state('show', style1),
       state('hide', style2),
       transition('show => hide', animate('700ms ease-out')),
-      transition('hide => show', animate('700ms ease-in')),
-    ]),
-  ],
+      transition('hide => show', animate('700ms ease-in'))
+    ])
+  ]
 })
 export class BlogPreviewComponent implements OnInit {
   blogEntries: Blog[] = [];
@@ -56,10 +56,11 @@ export class BlogPreviewComponent implements OnInit {
       .get(
         'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSGiKs_8gTfF-eACbbKuDyTjf7sjC1RatZHx2XulycZzgZIUooGxBTbk6jKyzHZteY5wWADVvq-LVq/pub?gid=0&single=true&output=csv',
         {
-          responseType: 'text',
+          responseType: 'text'
         }
       )
       .subscribe((res) => {
+        console.log('csv res', res);
         if (!res) return;
         const csv = res.split('\n');
         this.events = csv.map((line) => {
@@ -71,7 +72,7 @@ export class BlogPreviewComponent implements OnInit {
             date: this.utilsService.parseDate(date) || new Date(),
             title,
             description,
-            location,
+            location
           };
         });
       });
@@ -85,6 +86,7 @@ export class BlogPreviewComponent implements OnInit {
         })
       )
       .subscribe((res) => {
+        console.log('blog entries', res);
         this.blogEntries = res.sort((a, b) => {
           return (
             new Date(b.attributes.publishedAt).getTime() -
@@ -93,7 +95,6 @@ export class BlogPreviewComponent implements OnInit {
         });
       });
   }
-
 
   @HostListener('window:scroll', ['$event'])
   checkScroll(_: Event): void {
@@ -107,5 +108,12 @@ export class BlogPreviewComponent implements OnInit {
     } else {
       this.visible = false;
     }
+  }
+
+  getImageUrl(blog: Blog): string {
+    return this.strapiService.getStrapiImageUrl(
+      blog.attributes.image.data.attributes.formats,
+      'small'
+    );
   }
 }

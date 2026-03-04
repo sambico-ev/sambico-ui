@@ -6,7 +6,7 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss'],
+  styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
   blogEntries: Blog[] = [];
@@ -21,8 +21,8 @@ export class BlogComponent implements OnInit {
     this.strapiService.getBlogPosts().subscribe((res) => {
       this.blogEntries = res.sort((a, b) => {
         return (
-          new Date(b.attributes.publishedAt).getTime() -
-          new Date(a.attributes.publishedAt).getTime()
+          new Date(b?.attributes.publishedAt).getTime() -
+          new Date(a?.attributes.publishedAt).getTime()
         );
       });
     });
