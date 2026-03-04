@@ -44,5 +44,12 @@
       "tiktok": "TikTok",
       "donate": "Spenden"
     }
+  },
+  "festival": {
+    "title": "SAMBIOSIS",
+    "subtitle": "SAMBICO Festival",
+    "date": "05.09.2026",
+    "description": "Mehr Informationen folgen in Kürze.",
+    "location": "Jugendfestplatz Backnang"
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlogComponent } from './sites/blog/blog.component';
+import { FestivalComponent } from './sites/festival/festival.component';
 import { HomeComponent } from './sites/home/home.component';
 import { ImprintComponent } from './sites/imprint/imprint.component';
 import { ProjectsComponent } from './sites/projects/projects.component';
@@ -23,6 +24,7 @@ export enum RouteNames {
   HOME = '',
   IMPRINT = 'impressum',
   PROJECTS = 'projekte',
+  FESTIVAL = 'festival',
   BLOG = 'blog',
 }
 
@@ -40,6 +42,7 @@ const routes: Routes = [
     component: ProjectsComponent,
     pathMatch: 'full',
   },
+  { path: RouteNames.FESTIVAL, component: FestivalComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];
 
