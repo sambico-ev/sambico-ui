@@ -1,11 +1,14 @@
 <div class="blog-preview" [class.mobile]="isMobile | async">
-  <div class="image-container">
+  <div
+    class="image-container"
+    *ngIf="blog.attributes.image?.data?.attributes?.formats as formats"
+  >
     <img
-      (click)="openImage(blog.attributes.image.data.attributes.formats)"
+      (click)="openImage(formats)"
       class="image"
       [src]="
         strapiService.getStrapiImageUrl(
-          blog.attributes.image.data.attributes.formats,
+          formats,
           (isMobile | async) ? 'small' : 'xlarge'
         )
       "
@@ -13,7 +16,7 @@
     />
   </div>
   <div class="content">
-    <span>{{ blog.attributes.date | date : "dd.MM.YYYY, hh:mm" }}</span>
+    <span>{{ blog.attributes.date | date: 'dd.MM.YYYY, hh:mm' }}</span>
     <h2 class="title">{{ blog.attributes.title }}</h2>
     <h4 class="subtitile" *ngIf="blog.attributes.subTitle">
       {{ blog.attributes.subTitle }}

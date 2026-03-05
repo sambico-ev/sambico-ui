@@ -6,7 +6,7 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
 @Component({
   selector: 'app-blog-entry',
   templateUrl: './blog-entry.component.html',
-  styleUrls: ['./blog-entry.component.scss'],
+  styleUrls: ['./blog-entry.component.scss']
 })
 export class BlogEntryComponent {
   @Input() blog!: Blog;
@@ -18,8 +18,11 @@ export class BlogEntryComponent {
     public readonly strapiService: StrapiService
   ) {}
 
-  openImage(url: Formats): void {
+  openImage(url?: Formats): void {
+    if (!url) return;
     const test = this.strapiService.getStrapiImageUrl(url, 'xlarge');
-    window.open(test, '_blank');
+    if (test) {
+      window.open(test, '_blank');
+    }
   }
 }

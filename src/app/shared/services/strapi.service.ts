@@ -13,11 +13,11 @@ import {
   SliderResponse,
   StrapiTypes,
   WeclomeText,
-  WelcomeTextResponse,
+  WelcomeTextResponse
 } from '../models/strapi.models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class StrapiService {
   apiUrl = this.env.strapiUrl + '/api/';
@@ -31,7 +31,7 @@ export class StrapiService {
   getSlider(): Observable<Slide[]> {
     return this.http
       .get<SliderResponse>(this.apiUrl + StrapiTypes.SLIDER + '?populate=*', {
-        headers: this.headers,
+        headers: this.headers
       })
       .pipe(
         map((res) => {
@@ -77,7 +77,7 @@ export class StrapiService {
           `${count ? '&pagination[pageSize]=' + count : ''}`,
         {
           headers: this.headers,
-          params: { sort: 'id:' + (orderDir ? orderDir : 'asc') },
+          params: { sort: 'id:' + (orderDir ? orderDir : 'asc') }
         }
       )
       .pipe(
@@ -91,6 +91,10 @@ export class StrapiService {
     formats: Formats,
     size: 'large' | 'medium' | 'small' | 'thumbnail' | 'xlarge' | 'xsmall'
   ): string {
+    if (!formats) {
+      return '';
+    }
+
     if (!formats[size]) {
       if (formats.large) {
         size = 'large';
@@ -101,6 +105,6 @@ export class StrapiService {
       }
     }
 
-    return this.env.strapiUrl + formats[size]?.url;
+    return formats[size]?.url ? this.env.strapiUrl + formats[size].url : '';
   }
 }
