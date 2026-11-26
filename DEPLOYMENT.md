@@ -51,20 +51,13 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    server_name www.sambico.de;
-    ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
-    return 301 https://sambico.de$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
+    # nginx 1.24 on this server: http2 goes on the listen line
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name sambico.de;
     ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
 
     root /var/www/sambico;
     index index.html;
@@ -91,10 +84,10 @@ server {
 DNS still points at Vercel, so the usual HTTP check can't reach this server yet. Use the DNS check instead:
 
 ```bash
-sudo certbot certonly --manual --preferred-challenges dns -d sambico.de -d www.sambico.de
+sudo certbot certonly --manual --preferred-challenges dns --cert-name sambico.de -d sambico.de
 ```
 
-certbot shows TXT records for `_acme-challenge`. Add them in konsoleH, wait until `dig +short TXT _acme-challenge.sambico.de` shows them, then continue in certbot. Afterwards:
+certbot shows a TXT value for `_acme-challenge`. Put it into that record in the Hetzner DNS console (replace the old value; no spaces), wait until `dig +short TXT _acme-challenge.sambico.de @ns1.your-server.de` shows it, then continue in certbot. Only `sambico.de` can be done this way: Hetzner refuses `_acme-challenge.www` because `www` is a CNAME, so `www` gets its certificate in step 7. Until then it keeps pointing to Vercel, which redirects it to `sambico.de` anyway. Afterwards:
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/sambico /etc/nginx/sites-enabled/
@@ -115,19 +108,37 @@ That should return `200`. For a real look, add `178.104.6.98 sambico.de www.samb
 
 In konsoleH:
 - `sambico.de` A → `178.104.6.98`, plus an AAAA record → `2a01:4f8:1c19:6647::1`
-- `www`: delete the CNAME to Vercel, add an A record → `178.104.6.98` and an AAAA record → `2a01:4f8:1c19:6647::1`
+- `www`: leave it on Vercel for now; it redirects to `sambico.de`, which is now us
 
 Mail is not affected: MX is a separate record. SPF's `+a` now allows the cloud server instead of Vercel, which is harmless.
 
-### 7. Make the certificate renew itself
+### 7. Move www, and make the certificate renew itself
 
-The manual certificate from step 4 does not renew. Once DNS points here (`dig +short sambico.de` shows `178.104.6.98`):
+The manual certificate from step 4 does not renew. Once `dig +short sambico.de` shows `178.104.6.98`:
 
-```bash
-sudo certbot certonly --webroot -w /var/www/certbot --cert-name sambico.de -d sambico.de -d www.sambico.de --force-renewal
-sudo certbot renew --dry-run
-sudo systemctl reload nginx
-```
+1. In the DNS console replace `www`'s CNAME with an A record → `178.104.6.98` and an AAAA record → `2a01:4f8:1c19:6647::1`.
+2. As soon as `dig +short www.sambico.de` shows the new address, fetch one certificate for both names through the webroot; this also makes renewal automatic:
+
+   ```bash
+   sudo certbot certonly --webroot -w /var/www/certbot --cert-name sambico.de -d sambico.de -d www.sambico.de --expand --force-renewal
+   sudo certbot renew --dry-run
+   ```
+
+3. Add the HTTPS block for www to `/etc/nginx/sites-available/sambico`, then `sudo nginx -t && sudo systemctl reload nginx`:
+
+   ```nginx
+   server {
+       listen 443 ssl http2;
+       listen [::]:443 ssl http2;
+       server_name www.sambico.de;
+       ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
+       include /etc/letsencrypt/options-ssl-nginx.conf;
+       return 301 https://sambico.de$request_uri;
+   }
+   ```
+
+Between 1 and 2, `https://www.sambico.de` shows a certificate warning for a minute or two; `sambico.de` never does.
 
 ### 8. Rollback, and cleaning up
 
