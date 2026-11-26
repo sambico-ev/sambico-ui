@@ -37,6 +37,7 @@ Create `/etc/nginx/sites-available/sambico`:
 ```nginx
 server {
     listen 80;
+    listen [::]:80;
     server_name sambico.de www.sambico.de;
 
     # certificate renewal (step 7) answers here
@@ -51,6 +52,7 @@ server {
 
 server {
     listen 443 ssl;
+    listen [::]:443 ssl;
     server_name www.sambico.de;
     ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
@@ -59,6 +61,7 @@ server {
 
 server {
     listen 443 ssl;
+    listen [::]:443 ssl;
     server_name sambico.de;
     ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
@@ -111,8 +114,8 @@ That should return `200`. For a real look, add `178.104.6.98 sambico.de www.samb
 ### 6. Switch DNS
 
 In konsoleH:
-- `sambico.de` A → `178.104.6.98`
-- `www`: delete the CNAME to Vercel, add an A record → `178.104.6.98`
+- `sambico.de` A → `178.104.6.98`, plus an AAAA record → `2a01:4f8:1c19:6647::1`
+- `www`: delete the CNAME to Vercel, add an A record → `178.104.6.98` and an AAAA record → `2a01:4f8:1c19:6647::1`
 
 Mail is not affected: MX is a separate record. SPF's `+a` now allows the cloud server instead of Vercel, which is harmless.
 
@@ -128,5 +131,5 @@ sudo systemctl reload nginx
 
 ### 8. Rollback, and cleaning up
 
-- If something is wrong: put the old records back (`sambico.de` A `216.198.79.1`, `www` CNAME `6eb89138070e33a7.vercel-dns-017.com.`). With TTL 300 visitors follow quickly.
+- If something is wrong: put the old records back (`sambico.de` A `216.198.79.1` and no AAAA, `www` CNAME `6eb89138070e33a7.vercel-dns-017.com.`). With TTL 300 visitors follow quickly.
 - Once the new site has run without trouble for a while: delete the project in Vercel and set the TTLs back to `3600`.
