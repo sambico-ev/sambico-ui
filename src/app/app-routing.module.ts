@@ -8,6 +8,7 @@ import { ImprintComponent } from './sites/imprint/imprint.component';
 import { NewsletterQrComponent } from './sites/newsletter/newsletter-qr/newsletter-qr.component';
 import { NewsletterUnsubscribeComponent } from './sites/newsletter/newsletter-unsubscribe/newsletter-unsubscribe.component';
 import { NewsletterComponent } from './sites/newsletter/newsletter.component';
+import { PrivacyComponent } from './sites/privacy/privacy.component';
 import { ProjectsComponent } from './sites/projects/projects.component';
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +27,7 @@ export class TitleResolver {
 export enum RouteNames {
   HOME = '',
   IMPRINT = 'impressum',
+  PRIVACY = 'datenschutz',
   PROJECTS = 'projekte',
   FESTIVAL = 'festival',
   BLOG = 'blog',
@@ -43,6 +45,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: RouteNames.IMPRINT, component: ImprintComponent, pathMatch: 'full' },
+  { path: RouteNames.PRIVACY, component: PrivacyComponent, pathMatch: 'full' },
   {
     path: RouteNames.PROJECTS,
     component: ProjectsComponent,

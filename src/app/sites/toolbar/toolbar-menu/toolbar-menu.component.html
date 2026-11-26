@@ -13,6 +13,10 @@
       {{ "toolbar.actions.imprint" | translate }}
       <i-bs name="chevron-right" height="20" width="20"></i-bs>
     </a>
+    <a [routerLink]="['/' + routes.PRIVACY]" class="btn icon-btn">
+      {{ "toolbar.actions.privacy" | translate }}
+      <i-bs name="chevron-right" height="20" width="20"></i-bs>
+    </a>
   </div>
   <div class="toolbar-actions">
     <h4>{{ "toolbar.actions.participate" | translate }}</h4>

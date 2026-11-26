@@ -42,6 +42,8 @@ npm test        # ng test   — Karma/Jasmine unit tests
 npm run watch   # ng build --watch --configuration development
 ```
 
+Hosting and deploys (nginx on the Hetzner server, `deploy.sh`): see `DEPLOYMENT.md`.
+
 ---
 
 ## Routing

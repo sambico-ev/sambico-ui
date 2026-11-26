@@ -17,6 +17,7 @@ import { FestivalModule } from './sites/festival/festival.module';
 import { FooterModule } from './sites/footer/footer.module';
 import { HomeModule } from './sites/home/home.module';
 import { NewsletterModule } from './sites/newsletter/newsletter.module';
+import { PrivacyModule } from './sites/privacy/privacy.module';
 import { ToolbarModule } from './sites/toolbar/toolbar.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateLoader {
@@ -35,6 +36,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     BlogModule,
     FestivalModule,
     NewsletterModule,
+    PrivacyModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarModule,

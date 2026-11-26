@@ -59,6 +59,13 @@
           />
         </div>
 
+        <!-- consent text has to be read before the click, so it sits above the button -->
+        <p class="hint" id="newsletter-hint">
+          {{ 'newsletter.hint' | translate }}
+          <a [routerLink]="['/' + routes.PRIVACY]">{{
+            'newsletter.privacyLink' | translate
+          }}</a>
+        </p>
         <button
           class="btn btn-secondary"
           type="submit"
@@ -71,9 +78,6 @@
         </button>
         <p class="field-error" *ngIf="status === 'error'" role="alert">
           {{ 'newsletter.error' | translate }}
-        </p>
-        <p class="hint" id="newsletter-hint">
-          {{ 'newsletter.hint' | translate }}
         </p>
       </form>
     </ng-template>
