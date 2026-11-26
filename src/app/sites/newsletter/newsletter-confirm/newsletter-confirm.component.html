@@ -1,0 +1,35 @@
+<h1 class="page-heading">{{ 'newsletter.confirm.title' | translate }}</h1>
+<div class="card" [ngSwitch]="status">
+  <ng-container *ngSwitchCase="'done'">
+    <i-bs name="check-circle" width="48" height="48"></i-bs>
+    <h3 role="status">{{ 'newsletter.confirm.done.title' | translate }}</h3>
+    <p>{{ 'newsletter.confirm.done.text' | translate }}</p>
+    <a class="btn btn-secondary" [routerLink]="['/' + routes.BLOG]">
+      {{ 'newsletter.confirm.done.blog' | translate }}
+    </a>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'invalid'">
+    <p role="alert">{{ 'newsletter.confirm.invalid' | translate }}</p>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <p>{{ 'newsletter.confirm.question' | translate }}</p>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      [disabled]="status === 'sending'"
+      (click)="confirm()"
+    >
+      {{
+        (status === 'sending'
+          ? 'newsletter.confirm.sending'
+          : 'newsletter.confirm.submit'
+        ) | translate
+      }}
+    </button>
+    <p class="field-error" *ngIf="status === 'error'" role="alert">
+      {{ 'newsletter.confirm.error' | translate }}
+    </p>
+  </ng-container>
+</div>

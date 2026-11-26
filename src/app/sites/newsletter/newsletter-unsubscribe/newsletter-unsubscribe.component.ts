@@ -11,8 +11,9 @@ type Status = 'ready' | 'sending' | 'done' | 'expired' | 'error' | 'invalid';
   styleUrls: ['./newsletter-unsubscribe.component.scss'],
 })
 export class NewsletterUnsubscribeComponent {
-  private readonly target = this.newsletterService.unsubscribeTarget(
+  private readonly target = this.newsletterService.listmonkTarget(
     this.route.snapshot.queryParamMap.get('u'),
+    '/subscription/',
   );
   status: Status = this.target ? 'ready' : 'invalid';
 
@@ -26,7 +27,7 @@ export class NewsletterUnsubscribeComponent {
     this.status = 'sending';
     this.newsletterService.unsubscribe(this.target).subscribe({
       next: () => (this.status = 'done'),
-      // listmonk answers 403 when the signed link has expired
+      // listmonk versions with signed links answer 403 once a link has expired
       error: (err: HttpErrorResponse) =>
         (this.status = err.status === 403 ? 'expired' : 'error'),
     });

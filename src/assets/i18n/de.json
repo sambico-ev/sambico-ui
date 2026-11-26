@@ -86,7 +86,20 @@
       "error": "Das hat nicht geklappt. Bitte versuch es später noch einmal oder schreib uns.",
       "delete": "Sollen wir alle deine Daten löschen? Eine kurze Mail genügt:"
     },
-    "privacyLink": "Details in unserer Datenschutzerklärung."
+    "privacyLink": "Details in unserer Datenschutzerklärung.",
+    "confirm": {
+      "title": "Anmeldung bestätigen",
+      "question": "Ein Klick noch, dann bekommst du unseren Newsletter.",
+      "submit": "Anmeldung bestätigen",
+      "sending": "Wird bestätigt …",
+      "done": {
+        "title": "Du bist dabei",
+        "text": "Danke! Ab jetzt hörst du von uns, wenn es Neues aus unseren Projekten in Sambia gibt.",
+        "blog": "Zum Blog"
+      },
+      "invalid": "Dieser Bestätigungslink ist unvollständig. Nutze bitte den Link aus unserer E-Mail oder melde dich einfach noch einmal an.",
+      "error": "Das hat nicht geklappt. Bitte versuch es später noch einmal oder schreib uns an kontakt@sambico.de."
+    }
   },
   "privacy": {
     "title": "Datenschutz"

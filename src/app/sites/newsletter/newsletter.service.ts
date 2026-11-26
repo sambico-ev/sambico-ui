@@ -21,15 +21,15 @@ export class NewsletterService {
     );
   }
 
-  // the mail links here with listmonk's signed unsubscribe URL as ?u=; only
-  // pass it on when it really points at our listmonk, never at anything else
-  unsubscribeTarget(raw: string | null) {
+  // the mails link to our pages with listmonk's own URL as ?u=; only pass it
+  // on when it really points at our listmonk, never at anything else
+  listmonkTarget(raw: string | null, path: '/subscription/' | '/subscription/optin/') {
     if (!raw) return null;
     try {
       const target = new URL(raw);
       const listmonk = new URL(this.env.newsletterUrl);
       return target.origin === listmonk.origin &&
-        target.pathname.startsWith('/subscription/')
+        target.pathname.startsWith(path)
         ? target.href
         : null;
     } catch {
@@ -37,8 +37,15 @@ export class NewsletterService {
     }
   }
 
-  // listmonk answers with an HTML page; only the status matters here
+  // listmonk answers both with an HTML page; only the status matters here
   unsubscribe(target: string) {
     return this.http.post(target, new HttpParams(), { responseType: 'text' });
+  }
+
+  // only this POST confirms; mail scanners open the link but never press the button
+  confirm(target: string) {
+    return this.http.post(target, new HttpParams().set('confirm', 'true'), {
+      responseType: 'text',
+    });
   }
 }

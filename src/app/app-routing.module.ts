@@ -5,6 +5,7 @@ import { BlogComponent } from './sites/blog/blog.component';
 import { FestivalComponent } from './sites/festival/festival.component';
 import { HomeComponent } from './sites/home/home.component';
 import { ImprintComponent } from './sites/imprint/imprint.component';
+import { NewsletterConfirmComponent } from './sites/newsletter/newsletter-confirm/newsletter-confirm.component';
 import { NewsletterQrComponent } from './sites/newsletter/newsletter-qr/newsletter-qr.component';
 import { NewsletterUnsubscribeComponent } from './sites/newsletter/newsletter-unsubscribe/newsletter-unsubscribe.component';
 import { NewsletterComponent } from './sites/newsletter/newsletter.component';
@@ -34,6 +35,7 @@ export enum RouteNames {
   NEWSLETTER = 'newsletter',
   NEWSLETTER_QR = 'newsletter/qr',
   NEWSLETTER_UNSUBSCRIBE = 'newsletter/abmelden',
+  NEWSLETTER_CONFIRM = 'newsletter/bestaetigen',
 }
 
 const routes: Routes = [
@@ -65,6 +67,11 @@ const routes: Routes = [
   {
     path: RouteNames.NEWSLETTER_UNSUBSCRIBE,
     component: NewsletterUnsubscribeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: RouteNames.NEWSLETTER_CONFIRM,
+    component: NewsletterConfirmComponent,
     pathMatch: 'full',
   },
   { path: '**', component: HomeComponent },
