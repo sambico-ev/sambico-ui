@@ -26,12 +26,13 @@
 }
 
 .field-error {
-  color: var(--bs-danger);
+  // --bs-danger darkened: the brand red reaches only 3.6:1 on the light card
+  color: #c41a0e;
   font-family: 'poppins-medium';
 }
 
 .hint {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-top: 1rem;
 
   a {

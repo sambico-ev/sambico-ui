@@ -84,7 +84,7 @@
       "invalid": "Dieser Abmeldelink ist unvollständig. Nutze bitte den Link am Ende eines Newsletters oder schreib uns, dann melden wir dich ab.",
       "expired": "Dieser Abmeldelink ist abgelaufen. Nutze bitte den Link aus unserem neuesten Newsletter oder schreib uns, dann melden wir dich ab.",
       "error": "Das hat nicht geklappt. Bitte versuch es später noch einmal oder schreib uns.",
-      "delete": "Wir sollen alle deine Daten löschen? Eine kurze Mail genügt:"
+      "delete": "Sollen wir alle deine Daten löschen? Eine kurze Mail genügt:"
     },
     "privacyLink": "Details in unserer Datenschutzerklärung."
   },

@@ -29,9 +29,13 @@
           [class.is-invalid]="
             form.controls.email.touched && form.controls.email.invalid
           "
-          aria-describedby="newsletter-hint"
+          [attr.aria-invalid]="
+            form.controls.email.touched && form.controls.email.invalid
+          "
+          aria-describedby="newsletter-email-error"
         />
         <p
+          id="newsletter-email-error"
           class="field-error"
           *ngIf="form.controls.email.touched && form.controls.email.invalid"
           role="alert"
@@ -69,6 +73,7 @@
         <button
           class="btn btn-secondary"
           type="submit"
+          aria-describedby="newsletter-hint"
           [disabled]="status === 'sending'"
         >
           {{
