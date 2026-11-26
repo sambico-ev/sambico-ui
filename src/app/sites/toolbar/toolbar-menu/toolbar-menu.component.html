@@ -20,6 +20,10 @@
       <i-bs name="at" height="20" width="20"></i-bs>
       {{ "toolbar.actions.contact" | translate }}
     </a>
+    <a [routerLink]="['/' + routes.NEWSLETTER]" class="btn icon-btn">
+      <i-bs name="envelope" height="20" width="20"></i-bs>
+      {{ "toolbar.actions.newsletter" | translate }}
+    </a>
     <button class="btn icon-btn" (click)="downloadMembershipApplication()">
       <i-bs name="download" height="20" width="20"></i-bs>
       {{ "toolbar.actions.download_membership_application" | translate }}

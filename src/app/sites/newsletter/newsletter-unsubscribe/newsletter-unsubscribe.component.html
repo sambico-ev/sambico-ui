@@ -1,0 +1,41 @@
+<h1 class="page-heading">{{ 'newsletter.unsubscribe.title' | translate }}</h1>
+<div class="card" [ngSwitch]="status">
+  <ng-container *ngSwitchCase="'done'">
+    <i-bs name="check-circle" width="48" height="48"></i-bs>
+    <h3 role="status">{{ 'newsletter.unsubscribe.done.title' | translate }}</h3>
+    <p>{{ 'newsletter.unsubscribe.done.text' | translate }}</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'invalid'">
+    <p role="alert">{{ 'newsletter.unsubscribe.invalid' | translate }}</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'expired'">
+    <p role="alert">{{ 'newsletter.unsubscribe.expired' | translate }}</p>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <p>{{ 'newsletter.unsubscribe.question' | translate }}</p>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      [disabled]="status === 'sending'"
+      (click)="unsubscribe()"
+    >
+      {{
+        (status === 'sending'
+          ? 'newsletter.unsubscribe.sending'
+          : 'newsletter.unsubscribe.submit'
+        ) | translate
+      }}
+    </button>
+    <p class="field-error" *ngIf="status === 'error'" role="alert">
+      {{ 'newsletter.unsubscribe.error' | translate }}
+    </p>
+  </ng-container>
+
+  <p class="hint">
+    {{ 'newsletter.unsubscribe.delete' | translate }}
+    <a href="mailto:kontakt&#64;sambico.de">kontakt&#64;sambico.de</a>
+  </p>
+</div>

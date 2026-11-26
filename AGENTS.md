@@ -87,7 +87,6 @@ src/
       shared.module.ts     # Exports: MarkdownPipe, NgxBootstrapIconsModule
       models/
         strapi.models.ts   # All Strapi API interfaces + StrapiTypes enum
-        calEvent.model.ts  # CalEvent interface
         breakpoint.model.ts # Breakpoints enum
         env.model.ts       # Environment interface
       pipes/
@@ -96,15 +95,15 @@ src/
         strapi.service.ts  # All Strapi HTTP calls + getStrapiImageUrl()
         breakpoint.service.ts # CDK breakpoint observer, isMobile()
         title.service.ts   # Updates document.title on route change
-        utils.service.ts   # shuffleArray<T>(), parseDate() (DD.MM.YYYY)
+        utils.service.ts   # shuffleArray<T>()
     sites/
       home/              # Shell page: slideshow + welcome + blog-preview + projects-preview
       slideshow/         # ngx-bootstrap carousel, Strapi sliders (reversed order)
       welcome/           # Strapi welcome-text, renders markdown
       blog/              # Full blog list (all posts, sorted by publishedAt desc)
         blog-entry/      # Single blog card component (@Input() blog: Blog)
-      blog-preview/      # Home preview: 1 post (mobile) / 3 posts (desktop) + events
-      events/            # Upcoming events list (@Input() events: CalEvent[])
+      blog-preview/      # Home preview: 1 post (mobile) / 3 posts (desktop)
+      newsletter/        # Signup page, QR page, unsubscribe page + NewsletterService (listmonk)
       projects/          # Full projects list (reversed order, markdown content)
       projects-preview/  # Slot machine animation cycling through projects
       toolbar/           # Top nav bar (logo, social icons, burger menu)
@@ -150,7 +149,6 @@ Image size options (approx px widths): `xsmall`(96), `thumbnail`(156), `small`(5
 
 ### `UtilsService`
 - `shuffleArray<T>(array: T[]): T[]` — Fisher-Yates shuffle, returns new array
-- `parseDate(date: string): Date | undefined` — parses `DD.MM.YYYY` strings
 
 ---
 
@@ -178,13 +176,6 @@ StrapiTypes.USER         = 'user'
 // WeclomeText
 { title, subtitle, content (markdown) }
 ```
-
-### CalEvent
-Fetched from a **public Google Sheets CSV** (not Strapi):
-```
-https://docs.google.com/spreadsheets/d/e/2PACX-1vSSGiKs_.../pub?gid=0&single=true&output=csv
-```
-CSV columns (in order): `date (DD.MM.YYYY)`, `title`, `description`, `location`
 
 ---
 
@@ -244,7 +235,8 @@ Translation files live in `src/assets/i18n/`. German (`de.json`) is the source o
 
 Key namespaces:
 - `toolbar.actions.*` — nav menu labels (blog, projects, participate, contact, imprint, social, donate, download_membership_application, facebook, instagram, tiktok)
-- `blogPreview.*` — showAll, readMore, title, events.title
+- `blogPreview.*` — showAll, readMore, title
+- `newsletter.*` — signup, QR and unsubscribe pages
 - `projectPreview.*` — showAll, title
 - `projects.*` — title, info
 - `blog.title`, `imprint.title`, `home.tabTitle`
@@ -264,6 +256,8 @@ interface Environment {
   production: boolean;
   strapiUrl: string;      // 'https://strapi-vnv3.onrender.com'
   strapiApiToken: string; // Bearer token for Strapi API
+  newsletterUrl: string;  // listmonk, 'https://newsletter.sambico.de'
+  newsletterListUuids: string[]; // listmonk list(s) the public form subscribes to
 }
 ```
 
@@ -271,6 +265,14 @@ API base URL: `${strapiUrl}/api/`
 All requests include header: `Authorization: Bearer <strapiApiToken>`
 
 ---
+
+## Newsletter (listmonk)
+
+The newsletter runs on **listmonk** at `newsletter.sambico.de`, not Strapi. The site only talks to its public endpoints:
+
+- `/newsletter`: signup form, posts to `POST /api/public/subscription`. listmonk sends the double opt-in mail itself. A hidden `website` field is a honeypot: when filled, the form fakes success and sends nothing.
+- `/newsletter/qr`: QR code for events. It is a static SVG (`assets/images/newsletter-qr.svg`) pointing at `https://sambico.de/newsletter`; regenerate it only if that URL changes.
+- `/newsletter/abmelden?u=<signed listmonk unsubscribe URL>`: the mail template links here. The page only posts to `u` when it points at `newsletterUrl` under `/subscription/`. listmonk answers 403 when the signed link has expired.
 
 ## Notable Patterns & Conventions
 

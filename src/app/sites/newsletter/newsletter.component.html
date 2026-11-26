@@ -1,0 +1,86 @@
+<h1 class="page-heading">{{ 'newsletter.title' | translate }}</h1>
+<div class="newsletter-container">
+  <div class="card">
+    <p class="intro">{{ 'newsletter.intro' | translate }}</p>
+
+    <div class="sent" *ngIf="status === 'sent'; else signup" role="status">
+      <i-bs name="envelope-check" width="48" height="48"></i-bs>
+      <h3>{{ 'newsletter.sent.title' | translate }}</h3>
+      <p>
+        {{
+          'newsletter.sent.text'
+            | translate: { email: form.controls.email.value }
+        }}
+      </p>
+    </div>
+
+    <ng-template #signup>
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <label for="newsletter-email">{{ 'newsletter.email' | translate }}</label>
+        <input
+          id="newsletter-email"
+          class="form-control"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          inputmode="email"
+          spellcheck="false"
+          [placeholder]="'newsletter.placeholder' | translate"
+          [class.is-invalid]="
+            form.controls.email.touched && form.controls.email.invalid
+          "
+          aria-describedby="newsletter-hint"
+        />
+        <p
+          class="field-error"
+          *ngIf="form.controls.email.touched && form.controls.email.invalid"
+          role="alert"
+        >
+          {{ 'newsletter.invalid' | translate }}
+        </p>
+
+        <label for="newsletter-name">{{ 'newsletter.name' | translate }}</label>
+        <input
+          id="newsletter-name"
+          class="form-control"
+          type="text"
+          formControlName="name"
+          autocomplete="given-name"
+        />
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="newsletter-website">Website</label>
+          <input
+            id="newsletter-website"
+            type="text"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          type="submit"
+          [disabled]="status === 'sending'"
+        >
+          {{
+            (status === 'sending' ? 'newsletter.sending' : 'newsletter.submit')
+              | translate
+          }}
+        </button>
+        <p class="field-error" *ngIf="status === 'error'" role="alert">
+          {{ 'newsletter.error' | translate }}
+        </p>
+        <p class="hint" id="newsletter-hint">
+          {{ 'newsletter.hint' | translate }}
+        </p>
+      </form>
+    </ng-template>
+  </div>
+
+  <a class="qr-link" [routerLink]="['/' + routes.NEWSLETTER_QR]">
+    <i-bs name="qr-code" width="20" height="20"></i-bs>
+    {{ 'newsletter.showQr' | translate }}
+  </a>
+</div>

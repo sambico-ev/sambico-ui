@@ -22,10 +22,7 @@
   "blogPreview": {
     "showAll": "Alle Neuigkeiten",
     "readMore": "Jetzt Lesen",
-    "title": "Was gibt's Neues?",
-    "events": {
-      "title": "Bevorstehende Events"
-    }
+    "title": "Was gibt's Neues?"
   },
   "contact": "Kontakt",
   "readMore": "Mehr erfahren",
@@ -42,7 +39,8 @@
       "facebook": "Facebook",
       "instagram": "Instagram",
       "tiktok": "TikTok",
-      "donate": "Spenden"
+      "donate": "Spenden",
+      "newsletter": "Newsletter"
     }
   },
   "festival": {
@@ -51,5 +49,41 @@
     "date": "05.09.2026",
     "description": "Mehr Informationen folgen in Kürze.",
     "location": "Jugendfestplatz Backnang"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "intro": "Bleib auf dem Laufenden über unsere Projekte in Sambia: neue Blogartikel, Events und Neuigkeiten aus dem Verein, direkt in dein Postfach.",
+    "email": "E-Mail-Adresse",
+    "placeholder": "name@beispiel.de",
+    "submit": "Abonnieren",
+    "sending": "Wird gesendet …",
+    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "error": "Das hat nicht geklappt. Bitte versuch es später noch einmal oder schreib uns an kontakt@sambico.de.",
+    "hint": "Du bekommst zuerst eine E-Mail mit einem Bestätigungslink. Erst nach dem Klick darauf bist du angemeldet. Abmelden kannst du dich jederzeit über den Link am Ende jedes Newsletters.",
+    "sent": {
+      "title": "Fast geschafft",
+      "text": "Wir haben dir eine E-Mail an {{email}} geschickt. Klick auf den Link darin, um deine Anmeldung zu bestätigen."
+    },
+    "showQr": "QR-Code zum Teilen anzeigen",
+    "qr": {
+      "title": "Newsletter abonnieren",
+      "caption": "Scannen, E-Mail eintragen, Link bestätigen. Fertig.",
+      "alt": "QR-Code zur Newsletter-Anmeldung auf sambico.de/newsletter"
+    },
+    "name": "Vorname (optional)",
+    "unsubscribe": {
+      "title": "Newsletter abmelden",
+      "question": "Möchtest du keine Newsletter mehr von uns bekommen?",
+      "submit": "Abmelden",
+      "sending": "Wird abgemeldet …",
+      "done": {
+        "title": "Du bist abgemeldet",
+        "text": "Du bekommst keine Newsletter mehr von uns. Schade, dass du gehst, und danke, dass du dabei warst."
+      },
+      "invalid": "Dieser Abmeldelink ist unvollständig. Nutze bitte den Link am Ende eines Newsletters oder schreib uns, dann melden wir dich ab.",
+      "expired": "Dieser Abmeldelink ist abgelaufen. Nutze bitte den Link aus unserem neuesten Newsletter oder schreib uns, dann melden wir dich ab.",
+      "error": "Das hat nicht geklappt. Bitte versuch es später noch einmal oder schreib uns.",
+      "delete": "Wir sollen alle deine Daten löschen? Eine kurze Mail genügt:"
+    }
   }
 }

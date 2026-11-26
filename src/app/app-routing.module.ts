@@ -5,6 +5,9 @@ import { BlogComponent } from './sites/blog/blog.component';
 import { FestivalComponent } from './sites/festival/festival.component';
 import { HomeComponent } from './sites/home/home.component';
 import { ImprintComponent } from './sites/imprint/imprint.component';
+import { NewsletterQrComponent } from './sites/newsletter/newsletter-qr/newsletter-qr.component';
+import { NewsletterUnsubscribeComponent } from './sites/newsletter/newsletter-unsubscribe/newsletter-unsubscribe.component';
+import { NewsletterComponent } from './sites/newsletter/newsletter.component';
 import { ProjectsComponent } from './sites/projects/projects.component';
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +29,9 @@ export enum RouteNames {
   PROJECTS = 'projekte',
   FESTIVAL = 'festival',
   BLOG = 'blog',
+  NEWSLETTER = 'newsletter',
+  NEWSLETTER_QR = 'newsletter/qr',
+  NEWSLETTER_UNSUBSCRIBE = 'newsletter/abmelden',
 }
 
 const routes: Routes = [
@@ -43,6 +49,21 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: RouteNames.FESTIVAL, component: FestivalComponent, pathMatch: 'full' },
+  {
+    path: RouteNames.NEWSLETTER,
+    component: NewsletterComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: RouteNames.NEWSLETTER_QR,
+    component: NewsletterQrComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: RouteNames.NEWSLETTER_UNSUBSCRIBE,
+    component: NewsletterUnsubscribeComponent,
+    pathMatch: 'full',
+  },
   { path: '**', component: HomeComponent },
 ];
 

@@ -1,0 +1,13 @@
+<h1 class="page-heading">{{ 'newsletter.qr.title' | translate }}</h1>
+<div class="card">
+  <!-- static asset: the code always points at sambico.de/newsletter, regenerate only if that URL changes -->
+  <img
+    class="qr"
+    src="assets/images/newsletter-qr.svg"
+    [alt]="'newsletter.qr.alt' | translate"
+    width="320"
+    height="320"
+  />
+  <p class="caption">{{ 'newsletter.qr.caption' | translate }}</p>
+  <p class="url">sambico.de/newsletter</p>
+</div>
