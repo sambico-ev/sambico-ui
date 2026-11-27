@@ -1,6 +1,5 @@
-import { Injectable, NgModule } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './sites/blog/blog.component';
 import { FestivalComponent } from './sites/festival/festival.component';
 import { HomeComponent } from './sites/home/home.component';
@@ -11,19 +10,6 @@ import { NewsletterUnsubscribeComponent } from './sites/newsletter/newsletter-un
 import { NewsletterComponent } from './sites/newsletter/newsletter.component';
 import { PrivacyComponent } from './sites/privacy/privacy.component';
 import { ProjectsComponent } from './sites/projects/projects.component';
-
-@Injectable({ providedIn: 'root' })
-export class TitleResolver {
-  constructor(private readonly translateService: TranslateService) {}
-  resolve(snapshot: ActivatedRouteSnapshot) {
-    console.log('snapshot', snapshot);
-    switch (snapshot.routeConfig?.path) {
-      case RouteNames.HOME:
-        return Promise.resolve(this.translateService.get('home.tabTitle'));
-    }
-    return 'Custom About Me';
-  }
-}
 
 export enum RouteNames {
   HOME = '',

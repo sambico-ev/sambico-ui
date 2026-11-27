@@ -1,7 +1,6 @@
 export enum StrapiTypes {
   BLOG = 'blogs',
   SLIDER = 'sliders',
-  USER = 'user',
   WELCOME_TEXT = 'welcome-text',
   PROJECT = 'projects'
 }

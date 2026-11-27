@@ -28,9 +28,7 @@ export class BreakpointService {
 
   isMobile(): Observable<boolean> {
     return this.getBreakpoint().pipe(
-      map((breakpoint: any) => {
-        return breakpoint === Breakpoints.MOBILE;
-      })
+      map((breakpoint) => breakpoint === Breakpoints.MOBILE)
     );
   }
 }

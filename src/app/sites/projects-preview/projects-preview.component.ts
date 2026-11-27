@@ -10,7 +10,6 @@ import {
 import { RouteNames } from 'src/app/app-routing.module';
 import { Project } from 'src/app/shared/models/strapi.models';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
-import { UtilsService } from 'src/app/shared/services/utils.service';
 
 const SLIDE_DURATION = 60;
 const SLIDE_GAP = 20;
@@ -53,7 +52,6 @@ export class ProjectsPreviewComponent
 
   constructor(
     public strapiService: StrapiService,
-    private readonly utilService: UtilsService,
     public el: ElementRef
   ) {}
 
