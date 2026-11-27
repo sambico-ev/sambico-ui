@@ -6,7 +6,8 @@ import { registerLocaleData } from '@angular/common';
 import {
   HttpClient,
   provideHttpClient,
-  withInterceptorsFromDi
+  withInterceptorsFromDi,
+  withXhr
 } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
@@ -53,7 +54,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
   ],
   providers: [
     { provide: 'env', useValue: env },
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi())
   ]
 })
 export class AppModule {}

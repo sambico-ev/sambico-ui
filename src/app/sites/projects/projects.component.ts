@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Project } from 'src/app/shared/models/strapi.models';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
@@ -7,6 +7,7 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ProjectsComponent {

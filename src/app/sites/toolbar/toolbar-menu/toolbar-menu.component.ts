@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouteNames } from 'src/app/app-routing.module';
 import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 
@@ -6,6 +6,7 @@ import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
   selector: 'app-toolbar-menu',
   templateUrl: './toolbar-menu.component.html',
   styleUrls: ['./toolbar-menu.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ToolbarMenuComponent {

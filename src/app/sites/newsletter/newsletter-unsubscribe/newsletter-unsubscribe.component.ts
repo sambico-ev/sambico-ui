@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewsletterService } from '../newsletter.service';
 
@@ -9,6 +9,7 @@ type Status = 'ready' | 'sending' | 'done' | 'expired' | 'error' | 'invalid';
   selector: 'app-newsletter-unsubscribe',
   templateUrl: './newsletter-unsubscribe.component.html',
   styleUrls: ['./newsletter-unsubscribe.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NewsletterUnsubscribeComponent {

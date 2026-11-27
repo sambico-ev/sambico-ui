@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 import { Slide } from '../../shared/models/strapi.models';
 import { StrapiService } from '../../shared/services/strapi.service';
@@ -7,6 +7,7 @@ import { StrapiService } from '../../shared/services/strapi.service';
   selector: 'app-slideshow',
   templateUrl: './slideshow.component.html',
   styleUrls: ['./slideshow.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class SlideshowComponent implements OnInit {

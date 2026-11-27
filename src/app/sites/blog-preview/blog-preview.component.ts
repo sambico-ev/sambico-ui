@@ -5,7 +5,13 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { switchMap } from 'rxjs';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Blog } from 'src/app/shared/models/strapi.models';
@@ -32,6 +38,7 @@ const style2 = style({
       transition('hide => show', animate('700ms ease-in'))
     ])
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class BlogPreviewComponent implements OnInit {

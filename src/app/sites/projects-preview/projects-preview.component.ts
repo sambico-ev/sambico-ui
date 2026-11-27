@@ -4,7 +4,8 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Project } from 'src/app/shared/models/strapi.models';
@@ -36,6 +37,7 @@ const SLOT_DELAYS = [185, 175, 170, 210, 280, 340, 400, 500];
       ])
     ])
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ProjectsPreviewComponent

@@ -3,7 +3,8 @@ import {
   ElementRef,
   HostListener,
   OnDestroy,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -25,6 +26,7 @@ const TOOLBAR_HEIGHTS = {
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ToolbarComponent implements OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouteNames } from 'src/app/app-routing.module';
 import { NewsletterService } from '../newsletter.service';
@@ -11,6 +11,7 @@ type Status = 'ready' | 'sending' | 'done' | 'error' | 'invalid';
   styleUrls: [
     '../newsletter-unsubscribe/newsletter-unsubscribe.component.scss'
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NewsletterConfirmComponent {

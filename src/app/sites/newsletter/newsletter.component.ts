@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewsletterService } from './newsletter.service';
 import { RouteNames } from 'src/app/app-routing.module';
@@ -9,6 +9,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
   selector: 'app-newsletter',
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NewsletterComponent {
