@@ -13,15 +13,14 @@
         src="assets/logo/logo-full-horizontal.png"
     /></a>
     <div class="toolbar-actions">
-      <ng-container *ngIf="!(isMobile | async)">
+      @if (!(isMobile | async)) {
         <!--    <a
           class="btn icon-btn hot"
           [routerLink]="routes.FESTIVAL"
-        >
-          SAMBICO Festival 2026
-        </a>
+          >
+        SAMBICO Festival 2026
+      </a>
       -->
-
         <a
           class="btn icon-btn"
           href="https://www.instagram.com/sambico/"
@@ -42,7 +41,7 @@
         >
           <i-bs name="facebook" height="28" width="28"></i-bs>
         </a>
-      </ng-container>
+      }
       <app-burger-button
         (opened)="toggleMenu($event)"
         [active]="menuOpen"

@@ -3,20 +3,22 @@
   <div class="card">
     <p class="intro">{{ 'newsletter.intro' | translate }}</p>
 
-    <div class="sent" *ngIf="status === 'sent'; else signup" role="status">
-      <i-bs name="envelope-check" width="48" height="48"></i-bs>
-      <h3>{{ 'newsletter.sent.title' | translate }}</h3>
-      <p>
-        {{
-          'newsletter.sent.text'
-            | translate: { email: form.controls.email.value }
-        }}
-      </p>
-    </div>
-
-    <ng-template #signup>
+    @if (status === 'sent') {
+      <div class="sent" role="status">
+        <i-bs name="envelope-check" width="48" height="48"></i-bs>
+        <h3>{{ 'newsletter.sent.title' | translate }}</h3>
+        <p>
+          {{
+            'newsletter.sent.text'
+              | translate: { email: form.controls.email.value }
+          }}
+        </p>
+      </div>
+    } @else {
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <label for="newsletter-email">{{ 'newsletter.email' | translate }}</label>
+        <label for="newsletter-email">{{
+          'newsletter.email' | translate
+        }}</label>
         <input
           id="newsletter-email"
           class="form-control"
@@ -34,15 +36,11 @@
           "
           aria-describedby="newsletter-email-error"
         />
-        <p
-          id="newsletter-email-error"
-          class="field-error"
-          *ngIf="form.controls.email.touched && form.controls.email.invalid"
-          role="alert"
-        >
-          {{ 'newsletter.invalid' | translate }}
-        </p>
-
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <p id="newsletter-email-error" class="field-error" role="alert">
+            {{ 'newsletter.invalid' | translate }}
+          </p>
+        }
         <label for="newsletter-name">{{ 'newsletter.name' | translate }}</label>
         <input
           id="newsletter-name"
@@ -51,7 +49,6 @@
           formControlName="name"
           autocomplete="given-name"
         />
-
         <div class="honeypot" aria-hidden="true">
           <label for="newsletter-website">Website</label>
           <input
@@ -62,7 +59,6 @@
             autocomplete="off"
           />
         </div>
-
         <!-- consent text has to be read before the click, so it sits above the button -->
         <p class="hint" id="newsletter-hint">
           {{ 'newsletter.hint' | translate }}
@@ -81,11 +77,13 @@
               | translate
           }}
         </button>
-        <p class="field-error" *ngIf="status === 'error'" role="alert">
-          {{ 'newsletter.error' | translate }}
-        </p>
+        @if (status === 'error') {
+          <p class="field-error" role="alert">
+            {{ 'newsletter.error' | translate }}
+          </p>
+        }
       </form>
-    </ng-template>
+    }
   </div>
 
   <a class="qr-link" [routerLink]="['/' + routes.NEWSLETTER_QR]">

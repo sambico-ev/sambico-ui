@@ -12,7 +12,6 @@ import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { env } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,8 +49,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    }),
-    ButtonsModule.forRoot()
+    })
   ],
   providers: [
     { provide: 'env', useValue: env },

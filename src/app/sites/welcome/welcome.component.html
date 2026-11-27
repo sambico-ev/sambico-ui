@@ -1,7 +1,7 @@
 <div class="welcome-container">
-  <ng-container *ngIf="welcomeText">
+  @if (welcomeText) {
     <div class="title">{{ welcomeText.title }}</div>
     <div class="sub-title">{{ welcomeText.subtitle }}</div>
-    <p class="content" [innerHTML]="welcomeText.content | markdown"></p
-  ></ng-container>
+    <p class="content" [innerHTML]="welcomeText.content | markdown"></p>
+  }
 </div>

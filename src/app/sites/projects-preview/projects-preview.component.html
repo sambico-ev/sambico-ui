@@ -1,21 +1,19 @@
 <div class="wrapper">
-  <h1 class="heading">{{ "projectPreview.title" | translate }}</h1>
+  <h1 class="heading">{{ 'projectPreview.title' | translate }}</h1>
   <div class="card-container">
-    <div
-      class="project-preview-card"
-      *ngIf="currentProject"
-      @slideCard
-    >
-      <div class="content-wrapper">
-        <h2 class="margin-bottom-8">{{ currentProject.attributes.title }}</h2>
-        <div class="content">
-          <p [innerHTML]="currentProject.attributes.content | markdown"></p>
+    @if (currentProject) {
+      <div class="project-preview-card" @slideCard>
+        <div class="content-wrapper">
+          <h2 class="margin-bottom-8">{{ currentProject.attributes.title }}</h2>
+          <div class="content">
+            <p [innerHTML]="currentProject.attributes.content | markdown"></p>
+          </div>
         </div>
       </div>
-    </div>
+    }
   </div>
   <button class="btn icon-btn all-button" [routerLink]="'/' + routes.PROJECTS">
-    {{ "projectPreview.showAll" | translate }}
+    {{ 'projectPreview.showAll' | translate }}
     <i-bs name="chevron-right" width="20" height="20"> </i-bs>
   </button>
 </div>
