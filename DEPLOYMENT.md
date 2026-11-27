@@ -21,7 +21,7 @@ We left Vercel in November 2026 because its Hobby plan has no data processing ag
 SAMBICO_HOST=root@178.104.6.98 RSYNC_RSH="ssh -i ~/.ssh/id_ed25519_hetzner" ./deploy.sh
 ```
 
-It runs `npm ci` and the production build, then copies `dist/sambico-ui/` to `/var/www/sambico` with `rsync --delete`. nginx serves the new files immediately; nothing restarts. `index.html` is never cached, the hashed JS/CSS files are cached for a year, so visitors get the new version on their next page load.
+It runs `npm ci` and the production build (Node 22.22.3 or newer, Angular 22's requirement), then copies `dist/sambico-ui/` to `/var/www/sambico` with `rsync --delete`. nginx serves the new files immediately; nothing restarts. `index.html` is never cached, the hashed JS/CSS files are cached for a year, so visitors get the new version on their next page load.
 
 When the build already exists, the copy alone is enough:
 
@@ -29,7 +29,7 @@ When the build already exists, the copy alone is enough:
 rsync -az --delete -e "ssh -i ~/.ssh/id_ed25519_hetzner" dist/sambico-ui/ root@178.104.6.98:/var/www/sambico/
 ```
 
-The trailing slashes matter. Check afterwards: `curl -s https://sambico.de/ | grep -o 'main\.[a-f0-9]*\.js'` shows the new build's file name.
+The trailing slashes matter. Check afterwards: `curl -s https://sambico.de/ | grep -o 'main-[A-Z0-9]*\.js'` shows the new build's file name.
 
 ## nginx
 

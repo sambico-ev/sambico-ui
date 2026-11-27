@@ -8,13 +8,14 @@ This file contains comprehensive context about the project for AI coding agents.
 
 **sambico-ui** is the frontend web application for **SAMBICO e.V.**, a German non-profit association (Verein) based in Backnang that fundraises to support development projects in Zambia.
 
-- **Framework**: Angular 15 (standalone component schematics disabled; uses NgModules)
-- **Language**: TypeScript ~4.9.4
+- **Framework**: Angular 22 (NgModules, components declared `standalone: false`; zone.js change detection kept as `Eager`, the pre-22 behaviour)
+- **Language**: TypeScript ~6.0 (Node 22.22.3 or newer for the CLI)
 - **Styling**: SCSS + Bootstrap 5
 - **i18n**: `@ngx-translate/core`, default language **German (`de`)**
-- **Backend/CMS**: Strapi v4 at `https://cms.sambico.de` (repo `sambico-cms`, same Hetzner server as the site)
+- **Backend/CMS**: Strapi 4 or 5 (the data layer reads both, see Data Models) at `https://cms.sambico.de` (repo `sambico-cms`, same Hetzner server as the site)
 - **Newsletter**: listmonk at `https://newsletter.sambico.de` (see Newsletter below)
-- **Test runner**: Karma + Jasmine (tests skipped by default per schematics config)
+- **Tests**: none; the Karma/Jasmine setup was removed with the Angular 22 upgrade
+- **Build**: `@angular/build:application` (esbuild); output stays flat in `dist/sambico-ui/`
 
 ---
 
@@ -39,7 +40,6 @@ This file contains comprehensive context about the project for AI coding agents.
 ```bash
 npm start       # ng serve  — dev server at http://localhost:4200
 npm run build   # ng build  — production build to dist/sambico-ui/
-npm test        # ng test   — Karma/Jasmine unit tests
 npm run watch   # ng build --watch --configuration development
 ```
 
@@ -68,6 +68,8 @@ Defined in `src/app/app-routing.module.ts`. Route names are exported via the `Ro
 
 Always reference routes via `RouteNames` enum, never hardcode path strings.
 
+`blog/:id` shows that one entry (with a link back to the list). `:id` is the entry's `documentId` on Strapi 5 and the numeric id on Strapi 4; `blogRouteKey()` builds it, and `StrapiService.getBlogPost()` accepts both on either server, so links keep working across the CMS move. An id that matches nothing shows the whole list. Newsletter mails that link to a post should use `https://sambico.de/blog/<documentId>`.
+
 ---
 
 ## Project Structure
@@ -90,21 +92,21 @@ src/
     files/             # Downloadable files (e.g. membership application PDF)
   app/
     app.module.ts          # Root module — bootstraps AppComponent
-    app-routing.module.ts  # Routes + RouteNames enum + TitleResolver
+    app-routing.module.ts  # Routes + RouteNames enum
     app.component.ts       # Sets lang to 'de', inits TitleService, handles fragment scroll
     shared/
       shared.module.ts     # Exports: MarkdownPipe, NgxBootstrapIconsModule
       models/
-        strapi.models.ts   # All Strapi API interfaces + StrapiTypes enum
+        strapi.models.ts   # Flat models the components use + the raw Strapi 4/5 response types + StrapiTypes enum
         breakpoint.model.ts # Breakpoints enum
         env.model.ts       # Environment interface
       pipes/
-        markdown.pipe.ts   # `markdown` pipe — wraps marked() library
+        markdown.pipe.ts   # `markdown` pipe — wraps marked.parse()
       services/
         strapi.service.ts  # All Strapi HTTP calls + getStrapiImageUrl()
+        strapi.normalize.ts # Pure functions: Strapi 4/5 response -> flat models (no Angular imports)
         breakpoint.service.ts # CDK breakpoint observer, isMobile()
         title.service.ts   # Updates document.title on route change
-        utils.service.ts   # shuffleArray<T>()
     sites/
       home/              # Shell page: slideshow + welcome + blog-preview + projects-preview
       slideshow/         # ngx-bootstrap carousel, Strapi sliders (reversed order)
@@ -129,8 +131,8 @@ src/
 ## Shared Module
 
 `SharedModule` must be imported in any feature module that needs:
-- **`MarkdownPipe`** — use `[innerHTML]="value | markdown"` to render Strapi markdown content as HTML
-- **`NgxBootstrapIconsModule`** — use `<i-bs name="icon-name" width="X" height="X">` for Bootstrap Icons
+- **`MarkdownPipe`** — use `[innerHTML]="value | markdown"` to render Strapi markdown content as HTML (`marked.parse`, synchronous)
+- **`NgxBootstrapIconsModule`** — use `<i-bs name="icon-name" width="X" height="X">` for Bootstrap Icons. Only the icons listed in `shared.module.ts` are bundled (`allIcons` would add 1 MB); add a new icon there when a template needs one
 
 ---
 
@@ -143,8 +145,9 @@ Injected via `'env'` token. All methods return `Observable`.
 |---|---|---|
 | `getSlider()` | `Observable<Slide[]>` | Fetches slideshow slides |
 | `getProjects(count?)` | `Observable<Project[]>` | Optional `count` limits results |
-| `getWelcomeText()` | `Observable<WeclomeText>` | Single entry (title, subtitle, content) |
+| `getWelcomeText()` | `Observable<WelcomeText>` | Single entry (title, subTitle, content) |
 | `getBlogPosts(count?, orderDir?)` | `Observable<Blog[]>` | `orderDir`: `'asc'`\|`'desc'`, default `'asc'` |
+| `getBlogPost(key)` | `Observable<Blog \| undefined>` | Picks the entry whose `documentId` or numeric `id` equals `key` out of the list |
 | `getStrapiImageUrl(formats, size)` | `string` | Falls back to next available size if requested size missing |
 
 Image size options (approx px widths): `xsmall`(96), `thumbnail`(156), `small`(563), `medium`(750), `large`(1440), `xlarge`(1920).
@@ -158,14 +161,19 @@ Image size options (approx px widths): `xsmall`(96), `thumbnail`(156), `small`(5
 - Call `init()` once in `AppComponent` constructor
 - Base title: `"SAMBICO e.V."`, appends `" - ROUTE"` on navigation
 
-### `UtilsService`
-- `shuffleArray<T>(array: T[]): T[]` — Fisher-Yates shuffle, returns new array
-
 ---
 
 ## Data Models (Strapi)
 
-All Strapi responses follow the Strapi v4 structure: `{ data: T | T[] }` with items shaped as `{ id: number, attributes: {...} }`.
+The CMS is moving from Strapi 4 to Strapi 5, and the UI has to work against both while the two are not deployed at the same moment. `StrapiService` is the only place that knows the difference; it hands the components one flat shape (`strapi.models.ts`, converted in `strapi.normalize.ts`):
+
+| | Strapi 4 | Strapi 5 | What components get |
+|---|---|---|---|
+| Entry | `{ id, attributes: { ...fields } }` | `{ id, documentId, ...fields }` | `{ id, documentId?, ...fields }` |
+| Media field | `{ data: { id, attributes: { url, formats } } \| null }` | the file object, `null` or `[]` | `Media \| null` |
+| Single entry URL | `/api/blogs/:id` (numeric) | `/api/blogs/:documentId` | not used, see `getBlogPost` |
+
+Only the `Authorization` header is sent; any custom header would trigger a CORS preflight that the Strapi 4 server rejects. The numeric `id` of a Strapi 5 entry differs between draft and published rows and per locale, so links use `documentId` (`blogRouteKey()`).
 
 ```typescript
 // Strapi content types
@@ -173,20 +181,21 @@ StrapiTypes.BLOG         = 'blogs'
 StrapiTypes.SLIDER       = 'sliders'
 StrapiTypes.WELCOME_TEXT = 'welcome-text'
 StrapiTypes.PROJECT      = 'projects'
-StrapiTypes.USER         = 'user'
 
-// Project.attributes
-{ title, subtitle, content (markdown), image, locale, localizations, createdAt, updatedAt, publishedAt }
+// Project
+{ id, documentId?, title, subtitle, content (markdown), publishedAt }
 
-// Blog.attributes
-{ title, subTitle?, content (markdown), image, previewButtonText, date, locale, createdAt, updatedAt, publishedAt }
+// Blog
+{ id, documentId?, title, subTitle?, content (markdown), image, previewButtonText?, date, publishedAt }
 
-// Slide.attributes
-{ title, subtitle, buttonText, link, image, locale, localizations, createdAt, updatedAt, publishedAt }
+// Slide
+{ id, documentId?, title, subtitle, buttonText, link, image, publishedAt }
 
-// WeclomeText
-{ title, subtitle, content (markdown) }
+// WelcomeText
+{ title, subTitle, content (markdown) }
 ```
+
+Locale: no `locale` parameter is sent, so each server answers with its default locale. A Strapi 5 server whose default locale is not German needs that checked when it goes live.
 
 ---
 
@@ -226,6 +235,8 @@ $header-height-mobile: 80px;
 ---
 
 ## Feature Module Pattern
+
+Angular 22 generates standalone components by default; this app declares them in modules, so use `ng generate component ... --standalone=false` or write the standalone component and import it.
 
 Each page/feature has its own NgModule. When creating a new component:
 1. Create the module file (e.g. `my-feature.module.ts`)
@@ -297,11 +308,12 @@ The newsletter runs on **listmonk** at `newsletter.sambico.de`, not Strapi. The 
 - **Menu close on navigation**: `ToolbarComponent` subscribes to `router.events` and closes on `NavigationEnd`.
 - **Image fallback**: `getStrapiImageUrl()` falls back gracefully through `large → medium → small` if the requested size doesn't exist.
 - **Blog sorting**: Always sorted client-side by `publishedAt` descending. Slider is reversed (`res.reverse()`). Projects are also reversed.
-- **TODO markers**: `Localization.date` in `strapi.models.ts` is typed as `any[]` with a `//TODO: Type` comment.
 
 ---
 
 ## Known Issues / Notes
 
-- `TitleResolver` in `app-routing.module.ts` only handles `RouteNames.HOME`; all other routes fall back to `'Custom About Me'` (placeholder, not used for actual title).
+- Page titles come from `TitleService` (route path in upper case); there is no route title resolver.
+- The slot machine in `ProjectsPreviewComponent` is switched off (the calls are commented out); the preview shows one random project.
+- Sass: Bootstrap 5 and our styles still use `@import`; the Sass deprecation warnings for it are silenced in `angular.json` until Bootstrap 6 or a move to `@use`.
 - `en.json` is intentionally sparse; the app always defaults to German.
