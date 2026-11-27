@@ -6,7 +6,7 @@
     <app-blog-entry [blog]="blogEntry"></app-blog-entry>
   }
   @if (single) {
-    <button class="btn icon-btn" [routerLink]="'/' + routes.BLOG">
+    <button class="btn icon-btn back-button" [routerLink]="'/' + routes.BLOG">
       {{ "blogPreview.showAll" | translate }}
       <i-bs name="chevron-right" width="20" height="20"> </i-bs>
     </button>
