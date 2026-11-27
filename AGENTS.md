@@ -12,7 +12,7 @@ This file contains comprehensive context about the project for AI coding agents.
 - **Language**: TypeScript ~6.0 (Node 22.22.3 or newer for the CLI)
 - **Styling**: SCSS + Bootstrap 5
 - **i18n**: `@ngx-translate/core`, default language **German (`de`)**
-- **Backend/CMS**: Strapi 4 or 5 (the data layer reads both, see Data Models) at `https://cms.sambico.de` (repo `sambico-cms`, same Hetzner server as the site)
+- **Backend/CMS**: Strapi 5 since 2026-11-27 (the data layer still reads Strapi 4 too, see Data Models) at `https://cms.sambico.de` (repo `sambico-cms`, same Hetzner server as the site)
 - **Newsletter**: listmonk at `https://newsletter.sambico.de` (see Newsletter below)
 - **Tests**: none; the Karma/Jasmine setup was removed with the Angular 22 upgrade
 - **Build**: `@angular/build:application` (esbuild); output stays flat in `dist/sambico-ui/`
@@ -165,7 +165,7 @@ Image size options (approx px widths): `xsmall`(96), `thumbnail`(156), `small`(5
 
 ## Data Models (Strapi)
 
-The CMS is moving from Strapi 4 to Strapi 5, and the UI has to work against both while the two are not deployed at the same moment. `StrapiService` is the only place that knows the difference; it hands the components one flat shape (`strapi.models.ts`, converted in `strapi.normalize.ts`):
+The CMS runs Strapi 5 since 2026-11-27. The UI still reads Strapi 4 as well, so a rollback of the CMS needs no website change; the v4 path can go once the CMS rollback backups are deleted (`sambico-cms/DEPLOYMENT.md`). `StrapiService` is the only place that knows the difference; it hands the components one flat shape (`strapi.models.ts`, converted in `strapi.normalize.ts`):
 
 | | Strapi 4 | Strapi 5 | What components get |
 |---|---|---|---|
@@ -195,7 +195,7 @@ StrapiTypes.PROJECT      = 'projects'
 { title, subTitle, content (markdown) }
 ```
 
-Locale: no `locale` parameter is sent, so each server answers with its default locale. A Strapi 5 server whose default locale is not German needs that checked when it goes live.
+Locale: no `locale` parameter is sent, so the server answers with its default locale. On the live CMS that is `en`, and all entries, German texts included, are stored under it.
 
 ---
 
