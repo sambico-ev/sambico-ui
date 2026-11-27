@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BlogPreviewComponent } from './blog-preview.component';
 
@@ -10,7 +10,7 @@ import { BlogPreviewComponent } from './blog-preview.component';
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     SharedModule,
   ],
   exports: [BlogPreviewComponent],

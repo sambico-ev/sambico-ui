@@ -6,10 +6,11 @@ import { marked } from 'marked';
   standalone: false
 })
 export class MarkdownPipe implements PipeTransform {
-  transform(value: string, args?: any[]): any {
-    if (value && value?.length > 0) {
-      return marked(value);
+  transform(value: string | null | undefined): string {
+    if (!value) {
+      return '';
     }
-    return value;
+    // async: false makes parse() return a string instead of string | Promise<string>
+    return marked.parse(value, { async: false });
   }
 }

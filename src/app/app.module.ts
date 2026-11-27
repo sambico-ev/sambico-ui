@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { registerLocaleData } from '@angular/common';
 import {
-  HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
   withXhr
@@ -12,7 +11,7 @@ import {
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { env } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,10 +22,6 @@ import { HomeModule } from './sites/home/home.module';
 import { NewsletterModule } from './sites/newsletter/newsletter.module';
 import { PrivacyModule } from './sites/privacy/privacy.module';
 import { ToolbarModule } from './sites/toolbar/toolbar.module';
-
-export function createTranslateLoader(http: HttpClient): TranslateLoader {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
-}
 
 registerLocaleData(localeDe, 'de', localeDeExtra);
 
@@ -43,18 +38,19 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     PrivacyModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToolbarModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    })
+    ToolbarModule
   ],
   providers: [
     { provide: 'env', useValue: env },
-    provideHttpClient(withXhr(), withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    provideTranslateService({
+      lang: 'de',
+      fallbackLang: 'de',
+      loader: provideTranslateHttpLoader({
+        prefix: 'assets/i18n/',
+        suffix: '.json'
+      })
+    })
   ]
 })
 export class AppModule {}

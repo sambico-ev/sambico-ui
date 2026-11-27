@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NewsletterConfirmComponent } from './newsletter-confirm/newsletter-confirm.component';
 import { NewsletterQrComponent } from './newsletter-qr/newsletter-qr.component';
@@ -20,7 +20,7 @@ import { NewsletterComponent } from './newsletter.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     SharedModule,
   ],
   exports: [
