@@ -74,6 +74,11 @@ const routes: Routes = [
     component: NewsletterConfirmComponent,
     pathMatch: 'full',
   },
+  {
+    path: `${RouteNames.NEWSLETTER_CONFIRM}/:subscriber`,
+    component: NewsletterConfirmComponent,
+    pathMatch: 'full',
+  },
   { path: '**', component: HomeComponent },
 ];
 

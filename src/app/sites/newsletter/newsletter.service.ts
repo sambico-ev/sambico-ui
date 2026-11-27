@@ -37,6 +37,18 @@ export class NewsletterService {
     }
   }
 
+  // the opt-in mail links to /newsletter/bestaetigen/<subscriber>?l=<list>, a
+  // plain link without a nested URL (spam filters read those as phishing);
+  // listmonk's own opt-in URL is rebuilt here from the two UUIDs
+  optinTarget(subscriber: string | null, lists: string[]) {
+    const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!subscriber || !uuid.test(subscriber) || !lists.length || !lists.every((l) => uuid.test(l)))
+      return null;
+    const target = new URL(`/subscription/optin/${subscriber}`, this.env.newsletterUrl);
+    lists.forEach((l) => target.searchParams.append('l', l));
+    return target.href;
+  }
+
   // listmonk answers both with an HTML page; only the status matters here
   unsubscribe(target: string) {
     return this.http.post(target, new HttpParams(), { responseType: 'text' });

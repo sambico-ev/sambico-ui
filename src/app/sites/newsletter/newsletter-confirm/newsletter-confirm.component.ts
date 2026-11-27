@@ -12,10 +12,16 @@ type Status = 'ready' | 'sending' | 'done' | 'error' | 'invalid';
 })
 export class NewsletterConfirmComponent {
   readonly routes = RouteNames;
-  private readonly target = this.newsletterService.listmonkTarget(
-    this.route.snapshot.queryParamMap.get('u'),
-    '/subscription/optin/',
-  );
+  // ?u= is the old link form; opt-in mails sent before the switch still carry it
+  private readonly target = this.route.snapshot.paramMap.has('subscriber')
+    ? this.newsletterService.optinTarget(
+        this.route.snapshot.paramMap.get('subscriber'),
+        this.route.snapshot.queryParamMap.getAll('l'),
+      )
+    : this.newsletterService.listmonkTarget(
+        this.route.snapshot.queryParamMap.get('u'),
+        '/subscription/optin/',
+      );
   status: Status = this.target ? 'ready' : 'invalid';
 
   constructor(
