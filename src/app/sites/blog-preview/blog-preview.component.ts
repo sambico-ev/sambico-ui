@@ -31,7 +31,8 @@ const style2 = style({
       transition('show => hide', animate('700ms ease-out')),
       transition('hide => show', animate('700ms ease-in'))
     ])
-  ]
+  ],
+  standalone: false
 })
 export class BlogPreviewComponent implements OnInit {
   blogEntries: Blog[] = [];

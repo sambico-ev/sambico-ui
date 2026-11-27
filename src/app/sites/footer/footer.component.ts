@@ -6,6 +6,7 @@ import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  standalone: false
 })
 export class FooterComponent {
   routes = RouteNames;

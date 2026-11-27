@@ -2,7 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Blog } from '../models/strapi.models';
 import { StrapiService } from '../services/strapi.service';
 
-@Pipe({ name: 'imageUrl' })
+@Pipe({
+  name: 'imageUrl',
+  standalone: false
+})
 export class ImageUrlPipe implements PipeTransform {
   constructor(private readonly strapiService: StrapiService) {}
 

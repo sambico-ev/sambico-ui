@@ -7,6 +7,7 @@ import { StrapiService } from '../../shared/services/strapi.service';
   selector: 'app-slideshow',
   templateUrl: './slideshow.component.html',
   styleUrls: ['./slideshow.component.scss'],
+  standalone: false
 })
 export class SlideshowComponent implements OnInit {
   slides: Slide[] = [];

@@ -1,10 +1,11 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import {
-  animate,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Project } from 'src/app/shared/models/strapi.models';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
@@ -25,18 +26,21 @@ const SLOT_DELAYS = [185, 175, 170, 210, 280, 340, 400, 500];
         animate(
           `${SLIDE_DURATION}ms ease-out`,
           style({ transform: 'translateX(0) rotate(2deg)', opacity: 1 })
-        ),
+        )
       ]),
       transition(':leave', [
         animate(
           `${SLIDE_DURATION}ms ease-in`,
           style({ transform: 'translateX(-120%) rotate(2deg)', opacity: 0 })
-        ),
-      ]),
-    ]),
+        )
+      ])
+    ])
   ],
+  standalone: false
 })
-export class ProjectsPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProjectsPreviewComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   allProjects: Project[] = [];
   currentProject: Project | null = null;
   routes = RouteNames;
@@ -79,7 +83,8 @@ export class ProjectsPreviewComponent implements OnInit, AfterViewInit, OnDestro
   // @HostListener('window:scroll')
   checkScroll(): void {
     const rect = this.el.nativeElement.getBoundingClientRect();
-    const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+    const visibleHeight =
+      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
     const inView = visibleHeight >= rect.height * 0.8;
 
     if (inView) {

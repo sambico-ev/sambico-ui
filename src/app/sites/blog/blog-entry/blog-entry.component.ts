@@ -6,7 +6,8 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
 @Component({
   selector: 'app-blog-entry',
   templateUrl: './blog-entry.component.html',
-  styleUrls: ['./blog-entry.component.scss']
+  styleUrls: ['./blog-entry.component.scss'],
+  standalone: false
 })
 export class BlogEntryComponent {
   @Input() blog!: Blog;

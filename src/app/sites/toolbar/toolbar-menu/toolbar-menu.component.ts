@@ -6,6 +6,7 @@ import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
   selector: 'app-toolbar-menu',
   templateUrl: './toolbar-menu.component.html',
   styleUrls: ['./toolbar-menu.component.scss'],
+  standalone: false
 })
 export class ToolbarMenuComponent {
   routes = RouteNames;

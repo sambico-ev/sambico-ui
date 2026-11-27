@@ -6,7 +6,8 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  styleUrls: ['./projects.component.scss'],
+  standalone: false
 })
 export class ProjectsComponent {
   projects: Project[] = [];

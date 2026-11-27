@@ -9,17 +9,18 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
   selector: 'app-newsletter',
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss'],
+  standalone: false
 })
 export class NewsletterComponent {
   readonly routes = RouteNames;
   readonly form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required, Validators.email]
     }),
     name: new FormControl('', { nonNullable: true }),
     // honeypot: hidden from people, bots fill every field they find
-    website: new FormControl('', { nonNullable: true }),
+    website: new FormControl('', { nonNullable: true })
   });
   status: Status = 'idle';
 
@@ -39,7 +40,7 @@ export class NewsletterComponent {
     this.status = 'sending';
     this.newsletterService.subscribe(email, name.trim()).subscribe({
       next: () => (this.status = 'sent'),
-      error: () => (this.status = 'error'),
+      error: () => (this.status = 'error')
     });
   }
 }

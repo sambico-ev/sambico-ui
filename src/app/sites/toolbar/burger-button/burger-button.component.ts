@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-burger-button',
   templateUrl: './burger-button.component.html',
   styleUrls: ['./burger-button.component.scss'],
+  standalone: false
 })
 export class BurgerButtonComponent {
   @Input() active = false;
