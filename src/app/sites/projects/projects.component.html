@@ -7,11 +7,11 @@
   @for (project of projects; track project) {
     <div class="project-preview-card">
       <div class="content-wrapper">
-        <h2 class="margin-bottom-8">{{ project.attributes.title }}</h2>
-        <h4 class="margin-bottom-8">{{ project.attributes.subtitle }}</h4>
+        <h2 class="margin-bottom-8">{{ project.title }}</h2>
+        <h4 class="margin-bottom-8">{{ project.subtitle }}</h4>
         <div
           class="content"
-          [innerHTML]="project.attributes.content | markdown"
+          [innerHTML]="project.content | markdown"
         ></div>
       </div>
     </div>

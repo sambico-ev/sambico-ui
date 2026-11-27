@@ -16,6 +16,7 @@ import { switchMap } from 'rxjs';
 import { RouteNames } from 'src/app/app-routing.module';
 import { Blog } from 'src/app/shared/models/strapi.models';
 import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
+import { blogRouteKey } from 'src/app/shared/services/strapi.normalize';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
 
 const style1 = style({
@@ -63,11 +64,10 @@ export class BlogPreviewComponent implements OnInit {
         })
       )
       .subscribe((res) => {
-        console.log('blog entries', res);
         this.blogEntries = res.sort((a, b) => {
           return (
-            new Date(b.attributes.publishedAt).getTime() -
-            new Date(a.attributes.publishedAt).getTime()
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
           );
         });
       });
@@ -87,10 +87,5 @@ export class BlogPreviewComponent implements OnInit {
     }
   }
 
-  getImageUrl(blog: Blog): string {
-    return this.strapiService.getStrapiImageUrl(
-      blog.attributes.image.data.attributes.formats,
-      'small'
-    );
-  }
+  routeKey = blogRouteKey;
 }

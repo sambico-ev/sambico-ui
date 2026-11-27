@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { WeclomeText } from 'src/app/shared/models/strapi.models';
+import { WelcomeText } from 'src/app/shared/models/strapi.models';
 import { StrapiService } from 'src/app/shared/services/strapi.service';
 
 @Component({
@@ -10,17 +10,13 @@ import { StrapiService } from 'src/app/shared/services/strapi.service';
   standalone: false
 })
 export class WelcomeComponent implements OnInit {
-  welcomeText!: WeclomeText;
+  welcomeText: WelcomeText | null = null;
 
   constructor(public strapiService: StrapiService) {}
 
   ngOnInit(): void {
     this.strapiService.getWelcomeText().subscribe((res) => {
-      this.welcomeText = {
-        content: res.content,
-        title: res.title,
-        subtitle: res.subtitle
-      };
+      this.welcomeText = res;
     });
   }
 }

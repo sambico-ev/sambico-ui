@@ -9,39 +9,28 @@
         class="blog-preview"
         [class.visible]="visible && i > 0"
         [class.mobile]="isMobile | async"
-        [routerLink]="'/' + routes.BLOG"
+        [routerLink]="['/', routes.BLOG, routeKey(blog)]"
       >
-        @if (blog?.attributes) {
-          <ng-container>
-            <img
-              class="image"
-              [src]="blog | imageUrl: 'small'"
-              alt="blog image"
-            />
-          </ng-container>
-          <ng-template #placeholder>
-            <img
-              class="image"
-              src="assets/images/placeholder.png"
-              alt="placeholder"
-            />
-          </ng-template>
-          <div class="content">
-            <span>{{ blog.attributes.date | date: 'dd.MM.YYYY' }}</span>
-            <h3 class="title">{{ blog.attributes.title }}</h3>
-            @if (blog.attributes.subTitle) {
-              <h4 class="subtitile">
-                {{ blog.attributes.subTitle }}
-              </h4>
-            }
-            <button class="btn icon-btn read-button">
-              {{ 'blogPreview.readMore' | translate }}
-              <i-bs name="chevron-right" width="20" height="20"> </i-bs>
-            </button>
-          </div>
-        } @else {
-          <!-- Skip rendering entries without attributes -->
+        @if (blog.image?.formats; as formats) {
+          <img
+            class="image"
+            [src]="strapiService.getStrapiImageUrl(formats, 'small')"
+            alt="blog image"
+          />
         }
+        <div class="content">
+          <span>{{ blog.date | date: 'dd.MM.yyyy' }}</span>
+          <h3 class="title">{{ blog.title }}</h3>
+          @if (blog.subTitle) {
+            <h4 class="subtitile">
+              {{ blog.subTitle }}
+            </h4>
+          }
+          <button class="btn icon-btn read-button">
+            {{ 'blogPreview.readMore' | translate }}
+            <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+          </button>
+        </div>
       </div>
     }
   </div>

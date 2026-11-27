@@ -29,12 +29,11 @@ const icons = {
   qrCode,
   tiktok
 };
-import { ImageUrlPipe } from './pipes/image-url.pipe';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 
 @NgModule({
-  declarations: [MarkdownPipe, ImageUrlPipe],
+  declarations: [MarkdownPipe],
   imports: [CommonModule, NgxBootstrapIconsModule.pick(icons)],
-  exports: [MarkdownPipe, ImageUrlPipe, NgxBootstrapIconsModule]
+  exports: [MarkdownPipe, NgxBootstrapIconsModule]
 })
 export class SharedModule {}

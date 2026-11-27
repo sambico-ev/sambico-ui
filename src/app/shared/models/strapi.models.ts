@@ -3,76 +3,21 @@ export enum StrapiTypes {
   SLIDER = 'sliders',
   USER = 'user',
   WELCOME_TEXT = 'welcome-text',
-  PROJECT = 'projects',
+  PROJECT = 'projects'
 }
 
-export interface SliderResponse {
-  data: Slide[];
-}
+export type ImageSize =
+  | 'xlarge'
+  | 'large'
+  | 'medium'
+  | 'small'
+  | 'xsmall'
+  | 'thumbnail';
 
-export interface ProjectResponse {
-  data: Project[];
-}
-
-export interface Project {
-  id: number;
-  attributes: {
-    title: string;
-    subtitle: string;
-    content: string;
-    image: Image;
-    createdAt: Date;
-    locale: string;
-    localizations: Localization;
-    publishedAt: Date;
-    updatedAt: Date;
-  };
-}
-
-export interface Slide {
-  id: number;
-  attributes: {
-    buttonText: string;
-    createdAt: Date;
-    image: Image;
-    link: string;
-    locale: string;
-    localizations: Localization;
-    publishedAt: Date;
-    subtitle: string;
-    title: string;
-    updatedAt: Date;
-  };
-}
-
-export interface Blog {
-  id: number;
-  attributes: {
-    title: string;
-    subTitle?: string;
-    image: Image;
-    content: string;
-    previewButtonText: string;
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt: Date;
-    date: Date;
-    locale: string;
-  };
-}
-
-interface Localization {
-  date: any[]; //TODO: Type
-}
-
-export interface Formats {
-  xlarge: Format; // 1920
-  large: Format; // 1440
-  medium: Format; // 75
-  small: Format; // 563
-  xsmall: Format; // 96
-  thumbnail: Format; // 156
-}
+// ---------------------------------------------------------------------------
+// What the components work with: one flat shape, whatever Strapi version
+// answered. StrapiService converts both server shapes into these.
+// ---------------------------------------------------------------------------
 
 export interface Format {
   ext: string;
@@ -80,46 +25,97 @@ export interface Format {
   height: number;
   name: string;
   mime: string;
-  path: string;
+  path: string | null;
   size: number;
   url: string;
   width: number;
 }
 
-export interface Image {
-  data: {
-    id: number;
-    attributes: {
-      alternativeText: string;
-      caption: string;
-      createdAt: Date;
-      ext: string;
-      formats: Formats;
-      hash: string;
-      height: number;
-      mime: string;
-      name: string;
-      previewUrl: string;
-      provider: string;
-      provider_metadata: string;
-      size: number;
-      updatedAt: Date;
-      url: string;
-      width: number;
-    };
-  };
+// Strapi only generates the sizes smaller than the upload, so any can be missing
+export type Formats = Partial<Record<ImageSize, Format>>;
+
+export interface Media {
+  id: number;
+  alternativeText: string | null;
+  formats: Formats | null;
+  url: string;
 }
 
-export interface WelcomeTextResponse {
-  data: { attributes: WeclomeText };
+export interface Entry {
+  id: number;
+  /** Strapi 5 only: the stable key of an entry (numeric ids differ per draft/publish row and locale) */
+  documentId?: string;
 }
 
-export interface BlogResponse {
-  data: Blog[];
-}
-
-export interface WeclomeText {
+export interface Project extends Entry {
   title: string;
-  subtitle: string;
+  subtitle: string | null;
+  content: string;
+  publishedAt: string;
+}
+
+export interface Slide extends Entry {
+  title: string | null;
+  subtitle: string | null;
+  buttonText: string | null;
+  link: string | null;
+  image: Media | null;
+  publishedAt: string;
+}
+
+export interface Blog extends Entry {
+  title: string;
+  subTitle?: string | null;
+  content: string;
+  previewButtonText?: string | null;
+  date: string;
+  publishedAt: string;
+  image: Media | null;
+}
+
+export interface WelcomeText {
+  title: string | null;
+  subTitle: string | null;
   content: string;
 }
+
+// ---------------------------------------------------------------------------
+// What the servers send
+// ---------------------------------------------------------------------------
+
+/** Strapi 4: fields sit in `attributes` */
+export interface EntityV4<T> {
+  id: number;
+  attributes: T;
+}
+
+/** Strapi 5: fields sit on the item, next to the `documentId` */
+export type EntityV5<T> = Entry & T;
+
+export type RawEntity<T> = EntityV4<T> | EntityV5<T>;
+
+/** Strapi 4 nests a media field as `{ data: { id, attributes } | null }` */
+export interface MediaV4 {
+  data: EntityV4<Omit<Media, 'id'>> | null;
+}
+
+/** Strapi 5 sends the file itself, `null`, or `[]` when it is empty */
+export type RawMedia = MediaV4 | Media | Media[] | null | undefined;
+
+export type WithRawImage<T extends { image: Media | null }> = Omit<
+  T,
+  keyof Entry | 'image'
+> & { image?: RawMedia };
+
+export interface ListResponse<T> {
+  data: RawEntity<T>[];
+}
+
+export interface SingleResponse<T> {
+  data: RawEntity<T>;
+}
+
+export type BlogFields = WithRawImage<Blog>;
+export type SlideFields = WithRawImage<Slide>;
+export type ProjectFields = Omit<Project, keyof Entry>;
+export type WelcomeTextFields = WelcomeText;

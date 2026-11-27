@@ -3,22 +3,22 @@
     @for (slide of slides; track slide) {
       <slide>
         <!-- TODO Add different images depending on screen size -->
-        @if (slide.attributes.image.data) {
+        @if (slide.image) {
           <div>
             <img
               [class.mobile]="isMobile | async"
               [src]="
                 strapiService.getStrapiImageUrl(
-                  slide.attributes.image.data.attributes.formats,
+                  slide.image.formats,
                   (isMobile | async) ? 'large' : 'xlarge'
                 )
               "
-              [alt]="slide.attributes.image.data.attributes.alternativeText"
+              [alt]="slide.image.alternativeText ?? ''"
               style="display: block; width: 100%"
             />
             <div class="carousel-caption d-none d-md-block">
-              <h2 class="margin-bottom-8">{{ slide.attributes.title }}</h2>
-              <h4>{{ slide.attributes.subtitle }}</h4>
+              <h2 class="margin-bottom-8">{{ slide.title }}</h2>
+              <h4>{{ slide.subtitle }}</h4>
             </div>
           </div>
         }

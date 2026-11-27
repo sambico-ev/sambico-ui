@@ -1,5 +1,5 @@
 <div class="blog-preview" [class.mobile]="isMobile | async">
-  @if (blog.attributes.image?.data?.attributes?.formats; as formats) {
+  @if (blog.image?.formats; as formats) {
     <div class="image-container">
       <img
         (click)="openImage(formats)"
@@ -15,13 +15,13 @@
     </div>
   }
   <div class="content">
-    <span>{{ blog.attributes.date | date: 'dd.MM.YYYY, hh:mm' }}</span>
-    <h2 class="title">{{ blog.attributes.title }}</h2>
-    @if (blog.attributes.subTitle) {
+    <span>{{ blog.date | date: 'dd.MM.yyyy, hh:mm' }}</span>
+    <h2 class="title">{{ blog.title }}</h2>
+    @if (blog.subTitle) {
       <h4 class="subtitile">
-        {{ blog.attributes.subTitle }}
+        {{ blog.subTitle }}
       </h4>
     }
-    <p class="text" [innerHTML]="blog.attributes.content | markdown"></p>
+    <p class="text" [innerHTML]="blog.content | markdown"></p>
   </div>
 </div>

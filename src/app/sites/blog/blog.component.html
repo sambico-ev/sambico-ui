@@ -1,8 +1,14 @@
 <h1 class="page-heading" [class.mobile]="isMobile | async">
-  {{ 'blogPreview.title' | translate }}
+  {{ "blogPreview.title" | translate }}
 </h1>
 <div class="blog-container">
-  @for (blogEntry of blogEntries; track blogEntry) {
+  @for (blogEntry of blogEntries; track blogEntry.documentId ?? blogEntry.id) {
     <app-blog-entry [blog]="blogEntry"></app-blog-entry>
+  }
+  @if (single) {
+    <button class="btn icon-btn" [routerLink]="'/' + routes.BLOG">
+      {{ "blogPreview.showAll" | translate }}
+      <i-bs name="chevron-right" width="20" height="20"> </i-bs>
+    </button>
   }
 </div>

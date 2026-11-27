@@ -1,7 +1,7 @@
 <div class="welcome-container">
   @if (welcomeText) {
     <div class="title">{{ welcomeText.title }}</div>
-    <div class="sub-title">{{ welcomeText.subtitle }}</div>
+    <div class="sub-title">{{ welcomeText.subTitle }}</div>
     <p class="content" [innerHTML]="welcomeText.content | markdown"></p>
   }
 </div>

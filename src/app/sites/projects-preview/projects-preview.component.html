@@ -4,9 +4,9 @@
     @if (currentProject) {
       <div class="project-preview-card" @slideCard>
         <div class="content-wrapper">
-          <h2 class="margin-bottom-8">{{ currentProject.attributes.title }}</h2>
+          <h2 class="margin-bottom-8">{{ currentProject.title }}</h2>
           <div class="content">
-            <p [innerHTML]="currentProject.attributes.content | markdown"></p>
+            <p [innerHTML]="currentProject.content | markdown"></p>
           </div>
         </div>
       </div>
