@@ -53,7 +53,7 @@
   },
   "newsletter": {
     "title": "Newsletter",
-    "intro": "Bleib auf dem Laufenden über unsere Projekte in Sambia: neue Blogartikel, Events, Neuigkeiten aus dem Verein und gelegentlich Spendenaufrufe, direkt in dein Postfach.",
+    "intro": "Bleib auf dem Laufenden über unsere Projekte, Events, Neuigkeiten aus dem Verein und gelegentlich Spendenaufrufe, direkt in dein Postfach.",
     "email": "E-Mail-Adresse",
     "placeholder": "name@beispiel.de",
     "submit": "Abonnieren",
@@ -94,7 +94,7 @@
       "sending": "Wird bestätigt …",
       "done": {
         "title": "Du bist dabei",
-        "text": "Danke! Ab jetzt hörst du von uns, wenn es Neues aus unseren Projekten in Sambia gibt.",
+        "text": "Danke! Ab jetzt hörst du von uns, wenn es Neuigkeiten gibt.",
         "blog": "Zum Blog"
       },
       "invalid": "Dieser Bestätigungslink ist unvollständig. Nutze bitte den Link aus unserer E-Mail oder melde dich einfach noch einmal an.",
