@@ -2,6 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Environment } from 'src/app/shared/models/env.model';
 
+const isUuid = (value: string | null): value is string =>
+  !!value && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+
 @Injectable({ providedIn: 'root' })
 export class NewsletterService {
   constructor(
@@ -21,8 +24,8 @@ export class NewsletterService {
     );
   }
 
-  // the mails link to our pages with listmonk's own URL as ?u=; only pass it
-  // on when it really points at our listmonk, never at anything else
+  // the old link form carried listmonk's own URL as ?u=; only pass it on when
+  // it really points at our listmonk, never at anything else
   listmonkTarget(raw: string | null, path: '/subscription/' | '/subscription/optin/') {
     if (!raw) return null;
     try {
@@ -37,16 +40,21 @@ export class NewsletterService {
     }
   }
 
-  // the opt-in mail links to /newsletter/bestaetigen/<subscriber>?l=<list>, a
-  // plain link without a nested URL (spam filters read those as phishing);
-  // listmonk's own opt-in URL is rebuilt here from the two UUIDs
+  // The mails link to our pages with only the UUIDs listmonk's own URLs are
+  // made of, never a nested URL (spam filters read those as phishing):
+  //   /newsletter/bestaetigen/<subscriber>?l=<list>
+  //   /newsletter/abmelden/<campaign>/<subscriber>
+  // Here the listmonk URLs are rebuilt from them.
   optinTarget(subscriber: string | null, lists: string[]) {
-    const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-    if (!subscriber || !uuid.test(subscriber) || !lists.length || !lists.every((l) => uuid.test(l)))
-      return null;
+    if (!isUuid(subscriber) || !lists.length || !lists.every(isUuid)) return null;
     const target = new URL(`/subscription/optin/${subscriber}`, this.env.newsletterUrl);
     lists.forEach((l) => target.searchParams.append('l', l));
     return target.href;
+  }
+
+  unsubscribeTarget(campaign: string | null, subscriber: string | null) {
+    if (!isUuid(campaign) || !isUuid(subscriber)) return null;
+    return new URL(`/subscription/${campaign}/${subscriber}`, this.env.newsletterUrl).href;
   }
 
   // listmonk answers both with an HTML page; only the status matters here

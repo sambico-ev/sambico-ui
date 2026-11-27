@@ -70,6 +70,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: `${RouteNames.NEWSLETTER_UNSUBSCRIBE}/:campaign/:subscriber`,
+    component: NewsletterUnsubscribeComponent,
+    pathMatch: 'full',
+  },
+  {
     path: RouteNames.NEWSLETTER_CONFIRM,
     component: NewsletterConfirmComponent,
     pathMatch: 'full',

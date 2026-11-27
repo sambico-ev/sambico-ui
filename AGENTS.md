@@ -274,9 +274,9 @@ The newsletter runs on **listmonk** at `newsletter.sambico.de`, not Strapi. The 
 
 - `/newsletter`: signup form, posts to `POST /api/public/subscription`. listmonk sends the double opt-in mail itself. A hidden `website` field is a honeypot: when filled, the form fakes success and sends nothing.
 - `/newsletter/qr`: QR code for events. It is a static SVG (`assets/images/newsletter-qr.svg`) pointing at `https://sambico.de/newsletter`; regenerate it only if that URL changes.
-- `/newsletter/bestaetigen?u=<listmonk opt-in URL>`: the confirmation mail links here (template in `sambico-cms/listmonk-static/`). Only the button posts `confirm=true` to `u`; mail scanners open links but never press it.
-- `/newsletter/abmelden?u=<listmonk unsubscribe URL>`: the campaign template links here.
-- Both pages only post to `u` when it points at `newsletterUrl` (`NewsletterService.listmonkTarget`).
+- `/newsletter/bestaetigen/<subscriber-uuid>?l=<list-uuid>`: the confirmation mail links here (template in `sambico-cms/listmonk-static/`). Only the button posts `confirm=true` to listmonk's opt-in URL; mail scanners open links but never press it.
+- `/newsletter/abmelden/<campaign-uuid>/<subscriber-uuid>`: the campaign template links here (`{{ .Campaign.UUID }}/{{ .Subscriber.UUID }}`).
+- The links carry only UUIDs, never a nested URL, because spam filters read a URL inside a URL as phishing. `NewsletterService` rebuilds listmonk's URLs from them. The old `?u=<listmonk URL>` form still works for mails sent before the switch and is only passed on when it points at `newsletterUrl`.
 
 ## Notable Patterns & Conventions
 
