@@ -12,7 +12,8 @@ This file contains comprehensive context about the project for AI coding agents.
 - **Language**: TypeScript ~4.9.4
 - **Styling**: SCSS + Bootstrap 5
 - **i18n**: `@ngx-translate/core`, default language **German (`de`)**
-- **Backend/CMS**: Strapi v4 (hosted at `https://strapi-vnv3.onrender.com`)
+- **Backend/CMS**: Strapi v4 at `https://cms.sambico.de` (repo `sambico-cms`, same Hetzner server as the site)
+- **Newsletter**: listmonk at `https://newsletter.sambico.de` (see Newsletter below)
 - **Test runner**: Karma + Jasmine (tests skipped by default per schematics config)
 
 ---
@@ -29,7 +30,7 @@ This file contains comprehensive context about the project for AI coding agents.
 | Facebook | facebook.com/SambicoeV |
 | Bank IBAN | DE07 6025 0010 0015 2080 79 (Kreissparkasse Waiblingen) |
 | Registry | Vereinsregister Amtsgericht Stuttgart, VR 725855 |
-| Representatives | Silvan Vollmer, Laura Radatz, Julian Hofer, Janine Weißschuh, Max Härtner |
+| Representatives | Silvan Vollmer, Laura Radatz, Julian Hofer, Adrian Vollmer, Max Härtner (also in the listmonk campaign template footer) |
 
 ---
 
@@ -56,7 +57,13 @@ Defined in `src/app/app-routing.module.ts`. Route names are exported via the `Ro
 | `blog` | `BlogComponent` | `BLOG` |
 | `blog/:id` | `BlogComponent` | — |
 | `impressum` | `ImprintComponent` | `IMPRINT` |
+| `datenschutz` | `PrivacyComponent` | `PRIVACY` |
 | `projekte` | `ProjectsComponent` | `PROJECTS` |
+| `festival` | `FestivalComponent` | `FESTIVAL` |
+| `newsletter` | `NewsletterComponent` | `NEWSLETTER` |
+| `newsletter/qr` | `NewsletterQrComponent` | `NEWSLETTER_QR` |
+| `newsletter/abmelden`, `…/:campaign/:subscriber` | `NewsletterUnsubscribeComponent` | `NEWSLETTER_UNSUBSCRIBE` |
+| `newsletter/bestaetigen`, `…/:subscriber` | `NewsletterConfirmComponent` | `NEWSLETTER_CONFIRM` |
 | `**` | `HomeComponent` | — |
 
 Always reference routes via `RouteNames` enum, never hardcode path strings.
@@ -105,7 +112,9 @@ src/
       blog/              # Full blog list (all posts, sorted by publishedAt desc)
         blog-entry/      # Single blog card component (@Input() blog: Blog)
       blog-preview/      # Home preview: 1 post (mobile) / 3 posts (desktop)
-      newsletter/        # Signup page, QR page, unsubscribe page + NewsletterService (listmonk)
+      newsletter/        # Signup, QR, confirm and unsubscribe pages + NewsletterService (listmonk)
+      privacy/           # Datenschutzerklärung (static; promises tied to the server setup)
+      festival/          # Festival page
       projects/          # Full projects list (reversed order, markdown content)
       projects-preview/  # Slot machine animation cycling through projects
       toolbar/           # Top nav bar (logo, social icons, burger menu)
@@ -238,7 +247,8 @@ Translation files live in `src/assets/i18n/`. German (`de.json`) is the source o
 Key namespaces:
 - `toolbar.actions.*` — nav menu labels (blog, projects, participate, contact, imprint, social, donate, download_membership_application, facebook, instagram, tiktok)
 - `blogPreview.*` — showAll, readMore, title
-- `newsletter.*` — signup, QR and unsubscribe pages
+- `newsletter.*` — signup, QR, confirm (`newsletter.confirm.*`) and unsubscribe (`newsletter.unsubscribe.*`) pages
+- `privacy.title`
 - `projectPreview.*` — showAll, title
 - `projects.*` — title, info
 - `blog.title`, `imprint.title`, `home.tabTitle`
@@ -256,7 +266,7 @@ The `env` object is provided via `{ provide: 'env', useValue: env }` in `AppModu
 ```typescript
 interface Environment {
   production: boolean;
-  strapiUrl: string;      // 'https://strapi-vnv3.onrender.com'
+  strapiUrl: string;      // 'https://cms.sambico.de'
   strapiApiToken: string; // Bearer token for Strapi API
   newsletterUrl: string;  // listmonk, 'https://newsletter.sambico.de'
   newsletterListUuids: string[]; // listmonk list(s) the public form subscribes to

@@ -1,38 +1,39 @@
 # Deployment
 
-The site is a static Angular build served by nginx on the Hetzner cloud server (`178.104.6.98`). The same server runs Strapi (`cms.sambico.de`) and listmonk (`newsletter.sambico.de`); their setup lives in `sambico-cms/DEPLOYMENT.md` and `sambico-cms/NEWSLETTER-SETUP.md`.
+The site is a static Angular build served by nginx on the Hetzner cloud server (`178.104.6.98`, `2a01:4f8:1c19:6647::1`, Ubuntu 24.04, arm64). The same server runs Strapi (`cms.sambico.de`), listmonk (`newsletter.sambico.de`) and Leantime (`pm.sambico.de`); the server as a whole is described in `sambico-cms/DEPLOYMENT.md`, the newsletter in `sambico-cms/NEWSLETTER-SETUP.md`.
 
-We left Vercel because its Hobby plan has no data processing agreement (Art. 28 DSGVO), and that one server keeps all visitor data with one processor. The Datenschutzerklärung (`src/app/sites/privacy/`) says so; hosting elsewhere means changing it.
+We left Vercel in November 2026 because its Hobby plan has no data processing agreement (Art. 28 DSGVO); with one server all visitor data stays with one processor (Hetzner). The Datenschutzerklärung (`src/app/sites/privacy/`) says so; hosting elsewhere means changing it.
+
+## Current state
+
+| What | Where |
+|---|---|
+| Files | `/var/www/sambico` (only build output, replaced on every deploy) |
+| nginx | `/etc/nginx/sites-available/sambico` (config below) |
+| Certificate | `sambico.de` + `www.sambico.de`, Let's Encrypt, renews by itself through the webroot `/var/www/certbot` |
+| DNS | Hetzner DNS console, zone `sambico.de`: `@` and `www` A → `178.104.6.98`, AAAA → `2a01:4f8:1c19:6647::1`, TTL 3600 |
+| Redirects | `www.sambico.de` and `http://` → `https://sambico.de` |
+| Vercel | not serving anything any more; the old project only waits to be deleted |
 
 ## Deploying an update
 
 ```bash
-SAMBICO_HOST=user@178.104.6.98 ./deploy.sh
+SAMBICO_HOST=root@178.104.6.98 RSYNC_RSH="ssh -i ~/.ssh/id_ed25519_hetzner" ./deploy.sh
 ```
 
-It builds, then copies `dist/sambico-ui/` to `/var/www/sambico` on the server. nginx serves new files immediately; nothing restarts.
+It runs `npm ci` and the production build, then copies `dist/sambico-ui/` to `/var/www/sambico` with `rsync --delete`. nginx serves the new files immediately; nothing restarts. `index.html` is never cached, the hashed JS/CSS files are cached for a year, so visitors get the new version on their next page load.
 
-## Moving from Vercel (once)
-
-The order keeps the live site on Vercel until the new one is proven, and lets you switch back by changing DNS again.
-
-### 1. Lower the DNS TTL
-
-In konsoleH, set the TTL of `sambico.de` (A) and `www` (CNAME) to `300`. Wait for the old TTL (`7200` s) to run out before step 5, so the switch and any rollback reach visitors quickly.
-
-### 2. Stop Vercel from deploying
-
-In Vercel → project → Settings → Git, disconnect the repository. Otherwise the next push deploys the newsletter pages to Vercel before listmonk exists. Leave the current deployment running; it is the rollback.
-
-### 3. Prepare the server
+When the build already exists, the copy alone is enough:
 
 ```bash
-sudo mkdir -p /var/www/sambico /var/www/certbot && sudo chown $USER /var/www/sambico
+rsync -az --delete -e "ssh -i ~/.ssh/id_ed25519_hetzner" dist/sambico-ui/ root@178.104.6.98:/var/www/sambico/
 ```
 
-Then deploy once from your machine: `SAMBICO_HOST=user@178.104.6.98 ./deploy.sh`.
+The trailing slashes matter. Check afterwards: `curl -s https://sambico.de/ | grep -o 'main\.[a-f0-9]*\.js'` shows the new build's file name.
 
-Create `/etc/nginx/sites-available/sambico`:
+## nginx
+
+`/etc/nginx/sites-available/sambico`, linked into `sites-enabled`. The server runs nginx 1.24: `http2` goes on the `listen` line (`http2 on;` is not supported). After any change: `sudo nginx -t && sudo systemctl reload nginx`, never reload without the test.
 
 ```nginx
 server {
@@ -40,7 +41,7 @@ server {
     listen [::]:80;
     server_name sambico.de www.sambico.de;
 
-    # certificate renewal (step 7) answers here
+    # certificate renewal answers here
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
@@ -51,7 +52,6 @@ server {
 }
 
 server {
-    # nginx 1.24 on this server: http2 goes on the listen line
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     server_name sambico.de;
@@ -77,70 +77,33 @@ server {
         add_header Cache-Control "no-cache";
     }
 }
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.sambico.de;
+    ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    return 301 https://sambico.de$request_uri;
+}
 ```
 
-### 4. Get the certificate before switching
+## Certificate
 
-DNS still points at Vercel, so the usual HTTP check can't reach this server yet. Use the DNS check instead:
+One certificate for both names, fetched through the webroot, so renewal needs no DNS step. `sudo certbot renew --dry-run` proves it. Should it ever have to be fetched again:
 
 ```bash
-sudo certbot certonly --manual --preferred-challenges dns --cert-name sambico.de -d sambico.de
+sudo certbot certonly --webroot -w /var/www/certbot --cert-name sambico.de -d sambico.de -d www.sambico.de
 ```
 
-certbot shows a TXT value for `_acme-challenge`. Put it into that record in the Hetzner DNS console (replace the old value; no spaces), wait until `dig +short TXT _acme-challenge.sambico.de @ns1.your-server.de` shows it, then continue in certbot. Only `sambico.de` can be done this way: Hetzner refuses `_acme-challenge.www` because `www` is a CNAME, so `www` gets its certificate in step 7. Until then it keeps pointing to Vercel, which redirects it to `sambico.de` anyway. Afterwards:
+## Moving the site again
 
-```bash
-sudo ln -s /etc/nginx/sites-available/sambico /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-```
+The move from Vercel went like this, and a future move works the same way:
 
-### 5. Test on the server, without DNS
+1. A day ahead, set the TTL of the records that change to `300`, so the switch and a rollback reach visitors quickly.
+2. Set up the new host and test it without DNS: `curl -sI --resolve sambico.de:443:<new IP> https://sambico.de/newsletter`, or an `/etc/hosts` line for a real look.
+3. Switch the A/AAAA records, keep the old host running as the rollback until the new one has run quietly for a few days.
+4. Raise the TTLs again (`3600`, the highest step below a day that the console offers).
 
-From your machine:
-
-```bash
-curl -sI --resolve sambico.de:443:178.104.6.98 https://sambico.de/newsletter
-```
-
-That should return `200`. For a real look, add `178.104.6.98 sambico.de www.sambico.de` to `/etc/hosts`, then click through home, blog, projects, Impressum, Datenschutz, the newsletter and a reload on a sub-page. Remove the line afterwards.
-
-### 6. Switch DNS
-
-In konsoleH:
-- `sambico.de` A → `178.104.6.98`, plus an AAAA record → `2a01:4f8:1c19:6647::1`
-- `www`: leave it on Vercel for now; it redirects to `sambico.de`, which is now us
-
-Mail is not affected: MX is a separate record. SPF's `+a` now allows the cloud server instead of Vercel, which is harmless.
-
-### 7. Move www, and make the certificate renew itself
-
-The manual certificate from step 4 does not renew. Once `dig +short sambico.de` shows `178.104.6.98`:
-
-1. In the DNS console replace `www`'s CNAME with an A record → `178.104.6.98` and an AAAA record → `2a01:4f8:1c19:6647::1`.
-2. As soon as `dig +short www.sambico.de` shows the new address, fetch one certificate for both names through the webroot; this also makes renewal automatic:
-
-   ```bash
-   sudo certbot certonly --webroot -w /var/www/certbot --cert-name sambico.de -d sambico.de -d www.sambico.de --expand --force-renewal
-   sudo certbot renew --dry-run
-   ```
-
-3. Add the HTTPS block for www to `/etc/nginx/sites-available/sambico`, then `sudo nginx -t && sudo systemctl reload nginx`:
-
-   ```nginx
-   server {
-       listen 443 ssl http2;
-       listen [::]:443 ssl http2;
-       server_name www.sambico.de;
-       ssl_certificate     /etc/letsencrypt/live/sambico.de/fullchain.pem;
-       ssl_certificate_key /etc/letsencrypt/live/sambico.de/privkey.pem;
-       include /etc/letsencrypt/options-ssl-nginx.conf;
-       return 301 https://sambico.de$request_uri;
-   }
-   ```
-
-Between 1 and 2, `https://www.sambico.de` shows a certificate warning for a minute or two; `sambico.de` never does.
-
-### 8. Rollback, and cleaning up
-
-- If something is wrong: put the old records back (`sambico.de` A `216.198.79.1` and no AAAA, `www` CNAME `6eb89138070e33a7.vercel-dns-017.com.`). With TTL 300 visitors follow quickly.
-- Once the new site has run without trouble for a while: delete the project in Vercel and set the TTLs back to `3600`.
+Hetzner's DNS refuses `_acme-challenge` records under a name that is a CNAME; that is why `www` was switched to A/AAAA records first and certified afterwards.
