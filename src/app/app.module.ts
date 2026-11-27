@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { registerLocaleData } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,10 +32,10 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     HomeModule,
     BrowserModule,
-    HttpClientModule,
     FooterModule,
     BlogModule,
     FestivalModule,
@@ -44,12 +48,14 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
+        deps: [HttpClient]
+      }
     }),
-    ButtonsModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
-  providers: [{ provide: 'env', useValue: env }],
-  bootstrap: [AppComponent],
+  providers: [
+    { provide: 'env', useValue: env },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule {}
